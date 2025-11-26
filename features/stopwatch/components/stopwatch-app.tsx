@@ -20,7 +20,7 @@ export default function StopwatchApp() {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [draggedId, setDraggedId] = useState<number | null>(null);
   const [primaryId, setPrimaryId] = useState<number | null>(1);
-  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [theme, setTheme] = useState<"light" | "dark" | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   const hasRunningTimer = useMemo(
@@ -108,9 +108,11 @@ export default function StopwatchApp() {
     setTheme(prefersDark ? "dark" : "light");
   }, []);
 
-  // Apply theme class and persist
+  // Apply theme class and persist – only after theme has been initialised
   useEffect(() => {
     if (typeof window === "undefined") return;
+    if (!theme) return;
+
     document.documentElement.classList.toggle("dark", theme === "dark");
     window.localStorage.setItem("chrono-theme", theme);
   }, [theme]);
@@ -319,7 +321,7 @@ export default function StopwatchApp() {
   };
 
   const toggleTheme = () => {
-    setTheme((value) => (value === "light" ? "dark" : "light"));
+    setTheme((value) => (value === "dark" ? "light" : "dark"));
   };
 
   const toggleFullscreen = () => {
