@@ -1,0 +1,72 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=Oxanium:wght@300;400;500;600&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Chrono design tokens – light theme */
+  --chrono-bg-page: 245 245 247;      /* #F5F5F7 */
+  --chrono-bg-card: 255 255 255;      /* #FFFFFF */
+  --chrono-border-subtle: 235 235 240;/* softer light gray border */
+  --chrono-fg-primary: 0 0 0;         /* #000000 */
+  --chrono-fg-muted: 142 142 147;     /* #8E8E93 */
+  --chrono-accent: 91 111 232;        /* #5B6FE8 */
+  --chrono-accent-soft: 100 210 255;  /* #64D2FF */
+  --chrono-danger: 0 0 0;             /* mapped to black for monochrome */
+  --chrono-success: 0 0 0;            /* mapped to black for monochrome */
+  --chrono-warning: 0 0 0;            /* mapped to black for monochrome */
+
+  /* shadcn-style tokens mapped to the light palette */
+  --background: 240 7% 96%;          /* close to #F5F5F7 */
+  --foreground: 240 5% 5%;           /* near-black text */
+  --card: 0 0% 100%;                 /* white */
+  --card-foreground: 240 5% 10%;
+  --muted: 240 12% 95%;              /* slightly lighter gray */
+  --muted-foreground: 240 5% 45%;    /* text gray */
+  --border: 240 12% 92%;             /* softer, modern light border */
+}
+
+.dark {
+  /* Chrono design tokens – dark theme */
+  --chrono-bg-page: 13 13 17;        /* near-black background */
+  --chrono-bg-card: 24 24 31;        /* dark card */
+  --chrono-border-subtle: 56 56 66;  /* subtle dark border */
+  --chrono-fg-primary: 255 255 255;  /* white text */
+  --chrono-fg-muted: 142 142 147;    /* same muted gray */
+  --chrono-accent: 91 111 232;       /* keep blue accent */
+  --chrono-accent-soft: 100 210 255; /* unused but consistent */
+  --chrono-danger: 255 255 255;
+  --chrono-success: 255 255 255;
+  --chrono-warning: 255 255 255;
+
+  /* shadcn-style tokens mapped to the dark palette */
+  --background: 240 8% 6%;           /* very dark gray */
+  --foreground: 0 0% 100%;           /* white */
+  --card: 240 7% 12%;                /* dark card */
+  --card-foreground: 0 0% 100%;
+  --muted: 240 6% 18%;               /* subtle dark muted */
+  --muted-foreground: 240 5% 65%;
+  --border: 240 6% 24%;              /* subtle border */
+}
+
+body {
+  min-height: 100vh;
+  background-color: rgb(var(--chrono-bg-page));
+  color: rgb(var(--chrono-fg-primary));
+}
+
+/* Hide scrollbars but keep scrolling for custom areas */
+.chrono-scroll {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.chrono-scroll::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+/* Numeric display: enforce tabular, lining figures for timers */
+.chrono-number {
+  font-feature-settings: "tnum" 1, "lnum" 1;
+}
