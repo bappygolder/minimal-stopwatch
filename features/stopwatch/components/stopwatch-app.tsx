@@ -5,8 +5,13 @@ import { Eye, EyeOff, Maximize2, Minimize2, Plus, Moon, Sun } from "lucide-react
 import type { Timer } from "@/features/stopwatch/types";
 import TimerCard from "@/features/stopwatch/components/timer-card";
 import CompactTimerCard from "@/features/stopwatch/components/compact-timer-card";
+import { supabase } from "@/lib/supabase-client";
 
-export default function StopwatchApp() {
+type StopwatchAppProps = {
+  userId?: string | null;
+};
+
+export default function StopwatchApp({ userId }: StopwatchAppProps) {
   const [timers, setTimers] = useState<Timer[]>([
     {
       id: 1,
@@ -22,6 +27,7 @@ export default function StopwatchApp() {
   const [primaryId, setPrimaryId] = useState<number | null>(1);
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const supa = supabase;
 
   const hasRunningTimer = useMemo(
     () => timers.some((timer) => timer.isRunning),
@@ -57,6 +63,77 @@ export default function StopwatchApp() {
       cancelAnimationFrame(frameId);
     };
   }, [hasRunningTimer]);
+
+  // Load persisted timers for this user from Supabase (if configured)
+  useEffect(() => {
+    if (!supa || !userId) return;
+
+    let cancelled = false;
+
+    const load = async () => {
+      try {
+        const { data, error } = await (supa
+          .from("timer_states")
+          .select("timers, primary_id")
+          .eq("user_id", userId)
+          .maybeSingle() as any);
+
+        if (error) {
+          console.error("Failed to load timers from Supabase", error);
+          return;
+        }
+
+        if (!data) {
+          // No state yet – seed with current in-memory timers
+          await supa.from("timer_states").insert({
+            user_id: userId,
+            timers,
+            primary_id: primaryId,
+          });
+          return;
+        }
+
+        if (!cancelled && data.timers) {
+          const remoteTimers = data.timers as Timer[];
+          setTimers(remoteTimers);
+          const remotePrimary =
+            (data as any).primary_id ?? remoteTimers[0]?.id ?? null;
+          setPrimaryId(remotePrimary);
+        }
+      } catch (error) {
+        console.error("Failed to initialize timers from Supabase", error);
+      }
+    };
+
+    void load();
+
+    return () => {
+      cancelled = true;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [supa, userId]);
+
+  // Persist timers whenever they change for an authenticated user
+  useEffect(() => {
+    if (!supa || !userId) return;
+
+    const persist = async () => {
+      try {
+        await supa.from("timer_states").upsert(
+          {
+            user_id: userId,
+            timers,
+            primary_id: primaryId,
+          },
+          { onConflict: "user_id" },
+        );
+      } catch (error) {
+        console.error("Failed to persist timers to Supabase", error);
+      }
+    };
+
+    void persist();
+  }, [supa, userId, timers, primaryId]);
 
   // Initialize theme from localStorage or system preference
   useEffect(() => {
