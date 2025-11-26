@@ -5,13 +5,8 @@ import { Eye, EyeOff, Maximize2, Minimize2, Plus, Moon, Sun } from "lucide-react
 import type { Timer } from "@/features/stopwatch/types";
 import TimerCard from "@/features/stopwatch/components/timer-card";
 import CompactTimerCard from "@/features/stopwatch/components/compact-timer-card";
-import { supabase } from "@/lib/supabase-client";
 
-type StopwatchAppProps = {
-  userId?: string | null;
-};
-
-export default function StopwatchApp({ userId }: StopwatchAppProps) {
+export default function StopwatchApp() {
   const [timers, setTimers] = useState<Timer[]>([
     {
       id: 1,
@@ -27,7 +22,6 @@ export default function StopwatchApp({ userId }: StopwatchAppProps) {
   const [primaryId, setPrimaryId] = useState<number | null>(1);
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const supa = supabase;
 
   const hasRunningTimer = useMemo(
     () => timers.some((timer) => timer.isRunning),
@@ -64,76 +58,41 @@ export default function StopwatchApp({ userId }: StopwatchAppProps) {
     };
   }, [hasRunningTimer]);
 
-  // Load persisted timers for this user from Supabase (if configured)
+  // Load persisted timers from localStorage on first mount
   useEffect(() => {
-    if (!supa || !userId) return;
+    if (typeof window === "undefined") return;
 
-    let cancelled = false;
+    try {
+      const raw = window.localStorage.getItem("chrono-timers-v1");
+      if (!raw) return;
 
-    const load = async () => {
-      try {
-        const { data, error } = await (supa
-          .from("timer_states")
-          .select("timers, primary_id")
-          .eq("user_id", userId)
-          .maybeSingle() as any);
+      const parsed = JSON.parse(raw) as {
+        timers?: Timer[];
+        primaryId?: number | null;
+      };
 
-        if (error) {
-          console.error("Failed to load timers from Supabase", error);
-          return;
-        }
-
-        if (!data) {
-          // No state yet – seed with current in-memory timers
-          await supa.from("timer_states").insert({
-            user_id: userId,
-            timers,
-            primary_id: primaryId,
-          });
-          return;
-        }
-
-        if (!cancelled && data.timers) {
-          const remoteTimers = data.timers as Timer[];
-          setTimers(remoteTimers);
-          const remotePrimary =
-            (data as any).primary_id ?? remoteTimers[0]?.id ?? null;
-          setPrimaryId(remotePrimary);
-        }
-      } catch (error) {
-        console.error("Failed to initialize timers from Supabase", error);
-      }
-    };
-
-    void load();
-
-    return () => {
-      cancelled = true;
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [supa, userId]);
-
-  // Persist timers whenever they change for an authenticated user
-  useEffect(() => {
-    if (!supa || !userId) return;
-
-    const persist = async () => {
-      try {
-        await supa.from("timer_states").upsert(
-          {
-            user_id: userId,
-            timers,
-            primary_id: primaryId,
-          },
-          { onConflict: "user_id" },
+      if (Array.isArray(parsed.timers) && parsed.timers.length > 0) {
+        setTimers(parsed.timers);
+        setPrimaryId(
+          parsed.primaryId ?? parsed.timers[0]?.id ?? primaryId,
         );
-      } catch (error) {
-        console.error("Failed to persist timers to Supabase", error);
       }
-    };
+    } catch (error) {
+      console.error("Failed to read timers from localStorage", error);
+    }
+  }, []);
 
-    void persist();
-  }, [supa, userId, timers, primaryId]);
+  // Persist timers to localStorage whenever they change
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    try {
+      const payload = JSON.stringify({ timers, primaryId });
+      window.localStorage.setItem("chrono-timers-v1", payload);
+    } catch (error) {
+      console.error("Failed to save timers to localStorage", error);
+    }
+  }, [timers, primaryId]);
 
   // Initialize theme from localStorage or system preference
   useEffect(() => {
