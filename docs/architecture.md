@@ -9,7 +9,7 @@ This document describes the frontend-only architecture of the **Minimal Stopwatc
 - **Styling**: Tailwind CSS
 - **Icons**: Lucide React
 - **UI primitives**: light, shadcn-like components (`components/ui/*`), powered by a color token system
-- **State**: React hooks and local component state only (no backend / database wired yet)
+- **State**: React hooks + Local Storage persistence (no backend / database wired yet)
 
 ## High-Level Structure
 
@@ -72,6 +72,9 @@ Responsibilities:
 - Implements **render loop**:
   - Uses `requestAnimationFrame` to update `elapsedMs` for all running timers.
   - Runs only when at least one timer is running.
+- Implements **persistence**:
+  - Automatically saves `timers` state to `localStorage`.
+  - Loads saved timers on app startup.
 - Implements **drag-and-drop** ordering:
   - `handleDragStart`, `handleDragOver`, `handleDrop` reorder the timers array.
 - Implements **UI modes**:
