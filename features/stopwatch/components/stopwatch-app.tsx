@@ -25,6 +25,7 @@ export default function StopwatchApp() {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const saveTimeoutRef = useRef<number | null>(null);
   const [hasHydrated, setHasHydrated] = useState(false);
+  const [isLogoDescriptionOpen, setIsLogoDescriptionOpen] = useState(false);
 
   const hasRunningTimer = useMemo(
     () => timers.some((timer) => timer.isRunning),
@@ -284,9 +285,23 @@ export default function StopwatchApp() {
           .filter(Boolean)
           .join(" ")}
       >
-        <h1 className="text-xl font-bold text-chrono-fg-muted tracking-widest uppercase hidden sm:block">
-          Chrono<span className="text-foreground">Minimal</span>
-        </h1>
+        <div className="relative group">
+          <button
+            onClick={() => setIsLogoDescriptionOpen(!isLogoDescriptionOpen)}
+            className="text-xl font-bold text-foreground tracking-tighter uppercase border-2 border-foreground px-2 py-1 hover:bg-foreground hover:text-background transition-all duration-300"
+          >
+            M. Timer
+          </button>
+          <div
+            className={`absolute top-full left-0 mt-2 text-[10px] font-medium text-chrono-fg-muted tracking-[0.2em] uppercase whitespace-nowrap transition-all duration-300 ${
+              isLogoDescriptionOpen
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 -translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 pointer-events-none"
+            }`}
+          >
+            Minimal Timer
+          </div>
+        </div>
 
         <div className="flex items-center gap-2 bg-card/80 backdrop-blur-md p-1.5 rounded-full border border-border shadow-2xl ml-auto">
           <button
