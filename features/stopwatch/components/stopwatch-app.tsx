@@ -25,6 +25,48 @@ export default function StopwatchApp() {
   const saveTimeoutRef = useRef<number | null>(null);
   const [hasHydrated, setHasHydrated] = useState(false);
   const [isInfoOpen, setIsInfoOpen] = useState(false);
+  const infoRef = useRef<HTMLDivElement>(null);
+  const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const timersRef = useRef(timers);
+
+  // Keep ref synced with state for event listeners
+  timersRef.current = timers;
+
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      try {
+        window.localStorage.setItem(STORAGE_KEY, JSON.stringify(timersRef.current));
+      } catch {
+        // Ignore write errors
+      }
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event: globalThis.MouseEvent) => {
+      if (infoRef.current && !infoRef.current.contains(event.target as Node)) {
+        setIsInfoOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const handleMouseEnter = () => {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+    }
+    setIsInfoOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    closeTimeoutRef.current = setTimeout(() => {
+      setIsInfoOpen(false);
+    }, 2000);
+  };
 
   const hasRunningTimer = useMemo(
     () => timers.some((timer) => timer.isRunning),
@@ -293,11 +335,13 @@ export default function StopwatchApp() {
   return (
     <div
       ref={containerRef}
-      className="min-h-screen bg-chrono-bg-page text-foreground font-sans selection:bg-muted overflow-y-auto"
+      className={`min-h-screen bg-chrono-bg-page text-foreground font-sans selection:bg-muted overflow-y-auto transition-opacity duration-500 ${
+        hasHydrated ? "opacity-100" : "opacity-0"
+      }`}
     >
       <div
         className={[
-          "fixed top-0 left-0 right-0 p-6 flex justify-between items-center z-40 transition-opacity duration-500",
+          "fixed top-0 left-0 right-0 p-6 flex justify-center sm:justify-between items-center z-40 transition-opacity duration-500",
           focusedTimerId !== null ? "opacity-0 pointer-events-none" : "opacity-100",
         ]
           .filter(Boolean)
@@ -308,41 +352,76 @@ export default function StopwatchApp() {
             Stopwatch
           </span>
 
-          <div className="relative group/info">
+          <div
+            ref={infoRef}
+            className="relative group/info"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
             <button
               onClick={() => setIsInfoOpen(!isInfoOpen)}
-              className="p-1.5 rounded-full text-muted-foreground/40 hover:text-foreground transition-colors"
+              className="p-1.5 rounded-full text-muted-foreground/70 hover:text-foreground transition-colors"
               aria-label="App Info"
             >
-              <Info size={14} strokeWidth={2} />
+              <Info size={16} strokeWidth={2} />
             </button>
 
             <div
               className={`
-                absolute top-full left-0 mt-2 w-64 p-4 rounded-xl
-                bg-card/80 backdrop-blur-md border border-border/40 shadow-2xl
+                absolute top-full mt-4 sm:mt-2
+                left-1/2 -translate-x-1/2 sm:left-0 sm:translate-x-0
+                w-72 p-5 rounded-2xl
+                bg-card/90 backdrop-blur-xl border border-border/40 shadow-2xl
                 text-xs leading-relaxed text-muted-foreground
-                transition-all duration-500 ease-out origin-top-left
+                text-center sm:text-left
+                transition-all duration-500 ease-out
+                origin-top sm:origin-top-left z-50
                 ${
                   isInfoOpen
                     ? "opacity-100 translate-y-0 scale-100"
-                    : "opacity-0 -translate-y-2 scale-95 pointer-events-none group-hover/info:opacity-100 group-hover/info:translate-y-0 group-hover/info:scale-100 group-hover/info:pointer-events-auto"
+                    : "opacity-0 -translate-y-2 scale-95 pointer-events-none"
                 }
               `}
             >
-              <div className="flex flex-col gap-1">
-                <span className="font-medium text-foreground">
-                  Minimal Stopwatch by oLab
-                </span>
-                <span>Maintained by Bappy Golder</span>
+              <div className="flex flex-col gap-2 items-center sm:items-start">
+                <div className="space-y-0.5">
+                  <span className="font-medium text-foreground block text-sm">
+                    Minimal Stopwatch by{" "}
+                    <a
+                      href="https://olab.com.au"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-400 underline decoration-blue-400/30 underline-offset-2 hover:text-blue-300 hover:decoration-blue-300 hover:drop-shadow-[0_0_8px_rgba(147,197,253,0.8)] transition-all duration-300"
+                    >
+                      oLab
+                    </a>
+                  </span>
+                  <span className="block">
+                    Maintained by{" "}
+                    <a
+                      href="https://www.linkedin.com/in/bappygolder/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-400 underline decoration-blue-400/30 underline-offset-2 hover:text-blue-300 hover:decoration-blue-300 hover:drop-shadow-[0_0_8px_rgba(147,197,253,0.8)] transition-all duration-300"
+                    >
+                      Bappy Golder
+                    </a>
+                  </span>
+                </div>
+                
+                <p className="text-[10px] opacity-80 pt-2 border-t border-border/30 leading-normal">
+                  Click time to start or stop.
+                  <br />
+                  Drag handle to reorder.
+                </p>
               </div>
 
-              <div className="mt-3 pt-3 border-t border-border/20 flex items-center justify-between text-[10px] tracking-wider uppercase opacity-70">
+              <div className="mt-4 pt-2 border-t border-border/20 flex items-center justify-center gap-6 sm:justify-between sm:gap-0 text-[10px] tracking-wider uppercase opacity-60">
                 <a
                   href="https://github.com/bappygolder/minimal-stopwatch"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-foreground transition-colors"
+                  className="text-blue-400 underline decoration-blue-400/30 underline-offset-2 hover:text-blue-300 hover:decoration-blue-300 hover:drop-shadow-[0_0_8px_rgba(147,197,253,0.8)] transition-all duration-300"
                 >
                   GitHub
                 </a>
@@ -383,23 +462,15 @@ export default function StopwatchApp() {
       {focusedTimerId === null && (
         <button
           onClick={addTimer}
-          className="fixed bottom-8 right-8 p-3 rounded-full bg-background/80 backdrop-blur-sm border border-border text-muted-foreground hover:text-foreground hover:border-foreground hover:bg-background transition-all shadow-sm z-40 group"
-          title="Add new timer"
+          className="fixed bottom-8 right-8 p-4 rounded-full bg-background/50 backdrop-blur-sm border border-border text-muted-foreground hover:text-background hover:border-foreground hover:bg-foreground hover:scale-105 transition-all duration-500 shadow-sm z-40 group"
         >
-          <Plus size={24} className="group-hover:rotate-90 transition-transform duration-300" />
+          <Plus size={24} className="transition-transform duration-500" />
+          <span className="absolute bottom-full mb-3 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-card/90 backdrop-blur border border-border/50 rounded-lg text-xs font-medium text-foreground shadow-xl opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 pointer-events-none whitespace-nowrap">
+            Add another timer
+          </span>
         </button>
       )}
 
-      <div
-        className={[
-          "fixed bottom-4 left-0 right-0 text-center text-chrono-fg-muted text-sm pointer-events-none transition-opacity duration-500",
-          focusedTimerId !== null ? "opacity-0" : "opacity-100",
-        ]
-          .filter(Boolean)
-          .join(" ")}
-      >
-        Click time to start or stop. Drag handle to reorder.
-      </div>
     </div>
   );
 }
