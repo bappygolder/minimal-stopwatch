@@ -9,10 +9,6 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      fontFamily: {
-        sans: ["'Space Grotesk'", "system-ui", "sans-serif"],
-        chronoNumber: ["'Oxanium'", "system-ui", "sans-serif"],
-      },
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
@@ -41,7 +37,7 @@ const config: Config = {
         sm: "0.25rem",
       },
       boxShadow: {
-        "chrono-glow": "0 18px 40px -24px rgba(91, 111, 232, 0.18)",
+        "chrono-glow": "0 0 50px -12px rgba(129, 140, 248, 0.5)",
       },
     },
   },

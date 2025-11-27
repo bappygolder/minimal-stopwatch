@@ -1,3 +1,3638 @@
 [00:00:00.756] Server  LOG      ✓ Ready in 478ms
 [00:00:06.487] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
 [00:00:24.478] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:01:55.636] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:01:59.962] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:02:01.277] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:02:02.328] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:02:03.366] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:03:16.877] Server  LOG      ✓ Compiled in 58ms
+[00:03:30.582] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:03:31.668] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:04:51.172] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:17:31.946] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:32:06.490] Server  LOG      ✓ Compiled in 96ms
+[00:32:11.583] Server  LOG      ✓ Compiled in 88ms
+[00:32:12.202] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:12.206] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:12.209] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:12.210] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:12.215] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:12.217] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:12.218] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:12.220] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:12.223] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:12.226] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:12.227] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:12.229] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:12.232] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:12.233] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:12.234] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:12.235] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:12.237] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:12.239] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:12.242] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:12.243] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:12.247] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:12.248] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:12.249] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:12.251] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:12.252] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:12.254] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:12.256] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:12.259] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:12.260] Server  LOG      ✓ Compiled in 166ms
+[00:32:13.085] Browser ERROR   ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/stopwatch/components/stopwatch-app.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+[00:32:14.152] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:14.162] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:14.167] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:14.169] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:14.200] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:14.201] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:14.202] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:14.203] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:14.205] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:14.207] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:14.208] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:14.209] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:14.210] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:14.212] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:14.213] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:14.214] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:14.216] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:14.217] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:14.218] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:14.220] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:14.222] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:14.223] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:14.224] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:14.225] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:14.227] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:14.229] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:14.230] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:14.231] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:14.232] Server  LOG      ✓ Compiled in 291ms
+[00:32:15.085] Browser ERROR   ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+[00:32:15.330] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:15.331] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:15.332] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:15.333] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:15.390] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:15.392] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:15.393] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:15.395] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:15.398] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:15.399] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:15.401] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:15.402] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:15.406] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:15.407] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:15.409] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:15.411] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:15.419] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:15.420] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:15.421] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:15.423] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:15.426] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:15.427] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:15.429] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:15.430] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:15.432] Server  LOG      ✓ Compiled in 147ms
+[00:32:15.435] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:15.436] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:15.437] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:15.439] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:16.084] Browser ERROR   ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+[00:32:16.884] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:16.886] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:16.888] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:16.889] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:16.891] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:16.892] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:16.893] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:16.894] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:16.896] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:16.897] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:16.899] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:16.901] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:16.904] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:16.905] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:16.906] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:16.907] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:16.909] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:16.910] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:16.911] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:16.912] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:16.914] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:16.916] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:16.919] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:16.920] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:16.921] Server  LOG      ✓ Compiled in 105ms
+[00:32:17.084] Browser ERROR   ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+[00:32:17.805] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:17.806] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:17.807] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:17.808] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:17.809] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:17.810] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:17.811] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:17.812] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:17.814] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:17.815] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:17.815] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:17.816] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:17.817] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:17.819] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:17.821] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:17.822] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:17.824] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:17.825] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:17.826] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:17.827] Server  ERROR    ⨯ ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:32:18.085] Browser ERROR   ./lib/supabase-client.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+> 1 | import { createClient } from "@supabase/supabase-js";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  4 | const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+Import traces:
+  Client Component Browser:
+    ./lib/supabase-client.ts [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Client Component Browser]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./lib/supabase-client.ts [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Client Component SSR]
+    ./features/auth/auth-gate.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+[00:32:21.426] Server  LOG      ✓ Compiled in 1093ms
+[00:32:21.715] Server  LOG      ✓ Compiled in 135ms
+[00:32:22.823] Server  LOG      ✓ Compiled in 100ms
+[00:32:24.646] Server  LOG      ✓ Compiled in 231ms
+[00:32:25.399] Server  LOG      ✓ Compiled in 111ms
+[00:32:26.646] Server  LOG      ✓ Compiled in 50ms
+[00:32:27.560] Server  LOG      ✓ Compiled in 59ms
+[00:32:29.295] Server  LOG      ✓ Compiled in 80ms
+[00:32:29.909] Server  LOG      ✓ Compiled in 79ms
+[00:32:30.925] Server  LOG      ✓ Compiled in 69ms
+[00:32:32.206] Server  LOG      ✓ Compiled in 77ms
+[00:32:36.071] Server  LOG      ✓ Compiled in 33ms
+[00:32:36.804] Server  LOG      ✓ Compiled in 39ms
+[00:32:38.978] Server  LOG      ✓ Compiled in 1690ms
+[00:32:39.324] Server  LOG      ✓ Compiled in 78ms
+[00:32:40.550] Server  LOG      ✓ Compiled in 49ms
+[00:32:41.286] Server  LOG      ✓ Compiled in 50ms
+[00:32:41.903] Server  LOG      ✓ Compiled in 59ms
+[00:32:42.415] Server  LOG      ✓ Compiled in 60ms
+[00:32:42.739] Server  LOG      ✓ Compiled in 69ms
+[00:32:43.081] Server  LOG      ✓ Compiled in 126ms
+[00:32:43.379] Server  LOG      ✓ Compiled in 57ms
+[00:32:44.140] Server  LOG      ✓ Compiled in 79ms
+[00:32:45.014] Server  LOG      ✓ Compiled in 197ms
+[00:32:45.435] Server  LOG      ✓ Compiled in 51ms
+[00:32:45.757] Server  LOG      ✓ Compiled in 54ms
+[00:32:46.287] Server  LOG      ✓ Compiled in 78ms
+[00:32:47.356] Server  LOG      ✓ Compiled in 74ms
+[00:32:48.393] Server  LOG      ✓ Compiled in 57ms
+[00:32:49.084] Browser ERROR   ./features/stopwatch/components/stopwatch-app.tsx:312:7
+Parsing ecmascript source code failed
+  310 |         "min-h-screen flex flex-col items-center p-4 transition-all duration-500 gap-6",
+  311 |         timers.length >= 1 ? "pt-24 pb-24" : "justify-center",
+> 312 |       ]
+      |       ^
+  313 |         .filter(Boolean)
+  314 |         .join(" ")}
+  315 |     >
+
+Expression expected
+
+Import trace:
+  Server Component:
+    ./features/stopwatch/components/stopwatch-app.tsx
+    ./app/page.tsx
+[00:32:49.256] Server  LOG      ✓ Compiled in 53ms
+[00:32:50.085] Browser ERROR   ./features/stopwatch/components/stopwatch-app.tsx:395:9
+Parsing ecmascript source code failed
+  393 |         </button>
+  394 |
+> 395 |         <button
+      |         ^
+  396 |           onClick={toggleFullscreen}
+  397 |           className="p-2 rounded-full text-muted-foreground hover:text-foreground hover:bg-card transition-colors"
+  398 |           title="Fullscreen"
+
+Expression expected
+
+Import trace:
+  Server Component:
+    ./features/stopwatch/components/stopwatch-app.tsx
+    ./app/page.tsx
+[00:32:50.085] Browser ERROR   ./features/stopwatch/components/stopwatch-app.tsx:391:9
+Parsing ecmascript source code failed
+  389 |             .join(" ")}
+  390 |           title="Zen mode"
+> 391 |         >
+      |         ^
+  392 |           {isZenMode ? <EyeOff size={20} /> : <Eye size={20} />}
+  393 |         </button>
+  394 |
+
+Unexpected token. Did you mean `{'>'}` or `&gt;`?
+
+Import trace:
+  Server Component:
+    ./features/stopwatch/components/stopwatch-app.tsx
+    ./app/page.tsx
+[00:32:51.086] Browser ERROR   ./features/stopwatch/components/stopwatch-app.tsx:405:7
+Parsing ecmascript source code failed
+  403 |           .filter(Boolean)
+  404 |           .join(" ")}
+> 405 |       >
+      |       ^
+  406 |         Click time to start or stop. Drag handle to reorder.
+  407 |       </div>
+  408 |     </div>
+
+Unexpected token. Did you mean `{'>'}` or `&gt;`?
+
+Import trace:
+  Server Component:
+    ./features/stopwatch/components/stopwatch-app.tsx
+    ./app/page.tsx
+[00:32:52.369] Server  LOG      ✓ Compiled in 65ms
+[00:32:53.298] Server  LOG      ✓ Compiled in 71ms
+[00:32:53.902] Server  LOG      ✓ Compiled in 39ms
+[00:32:54.720] Server  LOG      ✓ Compiled in 61ms
+[00:32:55.178] Server  LOG      ✓ Compiled in 188ms
+[00:32:57.108] Server  LOG      ✓ Compiled in 1492ms
+[00:32:57.223] Server  LOG      ✓ Compiled in 59ms
+[00:32:58.119] Server  LOG      ✓ Compiled in 50ms
+[00:32:58.666] Server  LOG      ✓ Compiled in 64ms
+[00:32:58.978] Server  LOG      ✓ Compiled in 50ms
+[00:32:59.262] Server  LOG      ✓ Compiled in 41ms
+[00:32:59.556] Server  LOG      ✓ Compiled in 34ms
+[00:33:00.295] Server  LOG      ✓ Compiled in 42ms
+[00:33:01.347] Server  LOG      ✓ Compiled in 47ms
+[00:33:02.120] Server  LOG      ✓ Compiled in 51ms
+[00:33:02.926] Server  LOG      ✓ Compiled in 58ms
+[00:33:03.772] Server  LOG      ✓ Compiled in 51ms
+[00:33:04.531] Server  LOG      ✓ Compiled in 51ms
+[00:33:05.272] Server  LOG      ✓ Compiled in 59ms
+[00:33:06.328] Server  LOG      ✓ Compiled in 59ms
+[00:33:07.378] Server  LOG      ✓ Compiled in 82ms
+[00:33:07.685] Server  LOG      ✓ Compiled in 46ms
+[00:33:10.800] Server  LOG      ✓ Compiled in 1932ms
+[00:33:11.581] Server  LOG      ✓ Compiled in 72ms
+[00:33:13.010] Server  LOG      ✓ Compiled in 65ms
+[00:33:13.751] Server  LOG      ✓ Compiled in 37ms
+[00:33:14.899] Server  LOG      ✓ Compiled in 59ms
+[00:33:15.507] Server  LOG      ✓ Compiled in 55ms
+[00:33:16.988] Server  LOG      ✓ Compiled in 116ms
+[00:33:17.607] Server  LOG      ✓ Compiled in 65ms
+[00:33:18.264] Server  LOG      ✓ Compiled in 107ms
+[00:33:19.711] Server  LOG      ✓ Compiled in 80ms
+[00:33:20.906] Server  LOG      ✓ Compiled in 85ms
+[00:33:21.874] Server  LOG      ✓ Compiled in 170ms
+[00:33:25.225] Server  LOG      ✓ Compiled in 187ms
+[00:34:28.766] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:36:24.747] Server  LOG      ✓ Compiled in 50ms
+[00:36:55.873] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:37:13.061] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:37:13.226] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<SegmentViewNode>} forbidden={undefined} ...>
+      <RedirectBoundary>
+        <RedirectErrorBoundary router={{...}}>
+          <InnerLayoutRouter url="/" tree={[...]} params={{}} cacheNode={{lazyData:null, ...}} segmentPath={[...]} ...>
+            <SegmentViewNode type="page" pagePath="page.tsx">
+              <SegmentTrieNode>
+              <Page>
+                <StopwatchApp>
+                  <div ref={{current:null}} className="min-h-scre...">
+                    <div>
+                    <div className="min-h-scre...">
+                      <TimerCard timer={{id:1,label:"Fi...", ...}} totalTimers={2} isZenMode={false} ...>
+                        <div className="relative g..." draggable={true} onDragStart={function onDragStart} ...>
+                          <div className="flex justi...">
+                            <div>
+                            <div className={"flex gap..."}>
++                             <div
++                               className="p-1 text-muted-foreground hover:text-foreground transition-colors cursor-grab"
++                               title="Drag to reorder"
++                             >
+-                             <button
+-                               className="p-1 rounded-full transition-colors text-muted-foreground hover:text-chrono-..."
+-                               title="Focus mode"
+-                             >
+                              ...
+                          ...
+                      ...
+                      ...
+                    ...
+            ...
+          ...
+
+[00:37:57.656] Server  LOG      ✓ Compiled in 76ms
+[00:38:43.183] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:38:48.515] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold

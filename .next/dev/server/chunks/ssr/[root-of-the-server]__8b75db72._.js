@@ -437,6 +437,28 @@ function CompactTimerCard(props) {
     }, this);
 }
 }),
+"[project]/lib/supabase-client.ts [app-ssr] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "supabase",
+    ()=>supabase
+]);
+(()=>{
+    const e = new Error("Cannot find module '@supabase/supabase-js'");
+    e.code = 'MODULE_NOT_FOUND';
+    throw e;
+})();
+;
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+if (!supabaseUrl || !supabaseAnonKey) {
+    // We intentionally do not throw here so the rest of the UI can still render
+    // without Supabase. The owner will provide the correct env values.
+    console.warn("Supabase environment variables are not set. NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY are required for auth and persistence.");
+}
+const supabase = supabaseUrl && supabaseAnonKey ? createClient(supabaseUrl, supabaseAnonKey) : null;
+}),
 "[project]/features/stopwatch/components/stopwatch-app.tsx [app-ssr] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
 
@@ -455,13 +477,15 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$re
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$sun$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Sun$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/sun.js [app-ssr] (ecmascript) <export default as Sun>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$features$2f$stopwatch$2f$components$2f$timer$2d$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/features/stopwatch/components/timer-card.tsx [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$features$2f$stopwatch$2f$components$2f$compact$2d$timer$2d$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/features/stopwatch/components/compact-timer-card.tsx [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$supabase$2d$client$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/lib/supabase-client.ts [app-ssr] (ecmascript)");
 'use client';
 ;
 ;
 ;
 ;
 ;
-function StopwatchApp() {
+;
+function StopwatchApp({ userId }) {
     const [timers, setTimers] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])([
         {
             id: 1,
@@ -476,6 +500,7 @@ function StopwatchApp() {
     const [primaryId, setPrimaryId] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(1);
     const [theme, setTheme] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("light");
     const containerRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])(null);
+    const supa = __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$supabase$2d$client$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["supabase"];
     const hasRunningTimer = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useMemo"])(()=>timers.some((timer)=>timer.isRunning), [
         timers
     ]);
@@ -500,6 +525,68 @@ function StopwatchApp() {
         };
     }, [
         hasRunningTimer
+    ]);
+    // Load persisted timers for this user from Supabase (if configured)
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
+        if (!supa || !userId) return;
+        let cancelled = false;
+        const load = async ()=>{
+            try {
+                const { data, error } = await supa.from("timer_states").select("timers, primary_id").eq("user_id", userId).maybeSingle();
+                if (error) {
+                    console.error("Failed to load timers from Supabase", error);
+                    return;
+                }
+                if (!data) {
+                    // No state yet – seed with current in-memory timers
+                    await supa.from("timer_states").insert({
+                        user_id: userId,
+                        timers,
+                        primary_id: primaryId
+                    });
+                    return;
+                }
+                if (!cancelled && data.timers) {
+                    const remoteTimers = data.timers;
+                    setTimers(remoteTimers);
+                    const remotePrimary = data.primary_id ?? remoteTimers[0]?.id ?? null;
+                    setPrimaryId(remotePrimary);
+                }
+            } catch (error) {
+                console.error("Failed to initialize timers from Supabase", error);
+            }
+        };
+        void load();
+        return ()=>{
+            cancelled = true;
+        };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [
+        supa,
+        userId
+    ]);
+    // Persist timers whenever they change for an authenticated user
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
+        if (!supa || !userId) return;
+        const persist = async ()=>{
+            try {
+                await supa.from("timer_states").upsert({
+                    user_id: userId,
+                    timers,
+                    primary_id: primaryId
+                }, {
+                    onConflict: "user_id"
+                });
+            } catch (error) {
+                console.error("Failed to persist timers to Supabase", error);
+            }
+        };
+        void persist();
+    }, [
+        supa,
+        userId,
+        timers,
+        primaryId
     ]);
     // Initialize theme from localStorage or system preference
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
@@ -712,13 +799,13 @@ function StopwatchApp() {
                                 children: "Minimal"
                             }, void 0, false, {
                                 fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
-                                lineNumber: 324,
+                                lineNumber: 401,
                                 columnNumber: 17
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
-                        lineNumber: 323,
+                        lineNumber: 400,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -735,18 +822,18 @@ function StopwatchApp() {
                                     size: 20
                                 }, void 0, false, {
                                     fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
-                                    lineNumber: 340,
+                                    lineNumber: 417,
                                     columnNumber: 26
                                 }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$eye$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Eye$3e$__["Eye"], {
                                     size: 20
                                 }, void 0, false, {
                                     fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
-                                    lineNumber: 340,
+                                    lineNumber: 417,
                                     columnNumber: 49
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
-                                lineNumber: 328,
+                                lineNumber: 405,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -757,18 +844,18 @@ function StopwatchApp() {
                                     size: 20
                                 }, void 0, false, {
                                     fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
-                                    lineNumber: 348,
+                                    lineNumber: 425,
                                     columnNumber: 33
                                 }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$moon$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Moon$3e$__["Moon"], {
                                     size: 20
                                 }, void 0, false, {
                                     fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
-                                    lineNumber: 348,
+                                    lineNumber: 425,
                                     columnNumber: 53
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
-                                lineNumber: 343,
+                                lineNumber: 420,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -779,25 +866,25 @@ function StopwatchApp() {
                                     size: 20
                                 }, void 0, false, {
                                     fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
-                                    lineNumber: 356,
+                                    lineNumber: 433,
                                     columnNumber: 29
                                 }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$maximize$2d$2$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Maximize2$3e$__["Maximize2"], {
                                     size: 20
                                 }, void 0, false, {
                                     fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
-                                    lineNumber: 356,
+                                    lineNumber: 433,
                                     columnNumber: 55
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
-                                lineNumber: 351,
+                                lineNumber: 428,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "w-px h-6 bg-border mx-1"
                             }, void 0, false, {
                                 fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
-                                lineNumber: 359,
+                                lineNumber: 436,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -808,24 +895,24 @@ function StopwatchApp() {
                                     size: 20
                                 }, void 0, false, {
                                     fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
-                                    lineNumber: 366,
+                                    lineNumber: 443,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
-                                lineNumber: 361,
+                                lineNumber: 438,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
-                        lineNumber: 327,
+                        lineNumber: 404,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
-                lineNumber: 313,
+                lineNumber: 390,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -854,7 +941,7 @@ function StopwatchApp() {
                                     onDrop: handleDrop
                                 }, void 0, false, {
                                     fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
-                                    lineNumber: 396,
+                                    lineNumber: 473,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -869,12 +956,12 @@ function StopwatchApp() {
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
-                                                lineNumber: 412,
+                                                lineNumber: 489,
                                                 columnNumber: 19
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
-                                            lineNumber: 411,
+                                            lineNumber: 488,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -894,18 +981,18 @@ function StopwatchApp() {
                                                     onDrop: handleDrop
                                                 }, timer.id, false, {
                                                     fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
-                                                    lineNumber: 416,
+                                                    lineNumber: 493,
                                                     columnNumber: 21
                                                 }, this))
                                         }, void 0, false, {
                                             fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
-                                            lineNumber: 414,
+                                            lineNumber: 491,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
-                                    lineNumber: 410,
+                                    lineNumber: 487,
                                     columnNumber: 15
                                 }, this)
                             ]
@@ -915,23 +1002,23 @@ function StopwatchApp() {
                         className: "fixed bottom-12 left-1/2 -translate-x-1/2 w-full max-w-4xl px-4 flex justify-end pointer-events-none",
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                             onClick: addTimer,
-                            className: "flex h-12 w-12 items-center justify-center rounded-full bg-black text-white shadow-md hover:shadow-lg transition-shadow pointer-events-auto",
+                            className: "flex h-12 w-12 items-center justify-center rounded-full bg-foreground text-background shadow-md hover:shadow-lg transition-shadow pointer-events-auto",
                             "aria-label": "Add timer",
                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$plus$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Plus$3e$__["Plus"], {
                                 size: 22
                             }, void 0, false, {
                                 fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
-                                lineNumber: 444,
+                                lineNumber: 521,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
-                            lineNumber: 439,
+                            lineNumber: 516,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
-                        lineNumber: 438,
+                        lineNumber: 515,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -942,20 +1029,40 @@ function StopwatchApp() {
                         children: "Click time to start or stop. Drag handle to reorder."
                     }, void 0, false, {
                         fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
-                        lineNumber: 449,
+                        lineNumber: 526,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
-                lineNumber: 372,
+                lineNumber: 449,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
-        lineNumber: 308,
+        lineNumber: 385,
         columnNumber: 5
+    }, this);
+}
+}),
+"[project]/app/page.tsx [app-ssr] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "default",
+    ()=>Page
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react-jsx-dev-runtime.js [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$features$2f$stopwatch$2f$components$2f$stopwatch$2d$app$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/features/stopwatch/components/stopwatch-app.tsx [app-ssr] (ecmascript)");
+"use client";
+;
+;
+function Page() {
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$features$2f$stopwatch$2f$components$2f$stopwatch$2d$app$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
+        fileName: "[project]/app/page.tsx",
+        lineNumber: 6,
+        columnNumber: 10
     }, this);
 }
 }),
@@ -1775,4 +1882,4 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$re
 }),
 ];
 
-//# sourceMappingURL=%5Broot-of-the-server%5D__1661ea7f._.js.map
+//# sourceMappingURL=%5Broot-of-the-server%5D__8b75db72._.js.map

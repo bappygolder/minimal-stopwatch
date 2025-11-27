@@ -1,32 +1,100 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState, DragEvent } from "react";
-import { Eye, EyeOff, Maximize2, Minimize2, Plus, Moon, Sun } from "lucide-react";
+import { Eye, EyeOff, Maximize2, Minimize2, Plus } from "lucide-react";
 import type { Timer } from "@/features/stopwatch/types";
 import TimerCard from "@/features/stopwatch/components/timer-card";
-import CompactTimerCard from "@/features/stopwatch/components/compact-timer-card";
+
+const STORAGE_KEY = "chrono-minimal-timers-v1";
+
+const DEFAULT_TIMERS: Timer[] = [
+  {
+    id: 1,
+    label: "First timer",
+    isRunning: false,
+    elapsedMs: 0,
+  },
+];
 
 export default function StopwatchApp() {
-  const [timers, setTimers] = useState<Timer[]>([
-    {
-      id: 1,
-      label: "Untitled",
-      isRunning: false,
-      elapsedMs: 0,
-    },
-  ]);
+  const [timers, setTimers] = useState<Timer[]>(DEFAULT_TIMERS);
 
   const [isZenMode, setIsZenMode] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [draggedId, setDraggedId] = useState<number | null>(null);
-  const [primaryId, setPrimaryId] = useState<number | null>(1);
-  const [theme, setTheme] = useState<"light" | "dark" | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const saveTimeoutRef = useRef<number | null>(null);
+  const [hasHydrated, setHasHydrated] = useState(false);
 
   const hasRunningTimer = useMemo(
     () => timers.some((timer) => timer.isRunning),
     [timers]
   );
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    try {
+      const raw = window.localStorage.getItem(STORAGE_KEY);
+      if (!raw) {
+        setHasHydrated(true);
+        return;
+      }
+
+      const parsed = JSON.parse(raw) as unknown;
+
+      if (!Array.isArray(parsed)) {
+        setHasHydrated(true);
+        return;
+      }
+
+      const next = parsed.map((item) => {
+        const candidate = item as Partial<Timer>;
+        return {
+          id: typeof candidate.id === "number" ? candidate.id : Date.now(),
+          label: typeof candidate.label === "string" ? candidate.label : "Timer",
+          isRunning: Boolean(candidate.isRunning),
+          elapsedMs: typeof candidate.elapsedMs === "number" ? candidate.elapsedMs : 0,
+        } satisfies Timer;
+      });
+
+      if (next.length === 0) {
+        setTimers(DEFAULT_TIMERS);
+      } else {
+        setTimers(next);
+      }
+    } catch {
+      setTimers(DEFAULT_TIMERS);
+    } finally {
+      setHasHydrated(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!hasHydrated || typeof window === "undefined") {
+      return;
+    }
+
+    if (saveTimeoutRef.current !== null) {
+      window.clearTimeout(saveTimeoutRef.current);
+    }
+
+    saveTimeoutRef.current = window.setTimeout(() => {
+      try {
+        window.localStorage.setItem(STORAGE_KEY, JSON.stringify(timers));
+      } catch {
+        // Ignore write errors (e.g. storage quota)
+      }
+    }, 500);
+
+    return () => {
+      if (saveTimeoutRef.current !== null) {
+        window.clearTimeout(saveTimeoutRef.current);
+      }
+    };
+  }, [timers, hasHydrated]);
 
   useEffect(() => {
     if (!hasRunningTimer) {
@@ -58,65 +126,6 @@ export default function StopwatchApp() {
     };
   }, [hasRunningTimer]);
 
-  // Load persisted timers from localStorage on first mount
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    try {
-      const raw = window.localStorage.getItem("chrono-timers-v1");
-      if (!raw) return;
-
-      const parsed = JSON.parse(raw) as {
-        timers?: Timer[];
-        primaryId?: number | null;
-      };
-
-      if (Array.isArray(parsed.timers) && parsed.timers.length > 0) {
-        setTimers(parsed.timers);
-        setPrimaryId(
-          parsed.primaryId ?? parsed.timers[0]?.id ?? primaryId,
-        );
-      }
-    } catch (error) {
-      console.error("Failed to read timers from localStorage", error);
-    }
-  }, []);
-
-  // Persist timers to localStorage whenever they change
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    try {
-      const payload = JSON.stringify({ timers, primaryId });
-      window.localStorage.setItem("chrono-timers-v1", payload);
-    } catch (error) {
-      console.error("Failed to save timers to localStorage", error);
-    }
-  }, [timers, primaryId]);
-
-  // Initialize theme from localStorage or system preference
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    const stored = window.localStorage.getItem("chrono-theme");
-    if (stored === "light" || stored === "dark") {
-      setTheme(stored);
-      return;
-    }
-
-    const prefersDark = window.matchMedia?.("(prefers-color-scheme: dark)")?.matches;
-    setTheme(prefersDark ? "dark" : "light");
-  }, []);
-
-  // Apply theme class and persist – only after theme has been initialised
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    if (!theme) return;
-
-    document.documentElement.classList.toggle("dark", theme === "dark");
-    window.localStorage.setItem("chrono-theme", theme);
-  }, [theme]);
-
   useEffect(() => {
     const target = containerRef.current;
     if (!target) {
@@ -142,34 +151,15 @@ export default function StopwatchApp() {
           ? Math.max(...previous.map((timer) => timer.id)) + 1
           : 1;
 
-      const newTimer = {
-        id: nextId,
-        label: "Untitled",
-        isRunning: false,
-        elapsedMs: 0,
-      } as Timer;
-
-      // If we already have a primary timer, insert new timers
-      // directly after it so new histories appear at the top.
-      let nextTimers: Timer[];
-      if (previous.length > 0 && primaryId !== null) {
-        const primaryIndex = previous.findIndex((t) => t.id === primaryId);
-        if (primaryIndex >= 0) {
-          nextTimers = [...previous];
-          nextTimers.splice(primaryIndex + 1, 0, newTimer);
-        } else {
-          nextTimers = [...previous, newTimer];
-        }
-      } else {
-        nextTimers = [...previous, newTimer];
-      }
-
-      // Keep current primary; new timers start as compact/history by default
-      if (previous.length === 0) {
-        setPrimaryId(nextId);
-      }
-
-      return nextTimers;
+      return [
+        ...previous,
+        {
+          id: nextId,
+          label: `Timer ${nextId}`,
+          isRunning: false,
+          elapsedMs: 0,
+        },
+      ];
     });
   };
 
@@ -179,14 +169,7 @@ export default function StopwatchApp() {
         return previous;
       }
 
-      const next = previous.filter((timer) => timer.id !== id);
-
-      if (primaryId === id) {
-        const nextPrimary = next.length > 0 ? next[0].id : null;
-        setPrimaryId(nextPrimary);
-      }
-
-      return next;
+      return previous.filter((timer) => timer.id !== id);
     });
   };
 
@@ -217,16 +200,8 @@ export default function StopwatchApp() {
   };
 
   const resetTimer = (id: number) => {
-    setTimers((previous) => {
-      const target = previous.find((timer) => timer.id === id);
-      if (!target) {
-        return previous;
-      }
-
-      const shouldCreateHistory = target.isRunning && target.elapsedMs > 0;
-
-      // Reset the original timer
-      let nextTimers = previous.map((timer) =>
+    setTimers((previous) =>
+      previous.map((timer) =>
         timer.id === id
           ? {
               ...timer,
@@ -234,38 +209,8 @@ export default function StopwatchApp() {
               elapsedMs: 0,
             }
           : timer
-      );
-
-      if (shouldCreateHistory) {
-        const nextId =
-          previous.length > 0
-            ? Math.max(...previous.map((timer) => timer.id)) + 1
-            : 1;
-        const historyTimer: Timer = {
-          id: nextId,
-          label: target.label,
-          isRunning: false,
-          elapsedMs: target.elapsedMs,
-        };
-
-        // Insert new history directly after the primary timer so
-        // newest histories appear at the top of the history list.
-        const primaryIndex =
-          primaryId !== null
-            ? nextTimers.findIndex((timer) => timer.id === primaryId)
-            : -1;
-
-        if (primaryIndex >= 0) {
-          const withHistory = [...nextTimers];
-          withHistory.splice(primaryIndex + 1, 0, historyTimer);
-          nextTimers = withHistory;
-        } else {
-          nextTimers = [historyTimer, ...nextTimers];
-        }
-      }
-
-      return nextTimers;
-    });
+      )
+    );
   };
 
   const handleDragStart = (event: DragEvent<HTMLDivElement>, id: number) => {
@@ -297,16 +242,6 @@ export default function StopwatchApp() {
       const [moved] = updated.splice(sourceIndex, 1);
       updated.splice(targetIndex, 0, moved);
 
-      // If we dragged a history timer onto the primary timer, promote the dragged timer
-      if (primaryId !== null && targetId === primaryId && draggedId !== primaryId) {
-        setPrimaryId(draggedId);
-      }
-
-      // If we dragged the primary timer onto a history timer, promote the target timer
-      if (primaryId !== null && draggedId === primaryId && targetId !== primaryId) {
-        setPrimaryId(targetId);
-      }
-
       return updated;
     });
   };
@@ -318,10 +253,6 @@ export default function StopwatchApp() {
 
   const toggleZenMode = () => {
     setIsZenMode((value) => !value);
-  };
-
-  const toggleTheme = () => {
-    setTheme((value) => (value === "dark" ? "light" : "dark"));
   };
 
   const toggleFullscreen = () => {
@@ -338,16 +269,11 @@ export default function StopwatchApp() {
     }
   };
 
-  const promoteTimer = (id: number) => {
-    setPrimaryId(id);
-  };
-
   return (
     <div
       ref={containerRef}
-      className="h-screen bg-chrono-bg-page text-foreground font-sans selection:bg-muted overflow-hidden"
+      className="min-h-screen bg-chrono-bg-page text-foreground font-sans selection:bg-muted overflow-y-auto"
     >
-      {/* Top toolbar */}
       <div
         className={[
           "fixed top-0 left-0 right-0 p-6 flex justify-between items-center z-50 transition-opacity duration-500",
@@ -362,7 +288,7 @@ export default function StopwatchApp() {
           Chrono<span className="text-foreground">Minimal</span>
         </h1>
 
-        <div className="flex items-center gap-2 bg-card/80 backdrop-blur-md p-1.5 rounded-full border border-border ml-auto">
+        <div className="flex items-center gap-2 bg-card/80 backdrop-blur-md p-1.5 rounded-full border border-border shadow-2xl ml-auto">
           <button
             onClick={toggleZenMode}
             className={[
@@ -376,14 +302,6 @@ export default function StopwatchApp() {
             title="Zen mode"
           >
             {isZenMode ? <EyeOff size={20} /> : <Eye size={20} />}
-          </button>
-
-          <button
-            onClick={toggleTheme}
-            className="p-2 rounded-full text-muted-foreground hover:text-foreground hover:bg-card transition-colors"
-            title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-          >
-            {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
           </button>
 
           <button
@@ -406,94 +324,53 @@ export default function StopwatchApp() {
         </div>
       </div>
 
-      {/* Main content: primary timer + history */}
       <div
         className={[
-          "min-h-screen flex flex-col items-center p-4 transition-all duration-500 gap-6",
+          "min-h-screen flex flex-col items-center p-4 transition-all duration-500 gap-8",
           timers.length >= 1 ? "pt-24 pb-24" : "justify-center",
         ]
           .filter(Boolean)
           .join(" ")}
       >
-        {timers.length > 0 && (() => {
-          const currentPrimaryId =
-            primaryId && timers.some((timer) => timer.id === primaryId)
-              ? primaryId
-              : timers[0].id;
+        {timers.map((timer) => (
+          <TimerCard
+            key={timer.id}
+            timer={timer}
+            totalTimers={timers.length}
+            isZenMode={isZenMode}
+            isBeingDragged={draggedId === timer.id}
+            onToggle={() => toggleTimer(timer.id)}
+            onReset={() => resetTimer(timer.id)}
+            onDelete={() => removeTimer(timer.id)}
+            onUpdateLabel={(label) => updateLabel(timer.id, label)}
+            onDragStart={(event) => handleDragStart(event, timer.id)}
+            onDragOver={(event) => handleDragOver(event, timer.id)}
+            onDrop={handleDrop}
+          />
+        ))}
 
-          const primaryTimer = timers.find(
-            (timer) => timer.id === currentPrimaryId,
-          )!;
-
-          const secondaryTimers = timers.filter(
-            (timer) => timer.id !== currentPrimaryId,
-          );
-
-          return (
-            <>
-              <TimerCard
-                timer={primaryTimer}
-                totalTimers={timers.length}
-                isZenMode={isZenMode}
-                isBeingDragged={draggedId === primaryTimer.id}
-                onToggle={() => toggleTimer(primaryTimer.id)}
-                onReset={() => resetTimer(primaryTimer.id)}
-                onDelete={() => removeTimer(primaryTimer.id)}
-                onUpdateLabel={(label) => updateLabel(primaryTimer.id, label)}
-                onDragStart={(event) => handleDragStart(event, primaryTimer.id)}
-                onDragOver={(event) => handleDragOver(event, primaryTimer.id)}
-                onDrop={handleDrop}
-              />
-
-              <div className="w-full max-w-4xl mt-4">
-                <div className="mb-2 flex items-baseline justify-between text-xs text-chrono-fg-muted">
-                  <span>Total: {secondaryTimers.length}</span>
-                </div>
-                <div className="chrono-scroll max-h-[36vh] overflow-y-auto pr-1 flex flex-col gap-3 pb-32">
-                  {secondaryTimers.map((timer) => (
-                    <CompactTimerCard
-                      key={timer.id}
-                      timer={timer}
-                      isPrimary={false}
-                      isZenMode={isZenMode}
-                      isBeingDragged={draggedId === timer.id}
-                      onToggle={() => toggleTimer(timer.id)}
-                      onReset={() => resetTimer(timer.id)}
-                      onDelete={() => removeTimer(timer.id)}
-                      onUpdateLabel={(label) => updateLabel(timer.id, label)}
-                      onPromote={() => promoteTimer(timer.id)}
-                      onDragStart={(event) => handleDragStart(event, timer.id)}
-                      onDragOver={(event) => handleDragOver(event, timer.id)}
-                      onDrop={handleDrop}
-                    />
-                  ))}
-                </div>
-              </div>
-            </>
-          );
-        })()}
-        {/* Fixed + button aligned with history area (bottom-right within max-w-4xl) */}
-        <div className="fixed bottom-12 left-1/2 -translate-x-1/2 w-full max-w-4xl px-4 flex justify-end pointer-events-none">
-          <button
-            onClick={addTimer}
-            className="flex h-12 w-12 items-center justify-center rounded-full bg-foreground text-background shadow-md hover:shadow-lg transition-shadow pointer-events-auto"
-            aria-label="Add timer"
-          >
-            <Plus size={22} />
-          </button>
-        </div>
-
-        {/* Helper text at bottom of viewport */}
-        <div
-          className={[
-            "fixed bottom-4 left-0 right-0 text-center text-chrono-fg-muted text-sm pointer-events-none transition-opacity duration-500",
-            isZenMode ? "opacity-0" : "opacity-100",
-          ]
-            .filter(Boolean)
-            .join(" ")}
+        <button
+          onClick={addTimer}
+          className="group flex flex-col items-center gap-2 text-chrono-fg-muted hover:text-chrono-accent transition-colors py-4"
         >
-          Click time to start or stop. Drag handle to reorder.
-        </div>
+          <div className="p-3 rounded-full border border-chrono-border-subtle group-hover:border-chrono-accent/60 bg-chrono-bg-card/60">
+            <Plus size={24} />
+          </div>
+          <span className="text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+            Add new timer
+          </span>
+        </button>
+      </div>
+
+      <div
+        className={[
+          "fixed bottom-4 left-0 right-0 text-center text-chrono-fg-muted text-sm pointer-events-none transition-opacity duration-500",
+          isZenMode ? "opacity-0" : "opacity-100",
+        ]
+          .filter(Boolean)
+          .join(" ")}
+      >
+        Click time to start or stop. Drag handle to reorder.
       </div>
     </div>
   );

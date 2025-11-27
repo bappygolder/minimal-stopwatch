@@ -38,12 +38,13 @@ function TimerCard(props) {
     const minutes = Math.floor(timer.elapsedMs / 60000);
     const seconds = Math.floor(timer.elapsedMs % 60000 / 1000);
     const milliseconds = Math.floor(timer.elapsedMs % 1000 / 10);
-    const sizeClasses = isFocused ? "text-[18vw] sm:text-[12rem] font-normal" : "text-[12vw] sm:text-[8rem] font-normal";
+    const sizeClasses = isFocused ? "text-[18vw] sm:text-[12rem] font-medium" : "text-[12vw] sm:text-[8rem] font-medium";
     const subSizeClasses = isFocused ? "text-[9vw] sm:text-[6rem] text-chrono-fg-muted mx-1" : "text-[6vw] sm:text-[4rem] text-chrono-fg-muted mx-1";
     const msSizeClasses = isFocused ? "text-[6vw] sm:text-[4rem] font-light ml-2 w-[7vw] sm:w-[9rem] text-left" : "text-[4vw] sm:text-[3rem] font-light ml-2 w-[5vw] sm:w-[6rem] text-left";
-    const containerClasses = isFocused ? "fixed inset-0 z-50 bg-chrono-bg-page flex flex-col items-center justify-center gap-10" : [
+    const containerClasses = isFocused ? "fixed inset-0 z-50 bg-chrono-bg-page flex flex-col items-center justify-center space-y-12" : [
         "relative group flex flex-col items-center justify-center pt-20 pb-12 px-8 rounded-2xl border w-full max-w-4xl mx-auto transition-all duration-300",
-        timer.isRunning ? "bg-chrono-bg-card border-chrono-border-subtle shadow-chrono-glow" : "bg-chrono-bg-card border-chrono-border-subtle"
+        timer.isRunning ? "bg-chrono-bg-card/80 border-chrono-border-subtle shadow-chrono-glow" : "bg-chrono-bg-card/40 border-chrono-border-subtle",
+        isBeingDragged ? "opacity-50 border-chrono-accent border-dashed" : ""
     ].filter(Boolean).join(" ");
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: containerClasses,
@@ -59,14 +60,7 @@ function TimerCard(props) {
                     isZenMode && !isFocused ? "opacity-0 group-hover:opacity-100" : "opacity-100"
                 ].filter(Boolean).join(" "),
                 children: [
-                    isFocused ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "text-sm text-chrono-fg-muted",
-                        children: timer.label
-                    }, void 0, false, {
-                        fileName: "[project]/features/stopwatch/components/timer-card.tsx",
-                        lineNumber: 101,
-                        columnNumber: 11
-                    }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    !isFocused && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "transition-all duration-300",
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                             type: "text",
@@ -76,12 +70,12 @@ function TimerCard(props) {
                             className: "bg-transparent text-left outline-none border-b border-transparent focus:border-chrono-accent/50 transition-all text-chrono-fg-muted focus:text-chrono-accent text-lg placeholder:text-muted-foreground"
                         }, void 0, false, {
                             fileName: "[project]/features/stopwatch/components/timer-card.tsx",
-                            lineNumber: 106,
+                            lineNumber: 103,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/features/stopwatch/components/timer-card.tsx",
-                        lineNumber: 105,
+                        lineNumber: 102,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -97,12 +91,12 @@ function TimerCard(props) {
                                     size: 20
                                 }, void 0, false, {
                                     fileName: "[project]/features/stopwatch/components/timer-card.tsx",
-                                    lineNumber: 127,
+                                    lineNumber: 124,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/features/stopwatch/components/timer-card.tsx",
-                                lineNumber: 123,
+                                lineNumber: 120,
                                 columnNumber: 13
                             }, this),
                             !isFocused && totalTimers > 1 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -113,12 +107,12 @@ function TimerCard(props) {
                                     size: 20
                                 }, void 0, false, {
                                     fileName: "[project]/features/stopwatch/components/timer-card.tsx",
-                                    lineNumber: 137,
+                                    lineNumber: 134,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/features/stopwatch/components/timer-card.tsx",
-                                lineNumber: 132,
+                                lineNumber: 129,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -132,44 +126,55 @@ function TimerCard(props) {
                                     size: 24
                                 }, void 0, false, {
                                     fileName: "[project]/features/stopwatch/components/timer-card.tsx",
-                                    lineNumber: 153,
+                                    lineNumber: 150,
                                     columnNumber: 26
                                 }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$maximize$2d$2$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Maximize2$3e$__["Maximize2"], {
                                     size: 20
                                 }, void 0, false, {
                                     fileName: "[project]/features/stopwatch/components/timer-card.tsx",
-                                    lineNumber: 153,
+                                    lineNumber: 150,
                                     columnNumber: 52
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/features/stopwatch/components/timer-card.tsx",
-                                lineNumber: 141,
+                                lineNumber: 138,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/features/stopwatch/components/timer-card.tsx",
-                        lineNumber: 116,
+                        lineNumber: 113,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/features/stopwatch/components/timer-card.tsx",
-                lineNumber: 89,
+                lineNumber: 90,
                 columnNumber: 7
+            }, this),
+            isFocused && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                type: "text",
+                value: timer.label,
+                onChange: (event)=>onUpdateLabel(event.target.value),
+                placeholder: "Timer name",
+                className: "bg-transparent text-center outline-none border-b border-transparent focus:border-chrono-accent/50 transition-all text-muted-foreground text-2xl font-normal mb-[-2rem] sm:mb-[-4rem] max-w-full"
+            }, void 0, false, {
+                fileName: "[project]/features/stopwatch/components/timer-card.tsx",
+                lineNumber: 156,
+                columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 onClick: onToggle,
                 className: "cursor-pointer transition-transform duration-200 active:scale-95",
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "flex items-baseline font-chronoNumber chrono-number tracking-tight leading-none select-none transition-all duration-500",
+                    className: "flex items-baseline font-mono tracking-tighter leading-none select-none transition-all duration-500",
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                             className: sizeClasses + " text-foreground",
                             children: minutes.toString().padStart(2, "0")
                         }, void 0, false, {
                             fileName: "[project]/features/stopwatch/components/timer-card.tsx",
-                            lineNumber: 163,
+                            lineNumber: 170,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -177,7 +182,7 @@ function TimerCard(props) {
                             children: ":"
                         }, void 0, false, {
                             fileName: "[project]/features/stopwatch/components/timer-card.tsx",
-                            lineNumber: 166,
+                            lineNumber: 173,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -185,7 +190,7 @@ function TimerCard(props) {
                             children: seconds.toString().padStart(2, "0")
                         }, void 0, false, {
                             fileName: "[project]/features/stopwatch/components/timer-card.tsx",
-                            lineNumber: 167,
+                            lineNumber: 174,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -196,18 +201,18 @@ function TimerCard(props) {
                             ]
                         }, void 0, true, {
                             fileName: "[project]/features/stopwatch/components/timer-card.tsx",
-                            lineNumber: 170,
+                            lineNumber: 177,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/features/stopwatch/components/timer-card.tsx",
-                    lineNumber: 162,
+                    lineNumber: 169,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/features/stopwatch/components/timer-card.tsx",
-                lineNumber: 158,
+                lineNumber: 165,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -219,55 +224,58 @@ function TimerCard(props) {
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                         onClick: onReset,
-                        className: "p-2 rounded-full bg-transparent text-foreground hover:bg-muted hover:text-chrono-accent transition-all duration-200",
+                        className: "p-4 rounded-full bg-card text-foreground hover:bg-muted transition-all duration-200",
                         title: "Stop and reset",
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$square$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Square$3e$__["Square"], {
-                            size: 18
+                            size: 24,
+                            fill: "currentColor"
                         }, void 0, false, {
                             fileName: "[project]/features/stopwatch/components/timer-card.tsx",
-                            lineNumber: 192,
+                            lineNumber: 199,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/features/stopwatch/components/timer-card.tsx",
-                        lineNumber: 187,
+                        lineNumber: 194,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                         onClick: onToggle,
                         className: [
-                            "p-2 rounded-full bg-transparent transition-all duration-200 hover:bg-muted hover:text-chrono-accent",
-                            timer.isRunning ? "text-chrono-accent" : "text-foreground"
+                            "p-4 rounded-full transition-all duration-200",
+                            timer.isRunning ? "bg-chrono-accent/10 text-chrono-accent hover:bg-chrono-accent/20" : "bg-muted text-foreground hover:bg-muted/80"
                         ].join(" "),
                         title: timer.isRunning ? "Pause" : "Start",
                         children: timer.isRunning ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$pause$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Pause$3e$__["Pause"], {
-                            size: 18
+                            size: 24,
+                            fill: "currentColor"
                         }, void 0, false, {
                             fileName: "[project]/features/stopwatch/components/timer-card.tsx",
-                            lineNumber: 204,
+                            lineNumber: 213,
                             columnNumber: 13
                         }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$play$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Play$3e$__["Play"], {
-                            size: 18
+                            size: 24,
+                            fill: "currentColor"
                         }, void 0, false, {
                             fileName: "[project]/features/stopwatch/components/timer-card.tsx",
-                            lineNumber: 206,
+                            lineNumber: 215,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/features/stopwatch/components/timer-card.tsx",
-                        lineNumber: 195,
+                        lineNumber: 202,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/features/stopwatch/components/timer-card.tsx",
-                lineNumber: 176,
+                lineNumber: 183,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/features/stopwatch/components/timer-card.tsx",
-        lineNumber: 82,
+        lineNumber: 83,
         columnNumber: 5
     }, this);
 }
@@ -283,7 +291,9 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$play$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Play$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/play.js [app-ssr] (ecmascript) <export default as Play>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$pause$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Pause$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/pause.js [app-ssr] (ecmascript) <export default as Pause>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$square$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Square$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/square.js [app-ssr] (ecmascript) <export default as Square>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$maximize$2d$2$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Maximize2$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/maximize-2.js [app-ssr] (ecmascript) <export default as Maximize2>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$trash$2d$2$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Trash2$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/trash-2.js [app-ssr] (ecmascript) <export default as Trash2>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$grip$2d$vertical$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__GripVertical$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/grip-vertical.js [app-ssr] (ecmascript) <export default as GripVertical>");
 ;
 ;
 function CompactTimerCard(props) {
@@ -293,7 +303,7 @@ function CompactTimerCard(props) {
     const milliseconds = Math.floor(timer.elapsedMs % 1000 / 10);
     const containerClasses = [
         "group flex items-center w-full max-w-4xl mx-auto px-4 py-3 rounded-xl border bg-card transition-all duration-200 cursor-pointer",
-        "border-border",
+        isBeingDragged ? "opacity-50 border-chrono-accent border-dashed" : "border-border",
         isPrimary ? "ring-1 ring-chrono-accent/40" : "",
         isZenMode ? "hover:bg-muted" : ""
     ].filter(Boolean).join(" ");
@@ -306,6 +316,29 @@ function CompactTimerCard(props) {
         onClick: onPromote,
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "flex items-center gap-2 mr-3",
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: "p-1 text-muted-foreground hover:text-foreground transition-colors cursor-grab",
+                    title: "Drag to reorder",
+                    onClick: (event)=>event.stopPropagation(),
+                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$grip$2d$vertical$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__GripVertical$3e$__["GripVertical"], {
+                        size: 18
+                    }, void 0, false, {
+                        fileName: "[project]/features/stopwatch/components/compact-timer-card.tsx",
+                        lineNumber: 64,
+                        columnNumber: 11
+                    }, this)
+                }, void 0, false, {
+                    fileName: "[project]/features/stopwatch/components/compact-timer-card.tsx",
+                    lineNumber: 59,
+                    columnNumber: 9
+                }, this)
+            }, void 0, false, {
+                fileName: "[project]/features/stopwatch/components/compact-timer-card.tsx",
+                lineNumber: 58,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "flex flex-col flex-1 min-w-0 mr-3",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -317,11 +350,11 @@ function CompactTimerCard(props) {
                         className: "w-full bg-transparent text-sm text-chrono-fg-muted focus:text-foreground outline-none border-b border-transparent focus:border-chrono-accent/40 truncate"
                     }, void 0, false, {
                         fileName: "[project]/features/stopwatch/components/compact-timer-card.tsx",
-                        lineNumber: 60,
+                        lineNumber: 69,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "mt-1 flex items-baseline font-chronoNumber chrono-number text-base tracking-tight text-foreground",
+                        className: "mt-1 flex items-baseline font-mono text-base tracking-tight text-foreground",
                         onClick: (event)=>{
                             event.stopPropagation();
                             onToggle();
@@ -336,7 +369,7 @@ function CompactTimerCard(props) {
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/features/stopwatch/components/compact-timer-card.tsx",
-                                lineNumber: 80,
+                                lineNumber: 85,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -347,19 +380,19 @@ function CompactTimerCard(props) {
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/features/stopwatch/components/compact-timer-card.tsx",
-                                lineNumber: 85,
+                                lineNumber: 90,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/features/stopwatch/components/compact-timer-card.tsx",
-                        lineNumber: 73,
+                        lineNumber: 78,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/features/stopwatch/components/compact-timer-card.tsx",
-                lineNumber: 59,
+                lineNumber: 68,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -368,43 +401,62 @@ function CompactTimerCard(props) {
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                         onClick: onReset,
-                        className: "p-1.5 rounded-full bg-transparent text-foreground hover:bg-muted transition-colors",
+                        className: "p-2 rounded-full bg-card text-foreground hover:bg-muted transition-colors",
                         title: "Reset",
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$square$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Square$3e$__["Square"], {
-                            size: 18
+                            size: 18,
+                            fill: "currentColor"
                         }, void 0, false, {
                             fileName: "[project]/features/stopwatch/components/compact-timer-card.tsx",
-                            lineNumber: 100,
+                            lineNumber: 105,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/features/stopwatch/components/compact-timer-card.tsx",
-                        lineNumber: 95,
+                        lineNumber: 100,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                         onClick: onToggle,
                         className: [
-                            "p-1.5 rounded-full bg-transparent transition-colors",
-                            timer.isRunning ? "text-chrono-accent hover:text-chrono-accent" : "text-foreground hover:text-chrono-accent"
+                            "p-2 rounded-full transition-colors",
+                            timer.isRunning ? "bg-chrono-accent/10 text-chrono-accent hover:bg-chrono-accent/20" : "bg-muted text-foreground hover:bg-muted/80"
                         ].join(" "),
                         title: timer.isRunning ? "Pause" : "Start",
                         children: timer.isRunning ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$pause$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Pause$3e$__["Pause"], {
-                            size: 18
+                            size: 18,
+                            fill: "currentColor"
                         }, void 0, false, {
                             fileName: "[project]/features/stopwatch/components/compact-timer-card.tsx",
-                            lineNumber: 114,
+                            lineNumber: 119,
                             columnNumber: 13
                         }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$play$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Play$3e$__["Play"], {
-                            size: 18
+                            size: 18,
+                            fill: "currentColor"
                         }, void 0, false, {
                             fileName: "[project]/features/stopwatch/components/compact-timer-card.tsx",
-                            lineNumber: 116,
+                            lineNumber: 121,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/features/stopwatch/components/compact-timer-card.tsx",
-                        lineNumber: 103,
+                        lineNumber: 108,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                        onClick: onPromote,
+                        className: "p-2 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted transition-colors",
+                        title: "Focus this timer",
+                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$maximize$2d$2$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Maximize2$3e$__["Maximize2"], {
+                            size: 18
+                        }, void 0, false, {
+                            fileName: "[project]/features/stopwatch/components/compact-timer-card.tsx",
+                            lineNumber: 130,
+                            columnNumber: 11
+                        }, this)
+                    }, void 0, false, {
+                        fileName: "[project]/features/stopwatch/components/compact-timer-card.tsx",
+                        lineNumber: 125,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -415,18 +467,18 @@ function CompactTimerCard(props) {
                             size: 18
                         }, void 0, false, {
                             fileName: "[project]/features/stopwatch/components/compact-timer-card.tsx",
-                            lineNumber: 125,
+                            lineNumber: 138,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/features/stopwatch/components/compact-timer-card.tsx",
-                        lineNumber: 120,
+                        lineNumber: 133,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/features/stopwatch/components/compact-timer-card.tsx",
-                lineNumber: 91,
+                lineNumber: 96,
                 columnNumber: 7
             }, this)
         ]
@@ -463,7 +515,7 @@ function StopwatchApp() {
     const [timers, setTimers] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])([
         {
             id: 1,
-            label: "Untitled",
+            label: "First timer",
             isRunning: false,
             elapsedMs: 0
         }
@@ -515,34 +567,15 @@ function StopwatchApp() {
     const addTimer = ()=>{
         setTimers((previous)=>{
             const nextId = previous.length > 0 ? Math.max(...previous.map((timer)=>timer.id)) + 1 : 1;
-            const newTimer = {
-                id: nextId,
-                label: "Untitled",
-                isRunning: false,
-                elapsedMs: 0
-            };
-            // If we already have a primary timer, insert new timers
-            // directly after it so new histories appear at the top.
-            let nextTimers;
-            if (previous.length > 0 && primaryId !== null) {
-                const primaryIndex = previous.findIndex((t)=>t.id === primaryId);
-                if (primaryIndex >= 0) {
-                    nextTimers = [
-                        ...previous
-                    ];
-                    nextTimers.splice(primaryIndex + 1, 0, newTimer);
-                } else {
-                    nextTimers = [
-                        ...previous,
-                        newTimer
-                    ];
+            const nextTimers = [
+                ...previous,
+                {
+                    id: nextId,
+                    label: `Timer ${nextId}`,
+                    isRunning: false,
+                    elapsedMs: 0
                 }
-            } else {
-                nextTimers = [
-                    ...previous,
-                    newTimer
-                ];
-            }
+            ];
             // Keep current primary; new timers start as compact/history by default
             if (previous.length === 0) {
                 setPrimaryId(nextId);
@@ -576,44 +609,11 @@ function StopwatchApp() {
                 } : timer));
     };
     const resetTimer = (id)=>{
-        setTimers((previous)=>{
-            const target = previous.find((timer)=>timer.id === id);
-            if (!target) {
-                return previous;
-            }
-            const shouldCreateHistory = target.isRunning && target.elapsedMs > 0;
-            // Reset the original timer
-            let nextTimers = previous.map((timer)=>timer.id === id ? {
+        setTimers((previous)=>previous.map((timer)=>timer.id === id ? {
                     ...timer,
                     isRunning: false,
                     elapsedMs: 0
-                } : timer);
-            if (shouldCreateHistory) {
-                const nextId = previous.length > 0 ? Math.max(...previous.map((timer)=>timer.id)) + 1 : 1;
-                const historyTimer = {
-                    id: nextId,
-                    label: target.label,
-                    isRunning: false,
-                    elapsedMs: target.elapsedMs
-                };
-                // Insert new history directly after the primary timer so
-                // newest histories appear at the top of the history list.
-                const primaryIndex = primaryId !== null ? nextTimers.findIndex((timer)=>timer.id === primaryId) : -1;
-                if (primaryIndex >= 0) {
-                    const withHistory = [
-                        ...nextTimers
-                    ];
-                    withHistory.splice(primaryIndex + 1, 0, historyTimer);
-                    nextTimers = withHistory;
-                } else {
-                    nextTimers = [
-                        historyTimer,
-                        ...nextTimers
-                    ];
-                }
-            }
-            return nextTimers;
-        });
+                } : timer));
     };
     const handleDragStart = (event, id)=>{
         setDraggedId(id);
@@ -639,14 +639,6 @@ function StopwatchApp() {
             ];
             const [moved] = updated.splice(sourceIndex, 1);
             updated.splice(targetIndex, 0, moved);
-            // If we dragged a history timer onto the primary timer, promote the dragged timer
-            if (primaryId !== null && targetId === primaryId && draggedId !== primaryId) {
-                setPrimaryId(draggedId);
-            }
-            // If we dragged the primary timer onto a history timer, promote the target timer
-            if (primaryId !== null && draggedId === primaryId && targetId !== primaryId) {
-                setPrimaryId(targetId);
-            }
             return updated;
         });
     };
@@ -673,7 +665,7 @@ function StopwatchApp() {
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         ref: containerRef,
-        className: "h-screen bg-chrono-bg-page text-foreground font-sans selection:bg-muted overflow-hidden",
+        className: "min-h-screen bg-chrono-bg-page text-foreground font-sans selection:bg-muted overflow-y-auto",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: [
@@ -690,17 +682,17 @@ function StopwatchApp() {
                                 children: "Minimal"
                             }, void 0, false, {
                                 fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
-                                lineNumber: 298,
+                                lineNumber: 237,
                                 columnNumber: 17
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
-                        lineNumber: 297,
+                        lineNumber: 236,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "flex items-center gap-2 bg-card/80 backdrop-blur-md p-1.5 rounded-full border border-border ml-auto",
+                        className: "flex items-center gap-2 bg-card/80 backdrop-blur-md p-1.5 rounded-full border border-border shadow-2xl ml-auto",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                 onClick: toggleZenMode,
@@ -713,18 +705,18 @@ function StopwatchApp() {
                                     size: 20
                                 }, void 0, false, {
                                     fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
-                                    lineNumber: 314,
+                                    lineNumber: 253,
                                     columnNumber: 26
                                 }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$eye$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Eye$3e$__["Eye"], {
                                     size: 20
                                 }, void 0, false, {
                                     fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
-                                    lineNumber: 314,
+                                    lineNumber: 253,
                                     columnNumber: 49
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
-                                lineNumber: 302,
+                                lineNumber: 241,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -735,25 +727,25 @@ function StopwatchApp() {
                                     size: 20
                                 }, void 0, false, {
                                     fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
-                                    lineNumber: 322,
+                                    lineNumber: 261,
                                     columnNumber: 29
                                 }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$maximize$2d$2$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Maximize2$3e$__["Maximize2"], {
                                     size: 20
                                 }, void 0, false, {
                                     fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
-                                    lineNumber: 322,
+                                    lineNumber: 261,
                                     columnNumber: 55
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
-                                lineNumber: 317,
+                                lineNumber: 256,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "w-px h-6 bg-border mx-1"
                             }, void 0, false, {
                                 fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
-                                lineNumber: 325,
+                                lineNumber: 264,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -764,24 +756,24 @@ function StopwatchApp() {
                                     size: 20
                                 }, void 0, false, {
                                     fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
-                                    lineNumber: 332,
+                                    lineNumber: 271,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
-                                lineNumber: 327,
+                                lineNumber: 266,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
-                        lineNumber: 301,
+                        lineNumber: 240,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
-                lineNumber: 287,
+                lineNumber: 226,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -810,107 +802,90 @@ function StopwatchApp() {
                                     onDrop: handleDrop
                                 }, void 0, false, {
                                     fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
-                                    lineNumber: 362,
-                                    columnNumber: 15
+                                    lineNumber: 301,
+                                    columnNumber: 17
                                 }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "w-full max-w-4xl mt-4",
-                                    children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "mb-2 flex items-baseline justify-between text-xs text-chrono-fg-muted",
-                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                children: [
-                                                    "Total: ",
-                                                    secondaryTimers.length
-                                                ]
-                                            }, void 0, true, {
-                                                fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
-                                                lineNumber: 378,
-                                                columnNumber: 19
-                                            }, this)
-                                        }, void 0, false, {
+                                secondaryTimers.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "w-full max-w-4xl flex flex-col gap-3 mt-4",
+                                    children: secondaryTimers.map((timer)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$features$2f$stopwatch$2f$components$2f$compact$2d$timer$2d$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+                                            timer: timer,
+                                            isPrimary: false,
+                                            isZenMode: isZenMode,
+                                            isBeingDragged: draggedId === timer.id,
+                                            onToggle: ()=>toggleTimer(timer.id),
+                                            onReset: ()=>resetTimer(timer.id),
+                                            onDelete: ()=>removeTimer(timer.id),
+                                            onUpdateLabel: (label)=>updateLabel(timer.id, label),
+                                            onPromote: ()=>promoteTimer(timer.id),
+                                            onDragStart: (event)=>handleDragStart(event, timer.id),
+                                            onDragOver: (event)=>handleDragOver(event, timer.id),
+                                            onDrop: handleDrop
+                                        }, timer.id, false, {
                                             fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
-                                            lineNumber: 377,
-                                            columnNumber: 17
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "chrono-scroll max-h-[36vh] overflow-y-auto pr-1 flex flex-col gap-3 pb-32",
-                                            children: secondaryTimers.map((timer)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$features$2f$stopwatch$2f$components$2f$compact$2d$timer$2d$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-                                                    timer: timer,
-                                                    isPrimary: false,
-                                                    isZenMode: isZenMode,
-                                                    isBeingDragged: draggedId === timer.id,
-                                                    onToggle: ()=>toggleTimer(timer.id),
-                                                    onReset: ()=>resetTimer(timer.id),
-                                                    onDelete: ()=>removeTimer(timer.id),
-                                                    onUpdateLabel: (label)=>updateLabel(timer.id, label),
-                                                    onPromote: ()=>promoteTimer(timer.id),
-                                                    onDragStart: (event)=>handleDragStart(event, timer.id),
-                                                    onDragOver: (event)=>handleDragOver(event, timer.id),
-                                                    onDrop: handleDrop
-                                                }, timer.id, false, {
-                                                    fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
-                                                    lineNumber: 382,
-                                                    columnNumber: 21
-                                                }, this))
-                                        }, void 0, false, {
-                                            fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
-                                            lineNumber: 380,
-                                            columnNumber: 17
-                                        }, this)
-                                    ]
-                                }, void 0, true, {
+                                            lineNumber: 318,
+                                            columnNumber: 23
+                                        }, this))
+                                }, void 0, false, {
                                     fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
-                                    lineNumber: 376,
-                                    columnNumber: 15
+                                    lineNumber: 316,
+                                    columnNumber: 19
                                 }, this)
                             ]
                         }, void 0, true);
                     })(),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "fixed bottom-12 left-1/2 -translate-x-1/2 w-full max-w-4xl px-4 flex justify-end pointer-events-none",
-                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                            onClick: addTimer,
-                            className: "flex h-12 w-12 items-center justify-center rounded-full bg-black text-white shadow-md hover:shadow-lg transition-shadow pointer-events-auto",
-                            "aria-label": "Add timer",
-                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$plus$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Plus$3e$__["Plus"], {
-                                size: 22
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                        onClick: addTimer,
+                        className: "group flex flex-col items-center gap-2 text-chrono-fg-muted hover:text-chrono-accent transition-colors py-4",
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "p-3 rounded-full border border-chrono-border-subtle group-hover:border-chrono-accent/60 bg-chrono-bg-card/60",
+                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$plus$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Plus$3e$__["Plus"], {
+                                    size: 24
+                                }, void 0, false, {
+                                    fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
+                                    lineNumber: 346,
+                                    columnNumber: 13
+                                }, this)
                             }, void 0, false, {
                                 fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
-                                lineNumber: 410,
-                                columnNumber: 13
+                                lineNumber: 345,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                className: "text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity",
+                                children: "Add new timer"
+                            }, void 0, false, {
+                                fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
+                                lineNumber: 348,
+                                columnNumber: 11
                             }, this)
-                        }, void 0, false, {
-                            fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
-                            lineNumber: 405,
-                            columnNumber: 11
-                        }, this)
-                    }, void 0, false, {
+                        ]
+                    }, void 0, true, {
                         fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
-                        lineNumber: 404,
-                        columnNumber: 9
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: [
-                            "fixed bottom-4 left-0 right-0 text-center text-chrono-fg-muted text-sm pointer-events-none transition-opacity duration-500",
-                            isZenMode ? "opacity-0" : "opacity-100"
-                        ].filter(Boolean).join(" "),
-                        children: "Click time to start or stop. Drag handle to reorder."
-                    }, void 0, false, {
-                        fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
-                        lineNumber: 415,
+                        lineNumber: 341,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
-                lineNumber: 338,
+                lineNumber: 276,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: [
+                    "fixed bottom-4 left-0 right-0 text-center text-chrono-fg-muted text-sm pointer-events-none transition-opacity duration-500",
+                    isZenMode ? "opacity-0" : "opacity-100"
+                ].filter(Boolean).join(" "),
+                children: "Click time to start or stop. Drag handle to reorder."
+            }, void 0, false, {
+                fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
+                lineNumber: 354,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/features/stopwatch/components/stopwatch-app.tsx",
-        lineNumber: 282,
+        lineNumber: 222,
         columnNumber: 5
     }, this);
 }
