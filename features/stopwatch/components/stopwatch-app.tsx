@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState, DragEvent } from "react";
-import { Plus } from "lucide-react";
+import { Plus, Info } from "lucide-react";
 import type { Timer } from "@/features/stopwatch/types";
 import TimerCard from "@/features/stopwatch/components/timer-card";
 
@@ -24,7 +24,7 @@ export default function StopwatchApp() {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const saveTimeoutRef = useRef<number | null>(null);
   const [hasHydrated, setHasHydrated] = useState(false);
-  const [isLogoDescriptionOpen, setIsLogoDescriptionOpen] = useState(false);
+  const [isInfoOpen, setIsInfoOpen] = useState(false);
 
   const hasRunningTimer = useMemo(
     () => timers.some((timer) => timer.isRunning),
@@ -303,21 +303,52 @@ export default function StopwatchApp() {
           .filter(Boolean)
           .join(" ")}
       >
-        <div className="relative group">
-          <button
-            onClick={() => setIsLogoDescriptionOpen(!isLogoDescriptionOpen)}
-            className="text-xl font-bold text-foreground tracking-tighter uppercase border-2 border-foreground px-2 py-1 hover:bg-foreground hover:text-background transition-all duration-300"
-          >
-            M. Timer
-          </button>
-          <div
-            className={`absolute top-full left-0 mt-2 text-[10px] font-medium text-chrono-fg-muted tracking-[0.2em] uppercase whitespace-nowrap transition-all duration-300 ${
-              isLogoDescriptionOpen
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 -translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 pointer-events-none"
-            }`}
-          >
-            Minimal Timer
+        <div className="relative flex items-center gap-3">
+          <span className="text-lg font-light tracking-widest text-foreground uppercase cursor-default select-none">
+            Stopwatch
+          </span>
+
+          <div className="relative group/info">
+            <button
+              onClick={() => setIsInfoOpen(!isInfoOpen)}
+              className="p-1.5 rounded-full text-muted-foreground/40 hover:text-foreground transition-colors"
+              aria-label="App Info"
+            >
+              <Info size={14} strokeWidth={2} />
+            </button>
+
+            <div
+              className={`
+                absolute top-full left-0 mt-2 w-64 p-4 rounded-xl
+                bg-card/80 backdrop-blur-md border border-border/40 shadow-2xl
+                text-xs leading-relaxed text-muted-foreground
+                transition-all duration-500 ease-out origin-top-left
+                ${
+                  isInfoOpen
+                    ? "opacity-100 translate-y-0 scale-100"
+                    : "opacity-0 -translate-y-2 scale-95 pointer-events-none group-hover/info:opacity-100 group-hover/info:translate-y-0 group-hover/info:scale-100 group-hover/info:pointer-events-auto"
+                }
+              `}
+            >
+              <div className="flex flex-col gap-1">
+                <span className="font-medium text-foreground">
+                  Minimal Stopwatch by oLab
+                </span>
+                <span>Maintained by Bappy Golder</span>
+              </div>
+
+              <div className="mt-3 pt-3 border-t border-border/20 flex items-center justify-between text-[10px] tracking-wider uppercase opacity-70">
+                <a
+                  href="https://github.com/bappygolder/minimal-stopwatch"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-foreground transition-colors"
+                >
+                  GitHub
+                </a>
+                <span>v1.0</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -352,10 +383,10 @@ export default function StopwatchApp() {
       {focusedTimerId === null && (
         <button
           onClick={addTimer}
-          className="fixed bottom-8 right-8 p-4 rounded-full bg-foreground text-background hover:scale-110 transition-all shadow-2xl z-40"
+          className="fixed bottom-8 right-8 p-3 rounded-full bg-background/80 backdrop-blur-sm border border-border text-muted-foreground hover:text-foreground hover:border-foreground hover:bg-background transition-all shadow-sm z-40 group"
           title="Add new timer"
         >
-          <Plus size={32} />
+          <Plus size={24} className="group-hover:rotate-90 transition-transform duration-300" />
         </button>
       )}
 

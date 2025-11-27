@@ -1,4 +1,4 @@
-import { useState, MouseEvent, DragEvent } from "react";
+import { useState, useEffect, MouseEvent, DragEvent } from "react";
 import type { Timer } from "@/features/stopwatch/types";
 import {
   Play,
@@ -41,6 +41,30 @@ export default function TimerCard(props: TimerCardProps) {
     onDragOver,
     onDrop,
   } = props;
+
+  const [showControls, setShowControls] = useState(true);
+
+  useEffect(() => {
+    if (!isFocused) {
+      setShowControls(true);
+      return;
+    }
+
+    let timeout: NodeJS.Timeout;
+    const onMove = () => {
+      setShowControls(true);
+      clearTimeout(timeout);
+      timeout = setTimeout(() => setShowControls(false), 3000);
+    };
+
+    window.addEventListener("mousemove", onMove);
+    timeout = setTimeout(() => setShowControls(false), 3000);
+
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      clearTimeout(timeout);
+    };
+  }, [isFocused]);
 
   const handleToggleFocus = (event: MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
@@ -90,9 +114,9 @@ export default function TimerCard(props: TimerCardProps) {
     >
       <div
         className={[
-          "flex justify-between items-center w-full absolute top-0 pt-6 px-6 transition-opacity duration-300",
+          "flex justify-between items-center w-full absolute top-0 pt-6 px-6 transition-opacity duration-500",
           isFocused ? "top-6" : "",
-          "opacity-100",
+          isFocused && !showControls ? "opacity-0" : "opacity-100",
         ]
           .filter(Boolean)
           .join(" ")}
@@ -181,9 +205,9 @@ export default function TimerCard(props: TimerCardProps) {
 
       <div
         className={[
-          "flex gap-4 transition-all duration-300 justify-center",
+          "flex gap-4 transition-all duration-500 justify-center",
           isFocused ? "mt-12 scale-150" : "mt-6",
-          "opacity-100",
+          isFocused && !showControls ? "opacity-0" : "opacity-100",
         ]
           .filter(Boolean)
           .join(" ")}
