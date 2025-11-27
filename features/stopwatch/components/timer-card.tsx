@@ -8,13 +8,15 @@ import {
   Minimize2,
   Trash2,
   GripVertical,
+  Scan,
 } from "lucide-react";
 
 type TimerCardProps = {
   timer: Timer;
   totalTimers: number;
-  isZenMode: boolean;
   isBeingDragged: boolean;
+  isFocused: boolean;
+  onToggleFocus: () => void;
   onToggle: () => void;
   onReset: () => void;
   onDelete: () => void;
@@ -28,8 +30,9 @@ export default function TimerCard(props: TimerCardProps) {
   const {
     timer,
     totalTimers,
-    isZenMode,
     isBeingDragged,
+    isFocused,
+    onToggleFocus,
     onToggle,
     onReset,
     onDelete,
@@ -39,11 +42,9 @@ export default function TimerCard(props: TimerCardProps) {
     onDrop,
   } = props;
 
-  const [isFocused, setIsFocused] = useState(false);
-
   const handleToggleFocus = (event: MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
-    setIsFocused((value) => !value);
+    onToggleFocus();
   };
 
   const handleDelete = (event: MouseEvent<HTMLButtonElement>) => {
@@ -91,9 +92,7 @@ export default function TimerCard(props: TimerCardProps) {
         className={[
           "flex justify-between items-center w-full absolute top-0 pt-6 px-6 transition-opacity duration-300",
           isFocused ? "top-6" : "",
-          isZenMode && !isFocused
-            ? "opacity-0 group-hover:opacity-100"
-            : "opacity-100",
+          "opacity-100",
         ]
           .filter(Boolean)
           .join(" ")}
@@ -145,9 +144,9 @@ export default function TimerCard(props: TimerCardProps) {
             ]
               .filter(Boolean)
               .join(" ")}
-            title={isFocused ? "Exit focus" : "Focus mode"}
+            title={isFocused ? "Exit Focus Mode" : "Enter Focus Mode"}
           >
-            {isFocused ? <Minimize2 size={24} /> : <Maximize2 size={20} />}
+            {isFocused ? <Minimize2 size={24} /> : <Scan size={20} />}
           </button>
         </div>
       </div>
@@ -184,9 +183,7 @@ export default function TimerCard(props: TimerCardProps) {
         className={[
           "flex gap-4 transition-all duration-300 justify-center",
           isFocused ? "mt-12 scale-150" : "mt-6",
-          isZenMode && !isFocused
-            ? "opacity-0 group-hover:opacity-100"
-            : "opacity-100",
+          "opacity-100",
         ]
           .filter(Boolean)
           .join(" ")}

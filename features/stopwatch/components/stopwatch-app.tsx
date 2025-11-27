@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState, DragEvent } from "react";
-import { Eye, EyeOff, Maximize2, Minimize2, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
 import type { Timer } from "@/features/stopwatch/types";
 import TimerCard from "@/features/stopwatch/components/timer-card";
 
@@ -19,9 +19,8 @@ const DEFAULT_TIMERS: Timer[] = [
 export default function StopwatchApp() {
   const [timers, setTimers] = useState<Timer[]>(DEFAULT_TIMERS);
 
-  const [isZenMode, setIsZenMode] = useState(false);
-  const [isFullscreen, setIsFullscreen] = useState(false);
   const [draggedId, setDraggedId] = useState<number | null>(null);
+  const [focusedTimerId, setFocusedTimerId] = useState<number | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const saveTimeoutRef = useRef<number | null>(null);
   const [hasHydrated, setHasHydrated] = useState(false);
@@ -53,11 +52,23 @@ export default function StopwatchApp() {
 
       const next = parsed.map((item) => {
         const candidate = item as Partial<Timer>;
+        const isRunning = Boolean(candidate.isRunning);
+        let elapsedMs = typeof candidate.elapsedMs === "number" ? candidate.elapsedMs : 0;
+        let lastUpdateTime = candidate.lastUpdateTime;
+
+        if (isRunning && lastUpdateTime) {
+          const now = Date.now();
+          const drift = now - lastUpdateTime;
+          elapsedMs += drift;
+          lastUpdateTime = now;
+        }
+
         return {
           id: typeof candidate.id === "number" ? candidate.id : Date.now(),
           label: typeof candidate.label === "string" ? candidate.label : "Timer",
-          isRunning: Boolean(candidate.isRunning),
-          elapsedMs: typeof candidate.elapsedMs === "number" ? candidate.elapsedMs : 0,
+          isRunning,
+          elapsedMs,
+          lastUpdateTime,
         } satisfies Timer;
       });
 
@@ -112,7 +123,7 @@ export default function StopwatchApp() {
       setTimers((previous) =>
         previous.map((timer) =>
           timer.isRunning
-            ? { ...timer, elapsedMs: timer.elapsedMs + delta }
+            ? { ...timer, elapsedMs: timer.elapsedMs + delta, lastUpdateTime: Date.now() }
             : timer
         )
       );
@@ -128,22 +139,26 @@ export default function StopwatchApp() {
   }, [hasRunningTimer]);
 
   useEffect(() => {
-    const target = containerRef.current;
-    if (!target) {
-      return;
-    }
-
-    const handleChange = () => {
-      const active = Boolean(document.fullscreenElement);
-      setIsFullscreen(active);
+    const handleFullscreenChange = () => {
+      if (!document.fullscreenElement) {
+        setFocusedTimerId(null);
+      }
     };
 
-    document.addEventListener('fullscreenchange', handleChange);
+    document.addEventListener("fullscreenchange", handleFullscreenChange);
 
     return () => {
-      document.removeEventListener('fullscreenchange', handleChange);
+      document.removeEventListener("fullscreenchange", handleFullscreenChange);
     };
   }, []);
+
+  useEffect(() => {
+    if (focusedTimerId !== null) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+  }, [focusedTimerId]);
 
   const addTimer = () => {
     setTimers((previous) => {
@@ -153,13 +168,14 @@ export default function StopwatchApp() {
           : 1;
 
       return [
-        ...previous,
         {
           id: nextId,
           label: `Timer ${nextId}`,
           isRunning: false,
           elapsedMs: 0,
+          lastUpdateTime: Date.now(),
         },
+        ...previous,
       ];
     });
   };
@@ -214,6 +230,28 @@ export default function StopwatchApp() {
     );
   };
 
+  const toggleFocus = async (id: number) => {
+    const isEntering = focusedTimerId !== id;
+
+    if (isEntering) {
+      setFocusedTimerId(id);
+      try {
+        await document.documentElement.requestFullscreen();
+      } catch (e) {
+        // Ignore fullscreen errors
+      }
+    } else {
+      setFocusedTimerId(null);
+      if (document.fullscreenElement) {
+        try {
+          await document.exitFullscreen();
+        } catch (e) {
+          // Ignore fullscreen errors
+        }
+      }
+    }
+  };
+
   const handleDragStart = (event: DragEvent<HTMLDivElement>, id: number) => {
     setDraggedId(id);
     event.dataTransfer.effectAllowed = 'move';
@@ -252,24 +290,6 @@ export default function StopwatchApp() {
     setDraggedId(null);
   };
 
-  const toggleZenMode = () => {
-    setIsZenMode((value) => !value);
-  };
-
-  const toggleFullscreen = () => {
-    const element = containerRef.current;
-
-    if (!element) {
-      return;
-    }
-
-    if (!document.fullscreenElement) {
-      element.requestFullscreen().catch(() => undefined);
-    } else {
-      document.exitFullscreen().catch(() => undefined);
-    }
-  };
-
   return (
     <div
       ref={containerRef}
@@ -277,10 +297,8 @@ export default function StopwatchApp() {
     >
       <div
         className={[
-          "fixed top-0 left-0 right-0 p-6 flex justify-between items-center z-50 transition-opacity duration-500",
-          isZenMode || isFullscreen
-            ? "opacity-0 hover:opacity-100"
-            : "opacity-100",
+          "fixed top-0 left-0 right-0 p-6 flex justify-between items-center z-40 transition-opacity duration-500",
+          focusedTimerId !== null ? "opacity-0 pointer-events-none" : "opacity-100",
         ]
           .filter(Boolean)
           .join(" ")}
@@ -302,41 +320,6 @@ export default function StopwatchApp() {
             Minimal Timer
           </div>
         </div>
-
-        <div className="flex items-center gap-2 bg-card/80 backdrop-blur-md p-1.5 rounded-full border border-border shadow-2xl ml-auto">
-          <button
-            onClick={toggleZenMode}
-            className={[
-              "p-2 rounded-full transition-colors",
-              isZenMode
-                ? "bg-chrono-accent text-background"
-                : "text-muted-foreground hover:text-foreground hover:bg-card",
-            ]
-              .filter(Boolean)
-              .join(" ")}
-            title="Zen mode"
-          >
-            {isZenMode ? <EyeOff size={20} /> : <Eye size={20} />}
-          </button>
-
-          <button
-            onClick={toggleFullscreen}
-            className="p-2 rounded-full text-muted-foreground hover:text-foreground hover:bg-card transition-colors"
-            title="Fullscreen"
-          >
-            {isFullscreen ? <Minimize2 size={20} /> : <Maximize2 size={20} />}
-          </button>
-
-          <div className="w-px h-6 bg-border mx-1" />
-
-          <button
-            onClick={addTimer}
-            className="p-2 rounded-full bg-card text-foreground hover:bg-card/80 transition-colors"
-            title="Add stopwatch"
-          >
-            <Plus size={20} />
-          </button>
-        </div>
       </div>
 
       <div
@@ -352,8 +335,9 @@ export default function StopwatchApp() {
             key={timer.id}
             timer={timer}
             totalTimers={timers.length}
-            isZenMode={isZenMode}
             isBeingDragged={draggedId === timer.id}
+            isFocused={focusedTimerId === timer.id}
+            onToggleFocus={() => toggleFocus(timer.id)}
             onToggle={() => toggleTimer(timer.id)}
             onReset={() => resetTimer(timer.id)}
             onDelete={() => removeTimer(timer.id)}
@@ -363,24 +347,22 @@ export default function StopwatchApp() {
             onDrop={handleDrop}
           />
         ))}
+      </div>
 
+      {focusedTimerId === null && (
         <button
           onClick={addTimer}
-          className="group flex flex-col items-center gap-2 text-chrono-fg-muted hover:text-chrono-accent transition-colors py-4"
+          className="fixed bottom-8 right-8 p-4 rounded-full bg-foreground text-background hover:scale-110 transition-all shadow-2xl z-40"
+          title="Add new timer"
         >
-          <div className="p-3 rounded-full border border-chrono-border-subtle group-hover:border-chrono-accent/60 bg-chrono-bg-card/60">
-            <Plus size={24} />
-          </div>
-          <span className="text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
-            Add new timer
-          </span>
+          <Plus size={32} />
         </button>
-      </div>
+      )}
 
       <div
         className={[
           "fixed bottom-4 left-0 right-0 text-center text-chrono-fg-muted text-sm pointer-events-none transition-opacity duration-500",
-          isZenMode ? "opacity-0" : "opacity-100",
+          focusedTimerId !== null ? "opacity-0" : "opacity-100",
         ]
           .filter(Boolean)
           .join(" ")}
