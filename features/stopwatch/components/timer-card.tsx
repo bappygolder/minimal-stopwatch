@@ -56,8 +56,8 @@ export default function TimerCard(props: TimerCardProps) {
   const milliseconds = Math.floor((timer.elapsedMs % 1000) / 10);
 
   const sizeClasses = isFocused
-    ? "text-[18vw] sm:text-[12rem] font-normal"
-    : "text-[12vw] sm:text-[8rem] font-normal";
+    ? "text-[18vw] sm:text-[12rem] font-medium"
+    : "text-[12vw] sm:text-[8rem] font-medium";
 
   const subSizeClasses = isFocused
     ? "text-[9vw] sm:text-[6rem] text-chrono-fg-muted mx-1"
@@ -68,12 +68,13 @@ export default function TimerCard(props: TimerCardProps) {
     : "text-[4vw] sm:text-[3rem] font-light ml-2 w-[5vw] sm:w-[6rem] text-left";
 
   const containerClasses = isFocused
-    ? "fixed inset-0 z-50 bg-chrono-bg-page flex flex-col items-center justify-center gap-10"
+    ? "fixed inset-0 z-50 bg-chrono-bg-page flex flex-col items-center justify-center space-y-12"
     : [
         "relative group flex flex-col items-center justify-center pt-20 pb-12 px-8 rounded-2xl border w-full max-w-4xl mx-auto transition-all duration-300",
         timer.isRunning
-          ? "bg-chrono-bg-card border-chrono-border-subtle shadow-chrono-glow"
-          : "bg-chrono-bg-card border-chrono-border-subtle",
+          ? "bg-chrono-bg-card/80 border-chrono-border-subtle shadow-chrono-glow"
+          : "bg-chrono-bg-card/40 border-chrono-border-subtle",
+        isBeingDragged ? "opacity-50 border-chrono-accent border-dashed" : "",
       ]
         .filter(Boolean)
         .join(" ");
@@ -97,11 +98,7 @@ export default function TimerCard(props: TimerCardProps) {
           .filter(Boolean)
           .join(" ")}
       >
-        {isFocused ? (
-          <div className="text-sm text-chrono-fg-muted">
-            {timer.label}
-          </div>
-        ) : (
+        {!isFocused && (
           <div className="transition-all duration-300">
             <input
               type="text"
@@ -155,11 +152,21 @@ export default function TimerCard(props: TimerCardProps) {
         </div>
       </div>
 
+      {isFocused && (
+        <input
+          type="text"
+          value={timer.label}
+          onChange={(event) => onUpdateLabel(event.target.value)}
+          placeholder="Timer name"
+          className="bg-transparent text-center outline-none border-b border-transparent focus:border-chrono-accent/50 transition-all text-muted-foreground text-2xl font-normal mb-[-2rem] sm:mb-[-4rem] max-w-full"
+        />
+      )}
+
       <div
         onClick={onToggle}
         className="cursor-pointer transition-transform duration-200 active:scale-95"
       >
-        <div className="flex items-baseline font-chronoNumber chrono-number tracking-tight leading-none select-none transition-all duration-500">
+        <div className="flex items-baseline font-mono tracking-tighter leading-none select-none transition-all duration-500">
           <span className={sizeClasses + " text-foreground"}>
             {minutes.toString().padStart(2, "0")}
           </span>
@@ -186,24 +193,26 @@ export default function TimerCard(props: TimerCardProps) {
       >
         <button
           onClick={onReset}
-          className="p-2 rounded-full bg-transparent text-foreground hover:bg-muted hover:text-chrono-accent transition-all duration-200"
+          className="p-4 rounded-full bg-card text-chrono-danger hover:bg-chrono-danger/20 hover:text-chrono-danger transition-all duration-200"
           title="Stop and reset"
         >
-          <Square size={18} />
+          <Square size={24} fill="currentColor" />
         </button>
 
         <button
           onClick={onToggle}
           className={[
-            "p-2 rounded-full bg-transparent transition-all duration-200 hover:bg-muted hover:text-chrono-accent",
-            timer.isRunning ? "text-chrono-accent" : "text-foreground",
+            "p-4 rounded-full transition-all duration-200",
+            timer.isRunning
+              ? "bg-chrono-warning/10 text-chrono-warning hover:bg-chrono-warning/20"
+              : "bg-chrono-success/10 text-chrono-success hover:bg-chrono-success/20",
           ].join(" ")}
           title={timer.isRunning ? "Pause" : "Start"}
         >
           {timer.isRunning ? (
-            <Pause size={18} />
+            <Pause size={24} fill="currentColor" />
           ) : (
-            <Play size={18} />
+            <Play size={24} fill="currentColor" />
           )}
         </button>
       </div>
