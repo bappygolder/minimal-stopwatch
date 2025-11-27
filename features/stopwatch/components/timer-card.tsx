@@ -45,11 +45,6 @@ export default function TimerCard(props: TimerCardProps) {
   const [showControls, setShowControls] = useState(true);
 
   useEffect(() => {
-    if (!isFocused) {
-      setShowControls(true);
-      return;
-    }
-
     let timeout: NodeJS.Timeout;
     const onMove = () => {
       setShowControls(true);
@@ -58,13 +53,17 @@ export default function TimerCard(props: TimerCardProps) {
     };
 
     window.addEventListener("mousemove", onMove);
+    window.addEventListener("touchstart", onMove);
+    window.addEventListener("click", onMove);
     timeout = setTimeout(() => setShowControls(false), 3000);
 
     return () => {
       window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("touchstart", onMove);
+      window.removeEventListener("click", onMove);
       clearTimeout(timeout);
     };
-  }, [isFocused]);
+  }, []);
 
   const handleToggleFocus = (event: MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
@@ -76,20 +75,35 @@ export default function TimerCard(props: TimerCardProps) {
     onDelete();
   };
 
-  const minutes = Math.floor(timer.elapsedMs / 60000);
+  const hours = Math.floor(timer.elapsedMs / 3600000);
+  const minutes = Math.floor((timer.elapsedMs % 3600000) / 60000);
   const seconds = Math.floor((timer.elapsedMs % 60000) / 1000);
   const milliseconds = Math.floor((timer.elapsedMs % 1000) / 10);
 
+  const showHours = hours > 0;
+
   const sizeClasses = isFocused
-    ? "text-[18vw] sm:text-[12rem] font-medium"
+    ? showHours
+      ? "text-[13vw] sm:text-[9rem] font-medium"
+      : "text-[18vw] sm:text-[12rem] font-medium"
+    : showHours
+    ? "text-[9vw] sm:text-[6rem] font-medium"
     : "text-[12vw] sm:text-[8rem] font-medium";
 
   const subSizeClasses = isFocused
-    ? "text-[9vw] sm:text-[6rem] text-chrono-fg-muted mx-1"
+    ? showHours
+      ? "text-[7vw] sm:text-[5rem] text-chrono-fg-muted mx-1"
+      : "text-[9vw] sm:text-[6rem] text-chrono-fg-muted mx-1"
+    : showHours
+    ? "text-[5vw] sm:text-[3rem] text-chrono-fg-muted mx-1"
     : "text-[6vw] sm:text-[4rem] text-chrono-fg-muted mx-1";
 
   const msSizeClasses = isFocused
-    ? "text-[6vw] sm:text-[4rem] font-light ml-2 w-[7vw] sm:w-[9rem] text-left"
+    ? showHours
+      ? "text-[5vw] sm:text-[3rem] font-light ml-2 w-[5vw] sm:w-[7rem] text-left"
+      : "text-[6vw] sm:text-[4rem] font-light ml-2 w-[7vw] sm:w-[9rem] text-left"
+    : showHours
+    ? "text-[3vw] sm:text-[2.5rem] font-light ml-2 w-[4vw] sm:w-[5rem] text-left"
     : "text-[4vw] sm:text-[3rem] font-light ml-2 w-[5vw] sm:w-[6rem] text-left";
 
   const containerClasses = isFocused
@@ -116,13 +130,13 @@ export default function TimerCard(props: TimerCardProps) {
         className={[
           "flex justify-between items-center w-full absolute top-0 pt-6 px-6 transition-opacity duration-500",
           isFocused ? "top-6" : "",
-          isFocused && !showControls ? "opacity-0" : "opacity-100",
+          !showControls ? "opacity-0 pointer-events-none" : "opacity-100",
         ]
           .filter(Boolean)
           .join(" ")}
       >
         {!isFocused && (
-          <div className="transition-all duration-300">
+          <div className="transition-all duration-300 flex-1 min-w-0 mr-4">
             <input
               type="text"
               value={timer.label}
@@ -135,7 +149,7 @@ export default function TimerCard(props: TimerCardProps) {
 
         <div
           className={[
-            "flex gap-2 items-center ml-auto",
+            "flex gap-2 items-center ml-auto flex-shrink-0",
             isFocused ? "absolute top-6 right-6" : "",
           ].join(" ")}
         >
@@ -190,6 +204,14 @@ export default function TimerCard(props: TimerCardProps) {
         className="cursor-pointer transition-transform duration-200 active:scale-95"
       >
         <div className="flex items-baseline font-mono tracking-tighter leading-none select-none transition-all duration-500">
+          {showHours && (
+            <>
+              <span className={sizeClasses + " text-foreground"}>
+                {hours.toString().padStart(2, "0")}
+              </span>
+              <span className={subSizeClasses}>:</span>
+            </>
+          )}
           <span className={sizeClasses + " text-foreground"}>
             {minutes.toString().padStart(2, "0")}
           </span>
@@ -207,7 +229,7 @@ export default function TimerCard(props: TimerCardProps) {
         className={[
           "flex gap-4 transition-all duration-500 justify-center",
           isFocused ? "mt-12 scale-150" : "mt-6",
-          isFocused && !showControls ? "opacity-0" : "opacity-100",
+          !showControls ? "opacity-0 pointer-events-none" : "opacity-100",
         ]
           .filter(Boolean)
           .join(" ")}
