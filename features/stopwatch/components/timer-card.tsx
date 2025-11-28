@@ -107,9 +107,9 @@ export default function TimerCard(props: TimerCardProps) {
     : "text-[4vw] sm:text-[3rem] font-light ml-2 w-[5vw] sm:w-[6rem] text-left";
 
   const containerClasses = isFocused
-    ? "fixed inset-0 z-50 bg-chrono-bg-page flex flex-col items-center justify-center space-y-12"
+    ? "fixed inset-0 z-50 bg-chrono-bg-page flex flex-col items-center justify-center space-y-12 cursor-pointer"
     : [
-        "relative group flex flex-col items-center justify-center pt-20 pb-12 px-8 rounded-2xl border w-full max-w-4xl mx-auto transition-all duration-300",
+        "relative group flex flex-col items-center justify-center pt-20 pb-12 px-8 rounded-2xl border w-full max-w-4xl mx-auto transition-all duration-300 cursor-pointer",
         timer.isRunning
           ? "bg-chrono-bg-card/80 border-chrono-border-subtle shadow-chrono-glow"
           : "bg-chrono-bg-card/40 border-chrono-border-subtle",
@@ -125,18 +125,22 @@ export default function TimerCard(props: TimerCardProps) {
       onDragStart={onDragStart}
       onDragOver={onDragOver}
       onDrop={onDrop}
+      onClick={onToggle}
     >
       <div
         className={[
           "flex justify-between items-center w-full absolute top-0 pt-6 px-6 transition-opacity duration-500",
           isFocused ? "top-6" : "",
-          !showControls ? "opacity-0 pointer-events-none" : "opacity-100",
+          "opacity-100",
         ]
           .filter(Boolean)
           .join(" ")}
       >
         {!isFocused && (
-          <div className="transition-all duration-300 flex-1 min-w-0 mr-4">
+          <div
+            className="transition-all duration-300 flex-1 min-w-0 mr-4"
+            onClick={(e) => e.stopPropagation()}
+          >
             <input
               type="text"
               value={timer.label}
@@ -149,9 +153,11 @@ export default function TimerCard(props: TimerCardProps) {
 
         <div
           className={[
-            "flex gap-2 items-center ml-auto flex-shrink-0",
+            "flex gap-2 items-center ml-auto flex-shrink-0 transition-opacity duration-500",
             isFocused ? "absolute top-6 right-6" : "",
+            !showControls ? "opacity-0 pointer-events-none" : "opacity-100",
           ].join(" ")}
+          onClick={(e) => e.stopPropagation()}
         >
           {!isFocused && totalTimers > 1 && (
             <div
@@ -194,14 +200,14 @@ export default function TimerCard(props: TimerCardProps) {
           type="text"
           value={timer.label}
           onChange={(event) => onUpdateLabel(event.target.value)}
+          onClick={(e) => e.stopPropagation()}
           placeholder="Timer name"
           className="bg-transparent text-center outline-none border-b border-transparent focus:border-chrono-accent/50 transition-all text-muted-foreground text-2xl font-normal mb-[-2rem] sm:mb-[-4rem] max-w-full"
         />
       )}
 
       <div
-        onClick={onToggle}
-        className="cursor-pointer transition-transform duration-200 active:scale-95"
+        className="transition-transform duration-200 active:scale-95"
       >
         <div className="flex items-baseline font-mono tracking-tighter leading-none select-none transition-all duration-500">
           {showHours && (
@@ -233,6 +239,7 @@ export default function TimerCard(props: TimerCardProps) {
         ]
           .filter(Boolean)
           .join(" ")}
+        onClick={(e) => e.stopPropagation()}
       >
         <button
           onClick={onReset}
