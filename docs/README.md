@@ -14,6 +14,16 @@ A beautiful, distraction-free multi-timer application built with **Next.js**, **
 - **Local Persistence**: Your timers are saved to your browser's Local Storage, so they're waiting for you when you come back.
 - **Keyboard Accessible**: Fully usable with keyboard navigation.
 
+## ⌨️ Keyboard Shortcuts
+
+| Key | Action |
+| :--- | :--- |
+| **Space** | Start/Stop the active timer |
+| **N** | Create a new timer |
+| **F** | Enter Focus Mode (Browser) |
+| **Z** | Enter Zen Mode (Fullscreen) |
+| **Esc** | Exit current mode |
+
 ## 🚀 Quick Start
 
 1.  **Install dependencies**:
@@ -56,3 +66,7 @@ You may notice a file named **`stopwatch_app.jsx`** in the root directory.
 ## 📜 License
 
 This project is open source and available under the [MIT License](LICENSE).
+
+## 🔄 Changelog
+
+- **Nov 2025**: Added full keyboard shortcut support (N, Space, F, Z), redesigned the info card, and improved Zen Mode behavior.
