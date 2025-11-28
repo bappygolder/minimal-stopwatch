@@ -221,9 +221,8 @@ export default function TimerCard(props: TimerCardProps) {
             </button>
             
             {!isFocused && (
-              <div className="absolute right-full top-1/2 -translate-y-1/2 mr-3 px-3 py-2 bg-card/90 backdrop-blur border border-border/50 rounded-lg shadow-xl text-xs text-foreground opacity-0 group-hover/tooltip:opacity-100 transition-opacity duration-200 pointer-events-none z-50 min-w-max flex flex-col items-end">
-                <span className="font-medium">Click: Browser Focus Mode</span>
-                <span className="opacity-70">Shift+Click: Zen Mode</span>
+              <div className="absolute right-full top-1/2 -translate-y-1/2 mr-3 px-3 py-2 bg-card/90 backdrop-blur border border-border/50 rounded-lg shadow-xl text-xs text-foreground opacity-0 group-hover/tooltip:opacity-100 transition-opacity duration-200 pointer-events-none z-50 min-w-max">
+                <span className="font-medium">Zen Mode: <span className="opacity-70 font-normal">Shift + Click</span></span>
               </div>
             )}
             {isFocused && (
