@@ -27,6 +27,7 @@ export default function StopwatchApp() {
   const [hasHydrated, setHasHydrated] = useState(false);
   const [focusScale, setFocusScale] = useState(1);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [returnToMode, setReturnToMode] = useState<"focus" | "multi">("multi");
   const [isInfoOpen, setIsInfoOpen] = useState(false);
   const infoRef = useRef<HTMLDivElement>(null);
   const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -198,7 +199,12 @@ export default function StopwatchApp() {
       const isFull = !!document.fullscreenElement;
       setIsFullscreen(isFull);
       if (!isFull) {
-        setFocusedTimerId(null);
+        // Exiting fullscreen: decide where to go based on previous mode
+        if (returnToMode === "multi") {
+          setFocusedTimerId(null);
+        }
+        // If returnToMode is "focus", we intentionally keep focusedTimerId set
+        // to return to Browser Focus Mode.
       }
     };
 
@@ -207,7 +213,7 @@ export default function StopwatchApp() {
     return () => {
       document.removeEventListener("fullscreenchange", handleFullscreenChange);
     };
-  }, []);
+  }, [returnToMode]);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -303,7 +309,21 @@ export default function StopwatchApp() {
     const isFullscreen = !!document.fullscreenElement;
 
     if (isAlreadyFocused) {
-      if (isZen && !isFullscreen) {
+      if (isFullscreen) {
+        // We are in Zen mode. Just exit fullscreen.
+        // The fullscreenchange handler will decide whether to stay focused or not
+        // based on returnToMode.
+        try {
+          await document.exitFullscreen();
+        } catch (e) {
+          // Ignore fullscreen errors
+        }
+        return;
+      }
+
+      if (isZen) {
+        // Upgrade from Focus -> Zen
+        setReturnToMode("focus");
         try {
           await document.documentElement.requestFullscreen();
         } catch (e) {
@@ -312,17 +332,13 @@ export default function StopwatchApp() {
         return;
       }
 
+      // Exit Focus Mode (Browser) -> Multi
       setFocusedTimerId(null);
-      if (isFullscreen) {
-        try {
-          await document.exitFullscreen();
-        } catch (e) {
-          // Ignore fullscreen errors
-        }
-      }
     } else {
       setFocusedTimerId(id);
       if (isZen) {
+        // Multi -> Zen
+        setReturnToMode("multi");
         try {
           await document.documentElement.requestFullscreen();
         } catch (e) {
