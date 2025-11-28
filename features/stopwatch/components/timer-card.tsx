@@ -16,7 +16,7 @@ type TimerCardProps = {
   totalTimers: number;
   isBeingDragged: boolean;
   isFocused: boolean;
-  onToggleFocus: () => void;
+  onToggleFocus: (isZen: boolean) => void;
   onToggle: () => void;
   onReset: () => void;
   onDelete: () => void;
@@ -67,7 +67,7 @@ export default function TimerCard(props: TimerCardProps) {
 
   const handleToggleFocus = (event: MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
-    onToggleFocus();
+    onToggleFocus(event.shiftKey);
   };
 
   const handleDelete = (event: MouseEvent<HTMLButtonElement>) => {
@@ -188,7 +188,11 @@ export default function TimerCard(props: TimerCardProps) {
             ]
               .filter(Boolean)
               .join(" ")}
-            title={isFocused ? "Exit Focus Mode" : "Enter Focus Mode"}
+            title={
+              isFocused
+                ? "Exit Focus Mode"
+                : "Click for Focus Mode · Shift + Click for Zen Mode"
+            }
           >
             {isFocused ? <Minimize2 size={24} /> : <Scan size={20} />}
           </button>

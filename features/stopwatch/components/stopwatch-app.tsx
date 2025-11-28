@@ -272,21 +272,33 @@ export default function StopwatchApp() {
     );
   };
 
-  const toggleFocus = async (id: number) => {
-    const isEntering = focusedTimerId !== id;
+  const toggleFocus = async (id: number, isZen: boolean) => {
+    const isAlreadyFocused = focusedTimerId === id;
+    const isFullscreen = !!document.fullscreenElement;
 
-    if (isEntering) {
-      setFocusedTimerId(id);
-      try {
-        await document.documentElement.requestFullscreen();
-      } catch (e) {
-        // Ignore fullscreen errors
+    if (isAlreadyFocused) {
+      if (isZen && !isFullscreen) {
+        try {
+          await document.documentElement.requestFullscreen();
+        } catch (e) {
+          // Ignore fullscreen errors
+        }
+        return;
       }
-    } else {
+
       setFocusedTimerId(null);
-      if (document.fullscreenElement) {
+      if (isFullscreen) {
         try {
           await document.exitFullscreen();
+        } catch (e) {
+          // Ignore fullscreen errors
+        }
+      }
+    } else {
+      setFocusedTimerId(id);
+      if (isZen) {
+        try {
+          await document.documentElement.requestFullscreen();
         } catch (e) {
           // Ignore fullscreen errors
         }
@@ -447,7 +459,7 @@ export default function StopwatchApp() {
             totalTimers={timers.length}
             isBeingDragged={draggedId === timer.id}
             isFocused={focusedTimerId === timer.id}
-            onToggleFocus={() => toggleFocus(timer.id)}
+            onToggleFocus={(isZen) => toggleFocus(timer.id, isZen)}
             onToggle={() => toggleTimer(timer.id)}
             onReset={() => resetTimer(timer.id)}
             onDelete={() => removeTimer(timer.id)}
@@ -457,6 +469,18 @@ export default function StopwatchApp() {
             onDrop={handleDrop}
           />
         ))}
+        <footer className="fixed bottom-2 left-0 right-0 text-center text-xs text-muted-foreground/30 transition-colors hover:text-muted-foreground/80 z-30">
+          &copy;{" "}
+          <a
+            href="https://www.linkedin.com/in/bappygolder/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-foreground transition-all"
+          >
+            Bappy Golder
+          </a>{" "}
+          | 2025
+        </footer>
       </div>
 
       {focusedTimerId === null && (
@@ -465,7 +489,7 @@ export default function StopwatchApp() {
           className="fixed bottom-8 right-8 p-4 rounded-full bg-background/50 backdrop-blur-sm border border-border text-muted-foreground hover:text-background hover:border-foreground hover:bg-foreground hover:scale-105 transition-all duration-500 shadow-sm z-40 group"
         >
           <Plus size={24} className="transition-transform duration-500" />
-          <span className="absolute bottom-full mb-3 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-card/90 backdrop-blur border border-border/50 rounded-lg text-xs font-medium text-foreground shadow-xl opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 pointer-events-none whitespace-nowrap">
+          <span className="absolute bottom-full mb-3 right-0 px-3 py-1.5 bg-card/90 backdrop-blur border border-border/50 rounded-lg text-xs font-medium text-foreground shadow-xl opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 pointer-events-none whitespace-nowrap">
             Add another timer
           </span>
         </button>
