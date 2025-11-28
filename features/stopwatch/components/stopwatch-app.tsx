@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState, DragEvent } from "react";
-import { Plus, Info } from "lucide-react";
+import { Plus, Info, Menu } from "lucide-react";
 import type { Timer } from "@/features/stopwatch/types";
 import TimerCard from "@/features/stopwatch/components/timer-card";
 
@@ -233,9 +233,16 @@ export default function StopwatchApp() {
 
       // Detect shortcuts
       const key = event.key.toLowerCase();
-      if (key !== 'f' && key !== 'z' && event.key !== ' ') return;
+      if (key !== 'f' && key !== 'z' && key !== 'n' && event.key !== ' ') return;
 
       const targetId = activeTimerId ?? timersRef.current[0]?.id;
+      // For 'n', we don't need a targetId necessarily, but we check input focus above.
+      
+      if (key === 'n') {
+        addTimer();
+        return;
+      }
+
       if (!targetId) return;
 
       if (event.key === ' ') {
@@ -277,23 +284,26 @@ export default function StopwatchApp() {
   }, [focusedTimerId]);
 
   const addTimer = () => {
-    setTimers((previous) => {
-      const nextId =
-        previous.length > 0
-          ? Math.max(...previous.map((timer) => timer.id)) + 1
-          : 1;
+    const currentTimers = timersRef.current;
+    const nextId =
+      currentTimers.length > 0
+        ? Math.max(...currentTimers.map((timer) => timer.id)) + 1
+        : 1;
 
-      return [
-        {
-          id: nextId,
-          label: `Timer ${nextId}`,
-          isRunning: false,
-          elapsedMs: 0,
-          lastUpdateTime: Date.now(),
-        },
-        ...previous,
-      ];
-    });
+    const newTimer: Timer = {
+      id: nextId,
+      label: `Timer ${nextId}`,
+      isRunning: false,
+      elapsedMs: 0,
+      lastUpdateTime: Date.now(),
+    };
+
+    setTimers((previous) => [newTimer, ...previous]);
+    setActiveTimerId(nextId);
+    setHighlightedTimerId(nextId);
+    
+    if (highlightTimeoutRef.current) clearTimeout(highlightTimeoutRef.current);
+    highlightTimeoutRef.current = setTimeout(() => setHighlightedTimerId(null), 200);
   };
 
   const removeTimer = (id: number) => {
@@ -430,7 +440,7 @@ export default function StopwatchApp() {
     >
       <div
         className={[
-          "fixed top-0 left-0 right-0 p-6 flex justify-center sm:justify-between items-center z-40 transition-opacity duration-500",
+          "fixed top-0 left-0 right-0 p-6 flex justify-between items-center z-40 transition-opacity duration-500",
           focusedTimerId !== null ? "opacity-0 pointer-events-none" : "opacity-100",
         ]
           .filter(Boolean)
@@ -523,6 +533,9 @@ export default function StopwatchApp() {
                 <div className="flex flex-col gap-3 items-end text-right pl-6 border-l border-border/20 min-w-max">
                   <div className="font-medium text-foreground/80 text-[10px]">Shortcuts</div>
                   <div className="grid grid-cols-[auto_auto] gap-x-3 gap-y-2 items-center text-[10px]">
+                    <span>New Timer</span>
+                    <kbd className="font-mono bg-foreground/10 rounded px-1.5 py-0.5 text-[9px] min-w-[20px] text-center flex justify-center">n</kbd>
+
                     <span>Start/Stop</span>
                     <kbd className="font-mono bg-foreground/10 rounded px-1.5 py-0.5 text-[9px] min-w-[20px] text-center flex justify-center">Space</kbd>
 
@@ -540,6 +553,14 @@ export default function StopwatchApp() {
             </div>
           </div>
         </div>
+
+        <button
+          type="button"
+          className="p-2 -mr-2 text-muted-foreground hover:text-foreground transition-colors rounded-md hover:bg-foreground/5"
+          aria-label="Menu"
+        >
+          <Menu size={20} strokeWidth={2} />
+        </button>
       </div>
 
       <div
