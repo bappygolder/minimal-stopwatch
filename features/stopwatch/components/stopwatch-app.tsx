@@ -26,6 +26,7 @@ export default function StopwatchApp() {
   const saveTimeoutRef = useRef<number | null>(null);
   const [hasHydrated, setHasHydrated] = useState(false);
   const [focusScale, setFocusScale] = useState(1);
+  const [isFullscreen, setIsFullscreen] = useState(false);
   const [isInfoOpen, setIsInfoOpen] = useState(false);
   const infoRef = useRef<HTMLDivElement>(null);
   const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -194,7 +195,9 @@ export default function StopwatchApp() {
 
   useEffect(() => {
     const handleFullscreenChange = () => {
-      if (!document.fullscreenElement) {
+      const isFull = !!document.fullscreenElement;
+      setIsFullscreen(isFull);
+      if (!isFull) {
         setFocusedTimerId(null);
       }
     };
@@ -482,6 +485,7 @@ export default function StopwatchApp() {
             totalTimers={timers.length}
             isBeingDragged={draggedId === timer.id}
             isFocused={focusedTimerId === timer.id}
+            isZen={isFullscreen}
             focusScale={focusScale}
             onScaleChange={setFocusScale}
             onToggleFocus={(isZen) => toggleFocus(timer.id, isZen)}

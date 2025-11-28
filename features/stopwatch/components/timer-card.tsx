@@ -11,6 +11,7 @@ import {
   Scan,
   Plus,
   Minus,
+  RotateCcw,
 } from "lucide-react";
 
 type TimerCardProps = {
@@ -18,6 +19,7 @@ type TimerCardProps = {
   totalTimers: number;
   isBeingDragged: boolean;
   isFocused: boolean;
+  isZen: boolean;
   focusScale: number;
   onScaleChange: (scale: number) => void;
   onToggleFocus: (isZen: boolean) => void;
@@ -36,6 +38,7 @@ export default function TimerCard(props: TimerCardProps) {
     totalTimers,
     isBeingDragged,
     isFocused,
+    isZen,
     focusScale,
     onScaleChange,
     onToggleFocus,
@@ -49,7 +52,18 @@ export default function TimerCard(props: TimerCardProps) {
   } = props;
 
   const [showControls, setShowControls] = useState(true);
+  const [showEscHint, setShowEscHint] = useState(false);
   const controlsTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    if (isFocused && !isZen) {
+      setShowEscHint(true);
+      const timer = setTimeout(() => setShowEscHint(false), 4000);
+      return () => clearTimeout(timer);
+    } else {
+      setShowEscHint(false);
+    }
+  }, [isFocused, isZen]);
 
   const handleInteract = () => {
     setShowControls(true);
@@ -96,6 +110,11 @@ export default function TimerCard(props: TimerCardProps) {
     onScaleChange(Math.max(0.5, focusScale - 0.1));
   };
 
+  const handleZoomReset = (e: MouseEvent) => {
+    e.stopPropagation();
+    onScaleChange(1);
+  };
+
   const hours = Math.floor(timer.elapsedMs / 3600000);
   const minutes = Math.floor((timer.elapsedMs % 3600000) / 60000);
   const seconds = Math.floor((timer.elapsedMs % 60000) / 1000);
@@ -105,24 +124,24 @@ export default function TimerCard(props: TimerCardProps) {
 
   const sizeClasses = isFocused
     ? showHours
-      ? "text-[calc(13vw*var(--timer-scale))] sm:text-[calc(9rem*var(--timer-scale))] font-medium"
-      : "text-[calc(18vw*var(--timer-scale))] sm:text-[calc(12rem*var(--timer-scale))] font-medium"
+      ? "text-[min(calc(13vw*var(--timer-scale)),35vh)] sm:text-[min(calc(9rem*var(--timer-scale)),35vh)] font-medium"
+      : "text-[min(calc(18vw*var(--timer-scale)),45vh)] sm:text-[min(calc(12rem*var(--timer-scale)),45vh)] font-medium"
     : showHours
     ? "text-[9vw] sm:text-[6rem] font-medium"
     : "text-[12vw] sm:text-[8rem] font-medium";
 
   const subSizeClasses = isFocused
     ? showHours
-      ? "text-[calc(7vw*var(--timer-scale))] sm:text-[calc(5rem*var(--timer-scale))] text-chrono-fg-muted mx-[calc(0.25rem*var(--timer-scale))]"
-      : "text-[calc(9vw*var(--timer-scale))] sm:text-[calc(6rem*var(--timer-scale))] text-chrono-fg-muted mx-[calc(0.25rem*var(--timer-scale))]"
+      ? "text-[min(calc(7vw*var(--timer-scale)),20vh)] sm:text-[min(calc(5rem*var(--timer-scale)),20vh)] text-chrono-fg-muted mx-[calc(0.25rem*var(--timer-scale))]"
+      : "text-[min(calc(9vw*var(--timer-scale)),25vh)] sm:text-[min(calc(6rem*var(--timer-scale)),25vh)] text-chrono-fg-muted mx-[calc(0.25rem*var(--timer-scale))]"
     : showHours
     ? "text-[5vw] sm:text-[3rem] text-chrono-fg-muted mx-1"
     : "text-[6vw] sm:text-[4rem] text-chrono-fg-muted mx-1";
 
   const msSizeClasses = isFocused
     ? showHours
-      ? "text-[calc(5vw*var(--timer-scale))] sm:text-[calc(3rem*var(--timer-scale))] font-light ml-[calc(0.5rem*var(--timer-scale))] w-[calc(5vw*var(--timer-scale))] sm:w-[calc(7rem*var(--timer-scale))] text-left"
-      : "text-[calc(6vw*var(--timer-scale))] sm:text-[calc(4rem*var(--timer-scale))] font-light ml-[calc(0.5rem*var(--timer-scale))] w-[calc(7vw*var(--timer-scale))] sm:w-[calc(9rem*var(--timer-scale))] text-left"
+      ? "text-[min(calc(5vw*var(--timer-scale)),12vh)] sm:text-[min(calc(3rem*var(--timer-scale)),12vh)] font-light ml-[calc(0.5rem*var(--timer-scale))] w-[min(calc(5vw*var(--timer-scale)),15vh)] sm:w-[min(calc(7rem*var(--timer-scale)),20vh)] text-left"
+      : "text-[min(calc(6vw*var(--timer-scale)),15vh)] sm:text-[min(calc(4rem*var(--timer-scale)),15vh)] font-light ml-[calc(0.5rem*var(--timer-scale))] w-[min(calc(7vw*var(--timer-scale)),18vh)] sm:w-[min(calc(9rem*var(--timer-scale)),25vh)] text-left"
     : showHours
     ? "text-[3vw] sm:text-[2.5rem] font-light ml-2 w-[4vw] sm:w-[5rem] text-left"
     : "text-[4vw] sm:text-[3rem] font-light ml-2 w-[5vw] sm:w-[6rem] text-left";
@@ -186,51 +205,71 @@ export default function TimerCard(props: TimerCardProps) {
           ].join(" ")}
           onClick={(e) => e.stopPropagation()}
         >
-          {!isFocused && totalTimers > 1 && (
-            <div
-              className="p-1 text-muted-foreground hover:text-foreground transition-colors cursor-grab"
-              title="Drag to reorder"
-            >
-              <GripVertical size={20} />
-            </div>
+          {!isFocused && (
+            <>
+              {totalTimers > 1 && (
+                <div
+                  className="p-1 text-muted-foreground hover:text-foreground transition-colors cursor-grab"
+                  title="Drag to reorder"
+                >
+                  <GripVertical size={20} />
+                </div>
+              )}
+
+              {totalTimers > 1 && (
+                <button
+                  onClick={handleDelete}
+                  className="p-1 rounded-full text-muted-foreground hover:text-chrono-danger transition-colors"
+                  title="Delete timer"
+                >
+                  <Trash2 size={20} />
+                </button>
+              )}
+
+              <div className="relative group/tooltip">
+                <button
+                  onClick={handleToggleFocus}
+                  className="p-1 rounded-full transition-colors text-muted-foreground hover:text-chrono-accent"
+                >
+                  <Scan size={20} />
+                </button>
+                <div className="absolute right-full top-1/2 -translate-y-1/2 mr-3 px-3 py-2 bg-card/90 backdrop-blur border border-border/50 rounded-lg shadow-xl text-xs text-foreground opacity-0 group-hover/tooltip:opacity-100 transition-opacity duration-200 pointer-events-none z-50 min-w-max">
+                   <span className="font-medium">Zen Mode: <span className="opacity-70 font-normal">Shift + Click</span></span>
+                </div>
+              </div>
+            </>
           )}
 
-          {!isFocused && totalTimers > 1 && (
-            <button
-              onClick={handleDelete}
-              className="p-1 rounded-full text-muted-foreground hover:text-chrono-danger transition-colors"
-              title="Delete timer"
-            >
-              <Trash2 size={20} />
-            </button>
-          )}
+          {isFocused && (
+            <>
+              {!isZen && showEscHint && (
+                <div className="absolute top-full right-0 mt-4 text-xs text-muted-foreground/70 whitespace-nowrap animate-in fade-in slide-in-from-top-2 duration-500 pointer-events-none">
+                  Press <span className="font-medium text-foreground/80">Esc</span> to exit
+                </div>
+              )}
 
-          <div className="relative group/tooltip">
-            <button
-              onClick={handleToggleFocus}
-              className={[
-                "p-1 rounded-full transition-colors",
-                isFocused
-                  ? "text-chrono-accent text-2xl"
-                  : "text-muted-foreground hover:text-chrono-accent",
-              ]
-                .filter(Boolean)
-                .join(" ")}
-            >
-              {isFocused ? <Minimize2 size={24} /> : <Scan size={20} />}
-            </button>
-            
-            {!isFocused && (
-              <div className="absolute right-full top-1/2 -translate-y-1/2 mr-3 px-3 py-2 bg-card/90 backdrop-blur border border-border/50 rounded-lg shadow-xl text-xs text-foreground opacity-0 group-hover/tooltip:opacity-100 transition-opacity duration-200 pointer-events-none z-50 min-w-max">
-                <span className="font-medium">Zen Mode: <span className="opacity-70 font-normal">Shift + Click</span></span>
-              </div>
-            )}
-            {isFocused && (
-              <div className="absolute right-full top-1/2 -translate-y-1/2 mr-3 px-3 py-2 bg-card/90 backdrop-blur border border-border/50 rounded-lg shadow-xl text-xs text-foreground opacity-0 group-hover/tooltip:opacity-100 transition-opacity duration-200 pointer-events-none z-50 min-w-max">
-                <span className="font-medium">Exit Focus Mode</span>
-              </div>
-            )}
-          </div>
+              {!isZen && (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onToggleFocus(true);
+                  }}
+                  className="p-1 rounded-full text-muted-foreground hover:text-chrono-accent transition-colors"
+                  title="Enter Zen Mode"
+                >
+                  <Scan size={20} />
+                </button>
+              )}
+
+              <button
+                onClick={handleToggleFocus}
+                className="p-1 rounded-full text-chrono-accent text-2xl transition-colors hover:text-chrono-accent/80"
+                title={isZen ? "Exit Zen Mode" : "Return to Normal"}
+              >
+                <Minimize2 size={24} />
+              </button>
+            </>
+          )}
         </div>
       </div>
 
@@ -286,20 +325,41 @@ export default function TimerCard(props: TimerCardProps) {
             .join(" ")}
           onClick={(e) => e.stopPropagation()}
         >
-          <button
-            onClick={handleZoomIn}
-            className="p-3 rounded-full bg-card/10 hover:bg-card/30 backdrop-blur-sm text-muted-foreground hover:text-foreground transition-colors border border-white/5"
-            title="Zoom In"
-          >
-            <Plus size={20} />
-          </button>
-          <button
-            onClick={handleZoomOut}
-            className="p-3 rounded-full bg-card/10 hover:bg-card/30 backdrop-blur-sm text-muted-foreground hover:text-foreground transition-colors border border-white/5"
-            title="Zoom Out"
-          >
-            <Minus size={20} />
-          </button>
+          <div className="relative group/tooltip">
+            <button
+              onClick={handleZoomIn}
+              className="p-3 rounded-full bg-card/10 hover:bg-card/30 backdrop-blur-sm text-muted-foreground hover:text-foreground transition-colors border border-white/5"
+            >
+              <Plus size={20} />
+            </button>
+            <div className="absolute right-full top-1/2 -translate-y-1/2 mr-3 px-3 py-2 bg-card/90 backdrop-blur border border-border/50 rounded-lg shadow-xl text-xs text-foreground opacity-0 group-hover/tooltip:opacity-100 transition-opacity duration-200 pointer-events-none z-50 min-w-max">
+              <span className="font-medium">Zoom In</span>
+            </div>
+          </div>
+
+          <div className="relative group/tooltip">
+            <button
+              onClick={handleZoomOut}
+              className="p-3 rounded-full bg-card/10 hover:bg-card/30 backdrop-blur-sm text-muted-foreground hover:text-foreground transition-colors border border-white/5"
+            >
+              <Minus size={20} />
+            </button>
+            <div className="absolute right-full top-1/2 -translate-y-1/2 mr-3 px-3 py-2 bg-card/90 backdrop-blur border border-border/50 rounded-lg shadow-xl text-xs text-foreground opacity-0 group-hover/tooltip:opacity-100 transition-opacity duration-200 pointer-events-none z-50 min-w-max">
+              <span className="font-medium">Zoom Out</span>
+            </div>
+          </div>
+
+          <div className="relative group/tooltip">
+            <button
+              onClick={handleZoomReset}
+              className="p-3 rounded-full bg-card/10 hover:bg-card/30 backdrop-blur-sm text-muted-foreground hover:text-foreground transition-colors border border-white/5"
+            >
+              <RotateCcw size={16} />
+            </button>
+            <div className="absolute right-full top-1/2 -translate-y-1/2 mr-3 px-3 py-2 bg-card/90 backdrop-blur border border-border/50 rounded-lg shadow-xl text-xs text-foreground opacity-0 group-hover/tooltip:opacity-100 transition-opacity duration-200 pointer-events-none z-50 min-w-max">
+              <span className="font-medium">Reset Zoom</span>
+            </div>
+          </div>
         </div>
       )}
 
