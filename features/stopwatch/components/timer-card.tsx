@@ -205,24 +205,33 @@ export default function TimerCard(props: TimerCardProps) {
             </button>
           )}
 
-          <button
-            onClick={handleToggleFocus}
-            className={[
-              "p-1 rounded-full transition-colors",
-              isFocused
-                ? "text-chrono-accent text-2xl"
-                : "text-muted-foreground hover:text-chrono-accent",
-            ]
-              .filter(Boolean)
-              .join(" ")}
-            title={
-              isFocused
-                ? "Exit Focus Mode"
-                : "Click for Focus Mode · Shift + Click for Zen Mode"
-            }
-          >
-            {isFocused ? <Minimize2 size={24} /> : <Scan size={20} />}
-          </button>
+          <div className="relative group/tooltip">
+            <button
+              onClick={handleToggleFocus}
+              className={[
+                "p-1 rounded-full transition-colors",
+                isFocused
+                  ? "text-chrono-accent text-2xl"
+                  : "text-muted-foreground hover:text-chrono-accent",
+              ]
+                .filter(Boolean)
+                .join(" ")}
+            >
+              {isFocused ? <Minimize2 size={24} /> : <Scan size={20} />}
+            </button>
+            
+            {!isFocused && (
+              <div className="absolute right-full top-1/2 -translate-y-1/2 mr-3 px-3 py-2 bg-card/90 backdrop-blur border border-border/50 rounded-lg shadow-xl text-xs text-foreground opacity-0 group-hover/tooltip:opacity-100 transition-opacity duration-200 pointer-events-none z-50 min-w-max flex flex-col items-end">
+                <span className="font-medium">Click: Browser Focus Mode</span>
+                <span className="opacity-70">Shift+Click: Zen Mode</span>
+              </div>
+            )}
+            {isFocused && (
+              <div className="absolute right-full top-1/2 -translate-y-1/2 mr-3 px-3 py-2 bg-card/90 backdrop-blur border border-border/50 rounded-lg shadow-xl text-xs text-foreground opacity-0 group-hover/tooltip:opacity-100 transition-opacity duration-200 pointer-events-none z-50 min-w-max">
+                <span className="font-medium">Exit Focus Mode</span>
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
