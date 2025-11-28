@@ -9,6 +9,8 @@ A beautiful, distraction-free multi-timer application built with **Next.js**, **
 
 - **Multiple Timers**: Run as many stopwatches as you need simultaneously.
 - **Drag & Drop**: Reorder timers easily with a smooth drag interface.
+- **Zoom Controls**: Scale your timers up to 3x with viewport-aware sizing.
+- **Hamburger Menu**: Quick access to shortcuts, credits, and app info via the header menu.
 - **Zen Mode**: Toggle a clean, minimal UI that hides everything except the timers.
 - **Focus Mode**: Click "Maximize" on any timer to focus on just that one task.
 - **Local Persistence**: Your timers are saved to your browser's Local Storage, so they're waiting for you when you come back.
@@ -69,4 +71,5 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ## 🔄 Changelog
 
+- **Nov 2025**: Consolidated Info Card into a unified Hamburger Menu for a cleaner UI.
 - **Nov 2025**: Added full keyboard shortcut support (N, Space, F, Z), redesigned the info card, and improved Zen Mode behavior.

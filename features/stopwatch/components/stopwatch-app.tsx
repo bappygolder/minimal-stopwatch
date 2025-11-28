@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState, DragEvent } from "react";
-import { Plus, Info, Menu } from "lucide-react";
+import { Plus, Menu } from "lucide-react";
 import type { Timer } from "@/features/stopwatch/types";
 import TimerCard from "@/features/stopwatch/components/timer-card";
 
@@ -27,12 +27,12 @@ export default function StopwatchApp() {
   const [hasHydrated, setHasHydrated] = useState(false);
   const [focusScale, setFocusScale] = useState(1);
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const [isInfoOpen, setIsInfoOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeTimerId, setActiveTimerId] = useState<number | null>(null);
   const [highlightedTimerId, setHighlightedTimerId] = useState<number | null>(null);
   const previousModeRef = useRef<'focus' | 'multi'>('multi');
   const highlightTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const infoRef = useRef<HTMLDivElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
   const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const timersRef = useRef(timers);
 
@@ -54,26 +54,13 @@ export default function StopwatchApp() {
 
   useEffect(() => {
     const handleClickOutside = (event: globalThis.MouseEvent) => {
-      if (infoRef.current && !infoRef.current.contains(event.target as Node)) {
-        setIsInfoOpen(false);
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setIsMenuOpen(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
-
-  const handleMouseEnter = () => {
-    if (closeTimeoutRef.current) {
-      clearTimeout(closeTimeoutRef.current);
-    }
-    setIsInfoOpen(true);
-  };
-
-  const handleMouseLeave = () => {
-    closeTimeoutRef.current = setTimeout(() => {
-      setIsInfoOpen(false);
-    }, 2000);
-  };
 
   const hasRunningTimer = useMemo(
     () => timers.some((timer) => timer.isRunning),
@@ -450,117 +437,77 @@ export default function StopwatchApp() {
           <span className="text-lg font-light tracking-widest text-foreground uppercase cursor-default select-none">
             Stopwatch
           </span>
+        </div>
+
+        <div ref={menuRef} className="relative -mr-2">
+          <button
+            type="button"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className={`p-2 text-muted-foreground hover:text-foreground transition-colors rounded-md hover:bg-foreground/5 ${isMenuOpen ? 'text-foreground bg-foreground/5' : ''}`}
+            aria-label="Menu"
+          >
+            <Menu size={20} strokeWidth={2} />
+          </button>
 
           <div
-            ref={infoRef}
-            className="relative group/info"
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
+            className={`
+              absolute right-0 top-full mt-2 w-64 p-5 rounded-2xl
+              bg-card/90 backdrop-blur-xl border border-border/40 shadow-2xl
+              text-xs leading-relaxed text-muted-foreground
+              transition-all duration-300 ease-out origin-top-right z-50
+              ${isMenuOpen ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 -translate-y-2 pointer-events-none'}
+            `}
           >
-            <button
-              onClick={() => setIsInfoOpen(!isInfoOpen)}
-              className="p-1.5 rounded-full text-muted-foreground/70 hover:text-foreground transition-colors"
-              aria-label="App Info"
-            >
-              <Info size={16} strokeWidth={2} />
-            </button>
+            <div className="flex flex-col gap-5">
+              {/* Header */}
+              <div className="space-y-1">
+                <span className="font-medium text-foreground block text-sm">Minimal Stopwatch</span>
+                <span className="block text-[10px] opacity-70 leading-relaxed">
+                  by <a href="https://olab.com.au" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors underline decoration-border underline-offset-2">oLab</a>
+                  {" "}&bull;{" "}
+                  Maintained by <a href="https://www.linkedin.com/in/bappygolder/" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors underline decoration-border underline-offset-2">Bappy Golder</a>
+                </span>
+              </div>
 
-            <div
-              className={`
-                absolute top-full mt-4 sm:mt-2
-                left-1/2 -translate-x-1/2 sm:left-0 sm:translate-x-0
-                w-max max-w-[90vw] sm:w-[420px] p-6 rounded-2xl
-                bg-card/90 backdrop-blur-xl border border-border/40 shadow-2xl
-                text-xs leading-relaxed text-muted-foreground
-                text-left
-                transition-all duration-500 ease-out
-                origin-top sm:origin-top-left z-50
-                ${
-                  isInfoOpen
-                    ? "opacity-100 translate-y-0 scale-100"
-                    : "opacity-0 -translate-y-2 scale-95 pointer-events-none"
-                }
-              `}
-            >
-              <div className="flex justify-between gap-8">
-                <div className="flex flex-col gap-4 items-start">
-                  <div className="space-y-0.5">
-                    <span className="font-medium text-foreground block text-sm">
-                      Minimal Stopwatch
-                    </span>
-                    <span className="block text-[10px] opacity-70">
-                      by{" "}
-                      <a
-                        href="https://olab.com.au"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="hover:text-foreground transition-colors underline decoration-border underline-offset-2"
-                      >
-                        oLab
-                      </a>
-                      {" "}&bull;{" "}
-                      Maintained by{" "}
-                      <a
-                        href="https://www.linkedin.com/in/bappygolder/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="hover:text-foreground transition-colors underline decoration-border underline-offset-2"
-                      >
-                        Bappy Golder
-                      </a>
-                    </span>
-                  </div>
+              {/* Description */}
+              <p className="text-[10px] opacity-80 leading-normal">
+                Click time to start or stop.
+                <br />
+                Drag handle to reorder.
+              </p>
+
+              {/* Footer Links */}
+              <div className="flex items-center gap-4 text-[10px] tracking-wider uppercase opacity-60">
+                <a href="https://github.com/bappygolder/minimal-stopwatch" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">GitHub</a>
+                <span>v1.0</span>
+              </div>
+
+              {/* Divider */}
+              <div className="h-px bg-border/20 w-full" />
+
+              {/* Shortcuts */}
+              <div className="space-y-3">
+                <div className="font-medium text-foreground/80 text-[10px]">Shortcuts</div>
+                <div className="grid grid-cols-[1fr_auto] gap-y-2 gap-x-4 items-center text-[10px]">
+                  <span>New Timer</span>
+                  <kbd className="font-mono bg-foreground/10 rounded px-1.5 py-0.5 text-[9px] min-w-[24px] text-center">n</kbd>
+
+                  <span>Start/Stop</span>
+                  <kbd className="font-mono bg-foreground/10 rounded px-1.5 py-0.5 text-[9px] min-w-[24px] text-center">Space</kbd>
+
+                  <span>Focus</span>
+                  <kbd className="font-mono bg-foreground/10 rounded px-1.5 py-0.5 text-[9px] min-w-[24px] text-center">f</kbd>
                   
-                  <p className="text-[10px] opacity-80 leading-normal">
-                    Click time to start or stop.
-                    <br />
-                    Drag handle to reorder.
-                  </p>
-
-                  <div className="flex items-center gap-4 text-[10px] tracking-wider uppercase opacity-60 pt-1">
-                    <a
-                      href="https://github.com/bappygolder/minimal-stopwatch"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:text-foreground transition-colors"
-                    >
-                      GitHub
-                    </a>
-                    <span>v1.0</span>
-                  </div>
-                </div>
-
-                <div className="flex flex-col gap-3 items-end text-right pl-6 border-l border-border/20 min-w-max">
-                  <div className="font-medium text-foreground/80 text-[10px]">Shortcuts</div>
-                  <div className="grid grid-cols-[auto_auto] gap-x-3 gap-y-2 items-center text-[10px]">
-                    <span>New Timer</span>
-                    <kbd className="font-mono bg-foreground/10 rounded px-1.5 py-0.5 text-[9px] min-w-[20px] text-center flex justify-center">n</kbd>
-
-                    <span>Start/Stop</span>
-                    <kbd className="font-mono bg-foreground/10 rounded px-1.5 py-0.5 text-[9px] min-w-[20px] text-center flex justify-center">Space</kbd>
-
-                    <span>Focus</span>
-                    <kbd className="font-mono bg-foreground/10 rounded px-1.5 py-0.5 text-[9px] min-w-[20px] text-center flex justify-center">f</kbd>
-                    
-                    <span>Zen</span>
-                    <kbd className="font-mono bg-foreground/10 rounded px-1.5 py-0.5 text-[9px] min-w-[20px] text-center flex justify-center">z</kbd>
-                    
-                    <span>Exit</span>
-                    <kbd className="font-mono bg-foreground/10 rounded px-1.5 py-0.5 text-[9px] min-w-[20px] text-center flex justify-center">Esc</kbd>
-                  </div>
+                  <span>Zen</span>
+                  <kbd className="font-mono bg-foreground/10 rounded px-1.5 py-0.5 text-[9px] min-w-[24px] text-center">z</kbd>
+                  
+                  <span>Exit</span>
+                  <kbd className="font-mono bg-foreground/10 rounded px-1.5 py-0.5 text-[9px] min-w-[24px] text-center">Esc</kbd>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-        <button
-          type="button"
-          className="p-2 -mr-2 text-muted-foreground hover:text-foreground transition-colors rounded-md hover:bg-foreground/5"
-          aria-label="Menu"
-        >
-          <Menu size={20} strokeWidth={2} />
-        </button>
       </div>
 
       <div
