@@ -22,6 +22,22 @@
   --border: 217.2 32.6% 17.5%;
 }
 
+.light {
+  --chrono-bg-page: 248 250 252;
+  --chrono-bg-card: 255 255 255;
+  --chrono-border-subtle: 226 232 240;
+  --chrono-fg-primary: 15 23 42;
+  --chrono-fg-muted: 100 116 139;
+  
+  --background: 210 40% 98%;
+  --foreground: 222.2 84% 4%;
+  --card: 0 0% 100%;
+  --card-foreground: 222.2 84% 4%;
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --border: 214.3 31.8% 91.4%;
+}
+
 body {
   min-height: 100vh;
   background-color: rgb(var(--chrono-bg-page));

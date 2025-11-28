@@ -1,9 +1,10 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState, DragEvent } from "react";
-import { Plus, Info } from "lucide-react";
+import { Plus } from "lucide-react";
 import type { Timer } from "@/features/stopwatch/types";
 import TimerCard from "@/features/stopwatch/components/timer-card";
+import GlobalMenu from "./global-menu";
 
 const STORAGE_KEY = "chrono-minimal-timers-v1";
 const STORAGE_KEY_SCALE = "chrono-minimal-scale-v1";
@@ -28,13 +29,19 @@ export default function StopwatchApp() {
   const [focusScale, setFocusScale] = useState(1);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [returnToMode, setReturnToMode] = useState<"focus" | "multi">("multi");
-  const [isInfoOpen, setIsInfoOpen] = useState(false);
-  const infoRef = useRef<HTMLDivElement>(null);
-  const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const [theme, setTheme] = useState<"light" | "dark">("dark");
   const timersRef = useRef(timers);
 
   // Keep ref synced with state for event listeners
   timersRef.current = timers;
+
+  useEffect(() => {
+    if (theme === "light") {
+      document.documentElement.classList.add("light");
+    } else {
+      document.documentElement.classList.remove("light");
+    }
+  }, [theme]);
 
   useEffect(() => {
     const handleBeforeUnload = () => {
@@ -47,152 +54,7 @@ export default function StopwatchApp() {
 
     window.addEventListener("beforeunload", handleBeforeUnload);
     return () => window.removeEventListener("beforeunload", handleBeforeUnload);
-  }, []);
-
-  useEffect(() => {
-    const handleClickOutside = (event: globalThis.MouseEvent) => {
-      if (infoRef.current && !infoRef.current.contains(event.target as Node)) {
-        setIsInfoOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
-  const handleMouseEnter = () => {
-    if (closeTimeoutRef.current) {
-      clearTimeout(closeTimeoutRef.current);
-    }
-    setIsInfoOpen(true);
-  };
-
-  const handleMouseLeave = () => {
-    closeTimeoutRef.current = setTimeout(() => {
-      setIsInfoOpen(false);
-    }, 2000);
-  };
-
-  const hasRunningTimer = useMemo(
-    () => timers.some((timer) => timer.isRunning),
-    [timers]
-  );
-
-  useEffect(() => {
-    if (typeof window === "undefined") {
-      return;
-    }
-
-    try {
-      const raw = window.localStorage.getItem(STORAGE_KEY);
-      const rawScale = window.localStorage.getItem(STORAGE_KEY_SCALE);
-
-      if (rawScale) {
-        const parsedScale = parseFloat(rawScale);
-        if (!isNaN(parsedScale) && parsedScale >= 0.5 && parsedScale <= 3) {
-          setFocusScale(parsedScale);
-        }
-      }
-
-      if (!raw) {
-        setHasHydrated(true);
-        return;
-      }
-
-      const parsed = JSON.parse(raw) as unknown;
-
-      if (!Array.isArray(parsed)) {
-        setHasHydrated(true);
-        return;
-      }
-
-      const next = parsed.map((item) => {
-        const candidate = item as Partial<Timer>;
-        const isRunning = Boolean(candidate.isRunning);
-        let elapsedMs = typeof candidate.elapsedMs === "number" ? candidate.elapsedMs : 0;
-        let lastUpdateTime = candidate.lastUpdateTime;
-
-        if (isRunning && lastUpdateTime) {
-          const now = Date.now();
-          const drift = now - lastUpdateTime;
-          elapsedMs += drift;
-          lastUpdateTime = now;
-        }
-
-        return {
-          id: typeof candidate.id === "number" ? candidate.id : Date.now(),
-          label: typeof candidate.label === "string" ? candidate.label : "Timer",
-          isRunning,
-          elapsedMs,
-          lastUpdateTime,
-        } satisfies Timer;
-      });
-
-      if (next.length === 0) {
-        setTimers(DEFAULT_TIMERS);
-      } else {
-        setTimers(next);
-      }
-    } catch {
-      setTimers(DEFAULT_TIMERS);
-    } finally {
-      setHasHydrated(true);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (!hasHydrated || typeof window === "undefined") {
-      return;
-    }
-
-    if (saveTimeoutRef.current !== null) {
-      window.clearTimeout(saveTimeoutRef.current);
-    }
-
-    saveTimeoutRef.current = window.setTimeout(() => {
-      try {
-        window.localStorage.setItem(STORAGE_KEY, JSON.stringify(timers));
-        window.localStorage.setItem(STORAGE_KEY_SCALE, String(focusScale));
-      } catch {
-        // Ignore write errors (e.g. storage quota)
-      }
-    }, 500);
-
-    return () => {
-      if (saveTimeoutRef.current !== null) {
-        window.clearTimeout(saveTimeoutRef.current);
-      }
-    };
-  }, [timers, hasHydrated, focusScale]);
-
-  useEffect(() => {
-    if (!hasRunningTimer) {
-      return;
-    }
-
-    let frameId: number;
-    let lastTime = performance.now();
-
-    const loop = (time: number) => {
-      const delta = time - lastTime;
-      lastTime = time;
-
-      setTimers((previous) =>
-        previous.map((timer) =>
-          timer.isRunning
-            ? { ...timer, elapsedMs: timer.elapsedMs + delta, lastUpdateTime: Date.now() }
-            : timer
-        )
-      );
-
-      frameId = requestAnimationFrame(loop);
-    };
-
-    frameId = requestAnimationFrame(loop);
-
-    return () => {
-      cancelAnimationFrame(frameId);
-    };
-  }, [hasRunningTimer]);
+  }, [theme]);
 
   useEffect(() => {
     const handleFullscreenChange = () => {
@@ -406,83 +268,10 @@ export default function StopwatchApp() {
             Stopwatch
           </span>
 
-          <div
-            ref={infoRef}
-            className="relative group/info"
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-          >
-            <button
-              onClick={() => setIsInfoOpen(!isInfoOpen)}
-              className="p-1.5 rounded-full text-muted-foreground/70 hover:text-foreground transition-colors"
-              aria-label="App Info"
-            >
-              <Info size={16} strokeWidth={2} />
-            </button>
-
-            <div
-              className={`
-                absolute top-full mt-4 sm:mt-2
-                left-1/2 -translate-x-1/2 sm:left-0 sm:translate-x-0
-                w-72 p-5 rounded-2xl
-                bg-card/90 backdrop-blur-xl border border-border/40 shadow-2xl
-                text-xs leading-relaxed text-muted-foreground
-                text-center sm:text-left
-                transition-all duration-500 ease-out
-                origin-top sm:origin-top-left z-50
-                ${
-                  isInfoOpen
-                    ? "opacity-100 translate-y-0 scale-100"
-                    : "opacity-0 -translate-y-2 scale-95 pointer-events-none"
-                }
-              `}
-            >
-              <div className="flex flex-col gap-2 items-center sm:items-start">
-                <div className="space-y-0.5">
-                  <span className="font-medium text-foreground block text-sm">
-                    Minimal Stopwatch by{" "}
-                    <a
-                      href="https://olab.com.au"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-blue-400 underline decoration-blue-400/30 underline-offset-2 hover:text-blue-300 hover:decoration-blue-300 hover:drop-shadow-[0_0_8px_rgba(147,197,253,0.8)] transition-all duration-300"
-                    >
-                      oLab
-                    </a>
-                  </span>
-                  <span className="block">
-                    Maintained by{" "}
-                    <a
-                      href="https://www.linkedin.com/in/bappygolder/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-blue-400 underline decoration-blue-400/30 underline-offset-2 hover:text-blue-300 hover:decoration-blue-300 hover:drop-shadow-[0_0_8px_rgba(147,197,253,0.8)] transition-all duration-300"
-                    >
-                      Bappy Golder
-                    </a>
-                  </span>
-                </div>
-                
-                <p className="text-[10px] opacity-80 pt-2 border-t border-border/30 leading-normal">
-                  Click time to start or stop.
-                  <br />
-                  Drag handle to reorder.
-                </p>
-              </div>
-
-              <div className="mt-4 pt-2 border-t border-border/20 flex items-center justify-center gap-6 sm:justify-between sm:gap-0 text-[10px] tracking-wider uppercase opacity-60">
-                <a
-                  href="https://github.com/bappygolder/minimal-stopwatch"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-400 underline decoration-blue-400/30 underline-offset-2 hover:text-blue-300 hover:decoration-blue-300 hover:drop-shadow-[0_0_8px_rgba(147,197,253,0.8)] transition-all duration-300"
-                >
-                  GitHub
-                </a>
-                <span>v1.0</span>
-              </div>
-            </div>
-          </div>
+          <GlobalMenu
+            theme={theme}
+            onToggleTheme={() => setTheme((t) => (t === "dark" ? "light" : "dark"))}
+          />
         </div>
       </div>
 
