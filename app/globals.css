@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Minimal Stopwatch Global Styles */
+
 :root {
   --chrono-bg-page: 5 5 5;
   --chrono-bg-card: 15 23 42;
