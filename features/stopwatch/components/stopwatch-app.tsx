@@ -207,6 +207,17 @@ export default function StopwatchApp() {
   }, []);
 
   useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && focusedTimerId !== null && !document.fullscreenElement) {
+        setFocusedTimerId(null);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [focusedTimerId]);
+
+  useEffect(() => {
     if (focusedTimerId !== null) {
       document.body.style.overflow = "hidden";
     } else {

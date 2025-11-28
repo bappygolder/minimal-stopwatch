@@ -1,4 +1,4 @@
-import { useState, useEffect, MouseEvent, DragEvent } from "react";
+import { useState, useEffect, useRef, MouseEvent, DragEvent } from "react";
 import type { Timer } from "@/features/stopwatch/types";
 import {
   Play,
@@ -49,25 +49,30 @@ export default function TimerCard(props: TimerCardProps) {
   } = props;
 
   const [showControls, setShowControls] = useState(true);
+  const controlsTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const handleInteract = () => {
+    setShowControls(true);
+    if (controlsTimeoutRef.current) {
+      clearTimeout(controlsTimeoutRef.current);
+    }
+    controlsTimeoutRef.current = setTimeout(() => setShowControls(false), 3000);
+  };
+
+  const handleMouseLeave = () => {
+    if (controlsTimeoutRef.current) {
+      clearTimeout(controlsTimeoutRef.current);
+    }
+    setShowControls(false);
+  };
 
   useEffect(() => {
-    let timeout: NodeJS.Timeout;
-    const onMove = () => {
-      setShowControls(true);
-      clearTimeout(timeout);
-      timeout = setTimeout(() => setShowControls(false), 3000);
-    };
-
-    window.addEventListener("mousemove", onMove);
-    window.addEventListener("touchstart", onMove);
-    window.addEventListener("click", onMove);
-    timeout = setTimeout(() => setShowControls(false), 3000);
-
+    // Initial timeout to hide controls
+    controlsTimeoutRef.current = setTimeout(() => setShowControls(false), 3000);
     return () => {
-      window.removeEventListener("mousemove", onMove);
-      window.removeEventListener("touchstart", onMove);
-      window.removeEventListener("click", onMove);
-      clearTimeout(timeout);
+      if (controlsTimeoutRef.current) {
+        clearTimeout(controlsTimeoutRef.current);
+      }
     };
   }, []);
 
@@ -141,7 +146,13 @@ export default function TimerCard(props: TimerCardProps) {
       onDragStart={onDragStart}
       onDragOver={onDragOver}
       onDrop={onDrop}
-      onClick={onToggle}
+      onMouseMove={handleInteract}
+      onMouseLeave={handleMouseLeave}
+      onTouchStart={handleInteract}
+      onClick={() => {
+        handleInteract();
+        onToggle();
+      }}
     >
       <div
         className={[
