@@ -9,6 +9,8 @@ import {
   Trash2,
   GripVertical,
   Scan,
+  Plus,
+  Minus,
 } from "lucide-react";
 
 type TimerCardProps = {
@@ -16,6 +18,8 @@ type TimerCardProps = {
   totalTimers: number;
   isBeingDragged: boolean;
   isFocused: boolean;
+  focusScale: number;
+  onScaleChange: (scale: number) => void;
   onToggleFocus: (isZen: boolean) => void;
   onToggle: () => void;
   onReset: () => void;
@@ -32,6 +36,8 @@ export default function TimerCard(props: TimerCardProps) {
     totalTimers,
     isBeingDragged,
     isFocused,
+    focusScale,
+    onScaleChange,
     onToggleFocus,
     onToggle,
     onReset,
@@ -75,6 +81,16 @@ export default function TimerCard(props: TimerCardProps) {
     onDelete();
   };
 
+  const handleZoomIn = (e: MouseEvent) => {
+    e.stopPropagation();
+    onScaleChange(Math.min(3, focusScale + 0.1));
+  };
+
+  const handleZoomOut = (e: MouseEvent) => {
+    e.stopPropagation();
+    onScaleChange(Math.max(0.5, focusScale - 0.1));
+  };
+
   const hours = Math.floor(timer.elapsedMs / 3600000);
   const minutes = Math.floor((timer.elapsedMs % 3600000) / 60000);
   const seconds = Math.floor((timer.elapsedMs % 60000) / 1000);
@@ -84,24 +100,24 @@ export default function TimerCard(props: TimerCardProps) {
 
   const sizeClasses = isFocused
     ? showHours
-      ? "text-[13vw] sm:text-[9rem] font-medium"
-      : "text-[18vw] sm:text-[12rem] font-medium"
+      ? "text-[calc(13vw*var(--timer-scale))] sm:text-[calc(9rem*var(--timer-scale))] font-medium"
+      : "text-[calc(18vw*var(--timer-scale))] sm:text-[calc(12rem*var(--timer-scale))] font-medium"
     : showHours
     ? "text-[9vw] sm:text-[6rem] font-medium"
     : "text-[12vw] sm:text-[8rem] font-medium";
 
   const subSizeClasses = isFocused
     ? showHours
-      ? "text-[7vw] sm:text-[5rem] text-chrono-fg-muted mx-1"
-      : "text-[9vw] sm:text-[6rem] text-chrono-fg-muted mx-1"
+      ? "text-[calc(7vw*var(--timer-scale))] sm:text-[calc(5rem*var(--timer-scale))] text-chrono-fg-muted mx-[calc(0.25rem*var(--timer-scale))]"
+      : "text-[calc(9vw*var(--timer-scale))] sm:text-[calc(6rem*var(--timer-scale))] text-chrono-fg-muted mx-[calc(0.25rem*var(--timer-scale))]"
     : showHours
     ? "text-[5vw] sm:text-[3rem] text-chrono-fg-muted mx-1"
     : "text-[6vw] sm:text-[4rem] text-chrono-fg-muted mx-1";
 
   const msSizeClasses = isFocused
     ? showHours
-      ? "text-[5vw] sm:text-[3rem] font-light ml-2 w-[5vw] sm:w-[7rem] text-left"
-      : "text-[6vw] sm:text-[4rem] font-light ml-2 w-[7vw] sm:w-[9rem] text-left"
+      ? "text-[calc(5vw*var(--timer-scale))] sm:text-[calc(3rem*var(--timer-scale))] font-light ml-[calc(0.5rem*var(--timer-scale))] w-[calc(5vw*var(--timer-scale))] sm:w-[calc(7rem*var(--timer-scale))] text-left"
+      : "text-[calc(6vw*var(--timer-scale))] sm:text-[calc(4rem*var(--timer-scale))] font-light ml-[calc(0.5rem*var(--timer-scale))] w-[calc(7vw*var(--timer-scale))] sm:w-[calc(9rem*var(--timer-scale))] text-left"
     : showHours
     ? "text-[3vw] sm:text-[2.5rem] font-light ml-2 w-[4vw] sm:w-[5rem] text-left"
     : "text-[4vw] sm:text-[3rem] font-light ml-2 w-[5vw] sm:w-[6rem] text-left";
@@ -199,21 +215,26 @@ export default function TimerCard(props: TimerCardProps) {
         </div>
       </div>
 
-      {isFocused && (
-        <input
-          type="text"
-          value={timer.label}
-          onChange={(event) => onUpdateLabel(event.target.value)}
-          onClick={(e) => e.stopPropagation()}
-          placeholder="Timer name"
-          className="bg-transparent text-center outline-none border-b border-transparent focus:border-chrono-accent/50 transition-all text-muted-foreground text-2xl font-normal mb-[-2rem] sm:mb-[-4rem] max-w-full"
-        />
-      )}
-
       <div
-        className="transition-transform duration-200 active:scale-95"
+        className="flex flex-col items-center transition-all duration-200 origin-center"
+        style={isFocused ? ({ "--timer-scale": focusScale } as React.CSSProperties) : undefined}
+        onClick={(e) => isFocused && e.stopPropagation()}
       >
-        <div className="flex items-baseline font-mono tracking-tighter leading-none select-none transition-all duration-500">
+        {isFocused && (
+          <input
+            type="text"
+            value={timer.label}
+            onChange={(event) => onUpdateLabel(event.target.value)}
+            onClick={(e) => e.stopPropagation()}
+            placeholder="Timer name"
+            className="bg-transparent text-center outline-none border-b border-transparent focus:border-chrono-accent/50 transition-all text-muted-foreground font-normal max-w-full text-[calc(1.5rem*var(--timer-scale))] mb-[calc(0.5rem*var(--timer-scale))]"
+          />
+        )}
+
+        <div
+          className="transition-transform duration-200 active:scale-95"
+        >
+          <div className="flex items-baseline font-mono tracking-tighter leading-none select-none transition-all duration-500">
           {showHours && (
             <>
               <span className={sizeClasses + " text-foreground"}>
@@ -232,13 +253,41 @@ export default function TimerCard(props: TimerCardProps) {
           <span className={msSizeClasses}>
             .{milliseconds.toString().padStart(2, "0")}
           </span>
+          </div>
         </div>
       </div>
+
+      {isFocused && (
+        <div
+          className={[
+            "fixed bottom-8 right-8 flex flex-col gap-2 z-50 transition-opacity duration-500",
+            !showControls ? "opacity-0 pointer-events-none" : "opacity-100",
+          ]
+            .filter(Boolean)
+            .join(" ")}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <button
+            onClick={handleZoomIn}
+            className="p-3 rounded-full bg-card/10 hover:bg-card/30 backdrop-blur-sm text-muted-foreground hover:text-foreground transition-colors border border-white/5"
+            title="Zoom In"
+          >
+            <Plus size={20} />
+          </button>
+          <button
+            onClick={handleZoomOut}
+            className="p-3 rounded-full bg-card/10 hover:bg-card/30 backdrop-blur-sm text-muted-foreground hover:text-foreground transition-colors border border-white/5"
+            title="Zoom Out"
+          >
+            <Minus size={20} />
+          </button>
+        </div>
+      )}
 
       <div
         className={[
           "flex gap-4 transition-all duration-500 justify-center",
-          isFocused ? "mt-12 scale-150" : "mt-6",
+          isFocused ? "mt-[calc(3rem*var(--timer-scale))] scale-150" : "mt-6",
           !showControls ? "opacity-0 pointer-events-none" : "opacity-100",
         ]
           .filter(Boolean)

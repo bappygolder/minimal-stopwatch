@@ -6,6 +6,7 @@ import type { Timer } from "@/features/stopwatch/types";
 import TimerCard from "@/features/stopwatch/components/timer-card";
 
 const STORAGE_KEY = "chrono-minimal-timers-v1";
+const STORAGE_KEY_SCALE = "chrono-minimal-scale-v1";
 
 const DEFAULT_TIMERS: Timer[] = [
   {
@@ -24,6 +25,7 @@ export default function StopwatchApp() {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const saveTimeoutRef = useRef<number | null>(null);
   const [hasHydrated, setHasHydrated] = useState(false);
+  const [focusScale, setFocusScale] = useState(1);
   const [isInfoOpen, setIsInfoOpen] = useState(false);
   const infoRef = useRef<HTMLDivElement>(null);
   const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -80,6 +82,15 @@ export default function StopwatchApp() {
 
     try {
       const raw = window.localStorage.getItem(STORAGE_KEY);
+      const rawScale = window.localStorage.getItem(STORAGE_KEY_SCALE);
+
+      if (rawScale) {
+        const parsedScale = parseFloat(rawScale);
+        if (!isNaN(parsedScale) && parsedScale >= 0.5 && parsedScale <= 3) {
+          setFocusScale(parsedScale);
+        }
+      }
+
       if (!raw) {
         setHasHydrated(true);
         return;
@@ -138,6 +149,7 @@ export default function StopwatchApp() {
     saveTimeoutRef.current = window.setTimeout(() => {
       try {
         window.localStorage.setItem(STORAGE_KEY, JSON.stringify(timers));
+        window.localStorage.setItem(STORAGE_KEY_SCALE, String(focusScale));
       } catch {
         // Ignore write errors (e.g. storage quota)
       }
@@ -148,7 +160,7 @@ export default function StopwatchApp() {
         window.clearTimeout(saveTimeoutRef.current);
       }
     };
-  }, [timers, hasHydrated]);
+  }, [timers, hasHydrated, focusScale]);
 
   useEffect(() => {
     if (!hasRunningTimer) {
@@ -459,6 +471,8 @@ export default function StopwatchApp() {
             totalTimers={timers.length}
             isBeingDragged={draggedId === timer.id}
             isFocused={focusedTimerId === timer.id}
+            focusScale={focusScale}
+            onScaleChange={setFocusScale}
             onToggleFocus={(isZen) => toggleFocus(timer.id, isZen)}
             onToggle={() => toggleTimer(timer.id)}
             onReset={() => resetTimer(timer.id)}
