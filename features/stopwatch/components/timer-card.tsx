@@ -31,6 +31,7 @@ type TimerCardProps = {
   onDragOver: (event: DragEvent<HTMLDivElement>) => void;
   onDrop: (event: DragEvent<HTMLDivElement>) => void;
   onInteract?: () => void;
+  isHighlighted?: boolean;
 };
 
 export default function TimerCard(props: TimerCardProps) {
@@ -40,6 +41,7 @@ export default function TimerCard(props: TimerCardProps) {
     isBeingDragged,
     isFocused,
     isZen,
+    isHighlighted,
     focusScale,
     onScaleChange,
     onToggleFocus,
@@ -157,6 +159,7 @@ export default function TimerCard(props: TimerCardProps) {
           ? "bg-chrono-bg-card/80 border-chrono-border-subtle shadow-chrono-glow"
           : "bg-chrono-bg-card/40 border-chrono-border-subtle",
         isBeingDragged ? "opacity-50 border-chrono-accent border-dashed" : "",
+        isHighlighted ? "ring-2 ring-chrono-accent shadow-chrono-glow scale-[1.01]" : "",
       ]
         .filter(Boolean)
         .join(" ");

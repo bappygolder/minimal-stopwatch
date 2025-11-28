@@ -29,7 +29,9 @@ export default function StopwatchApp() {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isInfoOpen, setIsInfoOpen] = useState(false);
   const [activeTimerId, setActiveTimerId] = useState<number | null>(null);
+  const [highlightedTimerId, setHighlightedTimerId] = useState<number | null>(null);
   const previousModeRef = useRef<'focus' | 'multi'>('multi');
+  const highlightTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const infoRef = useRef<HTMLDivElement>(null);
   const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const timersRef = useRef(timers);
@@ -231,10 +233,21 @@ export default function StopwatchApp() {
 
       // Detect shortcuts
       const key = event.key.toLowerCase();
-      if (key !== 'f' && key !== 'z') return;
+      if (key !== 'f' && key !== 'z' && event.key !== ' ') return;
 
       const targetId = activeTimerId ?? timersRef.current[0]?.id;
       if (!targetId) return;
+
+      if (event.key === ' ') {
+        event.preventDefault(); // Prevent scrolling
+        toggleTimer(targetId);
+        setActiveTimerId(targetId);
+        setHighlightedTimerId(targetId);
+        
+        if (highlightTimeoutRef.current) clearTimeout(highlightTimeoutRef.current);
+        highlightTimeoutRef.current = setTimeout(() => setHighlightedTimerId(null), 200);
+        return;
+      }
 
       if (key === 'z') {
         // Zen Mode (Z key)
@@ -510,6 +523,9 @@ export default function StopwatchApp() {
                 <div className="flex flex-col gap-3 items-end text-right pl-6 border-l border-border/20 min-w-max">
                   <div className="font-medium text-foreground/80 text-[10px]">Shortcuts</div>
                   <div className="grid grid-cols-[auto_auto] gap-x-3 gap-y-2 items-center text-[10px]">
+                    <span>Start/Stop</span>
+                    <kbd className="font-mono bg-foreground/10 rounded px-1.5 py-0.5 text-[9px] min-w-[20px] text-center flex justify-center">Space</kbd>
+
                     <span>Focus</span>
                     <kbd className="font-mono bg-foreground/10 rounded px-1.5 py-0.5 text-[9px] min-w-[20px] text-center flex justify-center">f</kbd>
                     
@@ -542,6 +558,7 @@ export default function StopwatchApp() {
             isBeingDragged={draggedId === timer.id}
             isFocused={focusedTimerId === timer.id}
             isZen={isFullscreen}
+            isHighlighted={highlightedTimerId === timer.id}
             focusScale={focusScale}
             onScaleChange={setFocusScale}
             onToggleFocus={(isZen) => toggleFocus(timer.id, isZen)}
