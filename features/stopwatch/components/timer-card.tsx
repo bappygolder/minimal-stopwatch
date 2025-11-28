@@ -30,6 +30,7 @@ type TimerCardProps = {
   onDragStart: (event: DragEvent<HTMLDivElement>) => void;
   onDragOver: (event: DragEvent<HTMLDivElement>) => void;
   onDrop: (event: DragEvent<HTMLDivElement>) => void;
+  onInteract?: () => void;
 };
 
 export default function TimerCard(props: TimerCardProps) {
@@ -49,6 +50,7 @@ export default function TimerCard(props: TimerCardProps) {
     onDragStart,
     onDragOver,
     onDrop,
+    onInteract,
   } = props;
 
   const [showControls, setShowControls] = useState(true);
@@ -66,6 +68,7 @@ export default function TimerCard(props: TimerCardProps) {
   }, [isFocused, isZen]);
 
   const handleInteract = () => {
+    if (onInteract) onInteract();
     setShowControls(true);
     if (controlsTimeoutRef.current) {
       clearTimeout(controlsTimeoutRef.current);
