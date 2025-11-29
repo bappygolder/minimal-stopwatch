@@ -506,7 +506,7 @@ export default function StopwatchApp() {
           <div
             className={`
               absolute right-0 top-full mt-2 w-64 p-5 rounded-2xl
-              bg-card/90 backdrop-blur-xl border border-border/40 shadow-2xl
+              bg-card border border-border/60 shadow-2xl
               text-xs leading-relaxed text-muted-foreground
               transition-all duration-300 ease-out origin-top-right z-50
               ${isMenuOpen ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 -translate-y-2 pointer-events-none'}
@@ -523,12 +523,29 @@ export default function StopwatchApp() {
                 </span>
               </div>
 
-              {/* Description */}
-              <p className="text-[10px] opacity-80 leading-normal">
-                Click time to start or stop.
-                <br />
-                Drag handle to reorder.
-              </p>
+              {/* Shortcuts */}
+              <div className="space-y-3">
+                <div className="font-medium text-foreground text-[10px]">Shortcuts</div>
+                <div className="grid grid-cols-[1fr_auto] gap-y-2 gap-x-4 items-center text-[10px]">
+                  <span>New Timer</span>
+                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] text-center">N</kbd>
+
+                  <span>Start/Stop</span>
+                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] text-center">Space</kbd>
+
+                  <span>Focus</span>
+                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] text-center">F</kbd>
+                  
+                  <span>Zen</span>
+                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] text-center">Z</kbd>
+                  
+                  <span>Exit</span>
+                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] text-center">Esc</kbd>
+                </div>
+              </div>
+
+              {/* Divider */}
+              <div className="h-px bg-border/40 w-full" />
 
               {/* Footer Links */}
               <div className="flex items-center gap-4 text-[10px] tracking-wider uppercase opacity-60">
@@ -536,29 +553,12 @@ export default function StopwatchApp() {
                 <span>v1.0</span>
               </div>
 
-              {/* Divider */}
-              <div className="h-px bg-border/20 w-full" />
-
-              {/* Shortcuts */}
-              <div className="space-y-3">
-                <div className="font-medium text-foreground/80 text-[10px]">Shortcuts</div>
-                <div className="grid grid-cols-[1fr_auto] gap-y-2 gap-x-4 items-center text-[10px]">
-                  <span>New Timer</span>
-                  <kbd className="font-mono bg-foreground/10 rounded px-1.5 py-0.5 text-[9px] min-w-[24px] text-center">n</kbd>
-
-                  <span>Start/Stop</span>
-                  <kbd className="font-mono bg-foreground/10 rounded px-1.5 py-0.5 text-[9px] min-w-[24px] text-center">Space</kbd>
-
-                  <span>Focus</span>
-                  <kbd className="font-mono bg-foreground/10 rounded px-1.5 py-0.5 text-[9px] min-w-[24px] text-center">f</kbd>
-                  
-                  <span>Zen</span>
-                  <kbd className="font-mono bg-foreground/10 rounded px-1.5 py-0.5 text-[9px] min-w-[24px] text-center">z</kbd>
-                  
-                  <span>Exit</span>
-                  <kbd className="font-mono bg-foreground/10 rounded px-1.5 py-0.5 text-[9px] min-w-[24px] text-center">Esc</kbd>
-                </div>
-              </div>
+              {/* Description */}
+              <p className="text-[10px] opacity-80 leading-normal">
+                Click time to start or stop.
+                <br />
+                Drag handle to reorder.
+              </p>
             </div>
           </div>
         </div>
