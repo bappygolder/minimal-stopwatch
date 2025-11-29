@@ -260,9 +260,10 @@ export default function StopwatchApp() {
       // ...
       if (key === 'arrowup' || key === 'arrowdown') {
         event.preventDefault();
-        
+
         if (timersRef.current.length === 0) return;
 
+        // If no active timer yet, just select the first one
         if (activeTimerId === null) {
           const firstId = timersRef.current[0].id;
           setActiveTimerId(firstId);
@@ -272,9 +273,48 @@ export default function StopwatchApp() {
           return;
         }
 
-        const currentIndex = timersRef.current.findIndex(t => t.id === activeTimerId);
+        const currentIndex = timersRef.current.findIndex((t) => t.id === activeTimerId);
         if (currentIndex === -1) return;
 
+        // Shift + Arrow: reorder the active timer up/down
+        if (event.shiftKey) {
+          const isMovingUp = key === 'arrowup';
+          const targetIndex = isMovingUp
+            ? Math.max(0, currentIndex - 1)
+            : Math.min(timersRef.current.length - 1, currentIndex + 1);
+
+          // No-op if already at boundary
+          if (targetIndex === currentIndex) return;
+
+          setTimers((previous) => {
+            const index = previous.findIndex((t) => t.id === activeTimerId);
+            if (index === -1) return previous;
+
+            const next = [...previous];
+            const [moved] = next.splice(index, 1);
+            next.splice(targetIndex, 0, moved);
+            return next;
+          });
+
+          // Keep the same timer active, and briefly highlight it
+          setActiveTimerId(activeTimerId);
+          setHighlightedTimerId(activeTimerId);
+
+          if (highlightTimeoutRef.current) clearTimeout(highlightTimeoutRef.current);
+          highlightTimeoutRef.current = setTimeout(() => setHighlightedTimerId(null), 2500);
+
+          // After reordering, scroll the active timer into view
+          requestAnimationFrame(() => {
+            const element = document.querySelector<HTMLElement>(
+              `[data-timer-id="${activeTimerId}"]`
+            );
+            element?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          });
+
+          return;
+        }
+
+        // Plain Arrow: move focus between timers without reordering
         let newIndex = currentIndex;
         if (key === 'arrowup') {
           newIndex = Math.max(0, currentIndex - 1);
@@ -600,6 +640,9 @@ export default function StopwatchApp() {
                   
                   <span>Commit Title</span>
                   <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] text-center">Enter</kbd>
+                  
+                  <span>Move Selected</span>
+                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] text-center">Shift + ↑ / Shift + ↓</kbd>
                   
                   <span>Toggle Menu</span>
                   <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] text-center">M</kbd>

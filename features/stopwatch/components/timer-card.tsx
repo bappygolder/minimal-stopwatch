@@ -208,6 +208,7 @@ export default function TimerCard(props: TimerCardProps) {
   return (
     <div
       className={containerClasses}
+      data-timer-id={timer.id}
       draggable={!isFocused}
       onDragStart={onDragStart}
       onDragOver={onDragOver}
