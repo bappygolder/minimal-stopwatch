@@ -31,6 +31,7 @@ export default function StopwatchApp() {
   const [activeTimerId, setActiveTimerId] = useState<number | null>(null);
   const [highlightedTimerId, setHighlightedTimerId] = useState<number | null>(null);
   const [createdTimerId, setCreatedTimerId] = useState<number | null>(null);
+  const [spaceHintSeen, setSpaceHintSeen] = useState<number[]>([]);
   const previousModeRef = useRef<'focus' | 'multi'>('multi');
   const highlightTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -39,6 +40,10 @@ export default function StopwatchApp() {
 
   // Keep ref synced with state for event listeners
   timersRef.current = timers;
+
+  const markSpaceHintSeen = (id: number) => {
+    setSpaceHintSeen((previous) => (previous.includes(id) ? previous : [...previous, id]));
+  };
 
   useEffect(() => {
     const handleBeforeUnload = () => {
@@ -226,12 +231,13 @@ export default function StopwatchApp() {
       const targetId = activeTimerId ?? timersRef.current[0]?.id;
       // For 'n', we don't need a targetId necessarily, but we check input focus above.
       
-      if (key === 'n') {
+      if (event.key === 'n') {
         event.preventDefault();
         addTimer();
         return;
       }
 
+      // ...
       if (key === 'arrowup' || key === 'arrowdown') {
         event.preventDefault();
         
@@ -272,6 +278,7 @@ export default function StopwatchApp() {
         toggleTimer(targetId);
         setActiveTimerId(targetId);
         setHighlightedTimerId(targetId);
+        markSpaceHintSeen(targetId);
         
         if (highlightTimeoutRef.current) clearTimeout(highlightTimeoutRef.current);
         highlightTimeoutRef.current = setTimeout(() => setHighlightedTimerId(null), 200);
@@ -566,6 +573,18 @@ export default function StopwatchApp() {
           .join(" ")}
       >
         {timers.map((timer) => (
+          (() => {
+            const hasSeen = spaceHintSeen.includes(timer.id);
+            const isOnlyTimer = timers.length === 1;
+            const isFresh = timer.elapsedMs === 0 && !timer.isRunning;
+            const isSingleRunning = isOnlyTimer && timer.isRunning;
+            const isFocusedTimer = focusedTimerId === timer.id;
+
+            const showSpaceHint =
+              !hasSeen &&
+              ((isOnlyTimer && (isFresh || isSingleRunning)) || isFocusedTimer);
+
+            return (
           <TimerCard
             key={timer.id}
             timer={timer}
@@ -575,6 +594,7 @@ export default function StopwatchApp() {
             isZen={isFullscreen}
             isHighlighted={highlightedTimerId === timer.id}
             shouldAutoFocus={createdTimerId === timer.id}
+            showSpaceHint={showSpaceHint}
             onCommit={() => handleCommit(timer.id)}
             focusScale={focusScale}
             onScaleChange={setFocusScale}
@@ -582,12 +602,17 @@ export default function StopwatchApp() {
             onToggle={() => toggleTimer(timer.id)}
             onReset={() => resetTimer(timer.id)}
             onDelete={() => removeTimer(timer.id)}
-            onInteract={() => setActiveTimerId(timer.id)}
+            onInteract={() => {
+              setActiveTimerId(timer.id);
+              markSpaceHintSeen(timer.id);
+            }}
             onUpdateLabel={(label) => updateLabel(timer.id, label)}
             onDragStart={(event) => handleDragStart(event, timer.id)}
             onDragOver={(event) => handleDragOver(event, timer.id)}
             onDrop={handleDrop}
           />
+            );
+          })()
         ))}
         <footer className="mt-auto pt-8 pb-4 text-center text-xs text-muted-foreground/30 transition-colors hover:text-muted-foreground/80">
           &copy;{" "}

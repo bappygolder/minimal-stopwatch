@@ -34,6 +34,7 @@ type TimerCardProps = {
   isHighlighted?: boolean;
   shouldAutoFocus?: boolean;
   onCommit?: () => void;
+  showSpaceHint?: boolean;
 };
 
 export default function TimerCard(props: TimerCardProps) {
@@ -57,6 +58,7 @@ export default function TimerCard(props: TimerCardProps) {
     onDrop,
     onInteract,
     onCommit,
+    showSpaceHint,
   } = props;
 
   const [showControls, setShowControls] = useState(true);
@@ -443,9 +445,11 @@ export default function TimerCard(props: TimerCardProps) {
         </button>
       </div>
 
-      <div className="text-[10px] text-muted-foreground/30 font-medium uppercase tracking-widest mt-6 select-none text-center w-full max-w-[200px] mx-auto leading-relaxed">
-        Press Space to start/stop
-      </div>
+      {showSpaceHint && (
+        <div className="text-[10px] text-muted-foreground/30 font-medium uppercase tracking-widest mt-10 select-none text-center w-full max-w-[200px] mx-auto leading-relaxed">
+          Press Space to start/stop
+        </div>
+      )}
     </div>
   );
 }
