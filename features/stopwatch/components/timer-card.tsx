@@ -33,7 +33,7 @@ type TimerCardProps = {
   onInteract?: () => void;
   isHighlighted?: boolean;
   shouldAutoFocus?: boolean;
-  onTitleFocus?: () => void;
+  onCommit?: () => void;
 };
 
 export default function TimerCard(props: TimerCardProps) {
@@ -56,7 +56,7 @@ export default function TimerCard(props: TimerCardProps) {
     onDragOver,
     onDrop,
     onInteract,
-    onTitleFocus,
+    onCommit,
   } = props;
 
   const [showControls, setShowControls] = useState(true);
@@ -90,6 +90,19 @@ export default function TimerCard(props: TimerCardProps) {
       clearTimeout(controlsTimeoutRef.current);
     }
     controlsTimeoutRef.current = setTimeout(() => setShowControls(false), 3000);
+  };
+
+  const handleBlur = () => {
+    if (!timer.label.trim()) {
+      onUpdateLabel(`Timer ${timer.id}`);
+    }
+    onCommit?.();
+  };
+
+  const handleKeyDownInput = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      event.currentTarget.blur();
+    }
   };
 
   const handleMouseLeave = () => {
@@ -212,7 +225,8 @@ export default function TimerCard(props: TimerCardProps) {
               type="text"
               value={timer.label}
               onChange={(event) => onUpdateLabel(event.target.value)}
-              onFocus={() => onTitleFocus?.()}
+              onBlur={handleBlur}
+              onKeyDown={handleKeyDownInput}
               placeholder="Type timer name..."
               className="bg-transparent text-left outline-none border-b border-transparent focus:border-chrono-accent/50 transition-all text-chrono-fg-muted focus:text-chrono-accent text-lg placeholder:text-muted-foreground/50"
             />
@@ -307,7 +321,8 @@ export default function TimerCard(props: TimerCardProps) {
             value={timer.label}
             onChange={(event) => onUpdateLabel(event.target.value)}
             onClick={(e) => e.stopPropagation()}
-            onFocus={() => onTitleFocus?.()}
+            onBlur={handleBlur}
+            onKeyDown={handleKeyDownInput}
             placeholder="Type timer name..."
             className="bg-transparent text-center outline-none border-b border-transparent focus:border-chrono-accent/50 transition-all text-muted-foreground font-normal max-w-full text-[calc(1.5rem*var(--timer-scale))] mb-[calc(0.5rem*var(--timer-scale))]"
           />
@@ -415,7 +430,11 @@ export default function TimerCard(props: TimerCardProps) {
         </button>
 
         <button
-          onClick={onToggle}
+          onClick={(e) => {
+            e.stopPropagation();
+            if (shouldAutoFocus) return;
+            onToggle();
+          }}
           className={[
             "p-4 rounded-full transition-all duration-200",
             timer.isRunning

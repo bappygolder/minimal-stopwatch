@@ -227,6 +227,7 @@ export default function StopwatchApp() {
       // For 'n', we don't need a targetId necessarily, but we check input focus above.
       
       if (key === 'n') {
+        event.preventDefault();
         addTimer();
         return;
       }
@@ -271,6 +272,17 @@ export default function StopwatchApp() {
     }
   }, [focusedTimerId]);
 
+  const handleCommit = (id: number) => {
+    if (id === createdTimerId) {
+      setCreatedTimerId(null);
+      setTimers((previous) =>
+        previous.map((timer) =>
+          timer.id === id ? { ...timer, isRunning: true, lastUpdateTime: Date.now() } : timer
+        )
+      );
+    }
+  };
+
   const addTimer = () => {
     const currentTimers = timersRef.current;
     const nextId =
@@ -280,8 +292,8 @@ export default function StopwatchApp() {
 
     const newTimer: Timer = {
       id: nextId,
-      label: `Timer ${nextId}`,
-      isRunning: true,
+      label: "", // Start empty to show placeholder
+      isRunning: false,
       elapsedMs: 0,
       lastUpdateTime: Date.now(),
     };
@@ -530,7 +542,7 @@ export default function StopwatchApp() {
             isZen={isFullscreen}
             isHighlighted={highlightedTimerId === timer.id}
             shouldAutoFocus={createdTimerId === timer.id}
-            onTitleFocus={() => setCreatedTimerId(null)}
+            onCommit={() => handleCommit(timer.id)}
             focusScale={focusScale}
             onScaleChange={setFocusScale}
             onToggleFocus={(isZen) => toggleFocus(timer.id, isZen)}
