@@ -71,5 +71,6 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ## 🔄 Changelog
 
+- **Nov 2025**: New timers now auto-start and automatically focus the title input for rapid workflow.
 - **Nov 2025**: Consolidated Info Card into a unified Hamburger Menu for a cleaner UI.
 - **Nov 2025**: Added full keyboard shortcut support (N, Space, F, Z), redesigned the info card, and improved Zen Mode behavior.

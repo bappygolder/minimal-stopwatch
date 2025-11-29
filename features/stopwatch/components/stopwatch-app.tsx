@@ -30,6 +30,7 @@ export default function StopwatchApp() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeTimerId, setActiveTimerId] = useState<number | null>(null);
   const [highlightedTimerId, setHighlightedTimerId] = useState<number | null>(null);
+  const [createdTimerId, setCreatedTimerId] = useState<number | null>(null);
   const previousModeRef = useRef<'focus' | 'multi'>('multi');
   const highlightTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -280,7 +281,7 @@ export default function StopwatchApp() {
     const newTimer: Timer = {
       id: nextId,
       label: `Timer ${nextId}`,
-      isRunning: false,
+      isRunning: true,
       elapsedMs: 0,
       lastUpdateTime: Date.now(),
     };
@@ -288,6 +289,7 @@ export default function StopwatchApp() {
     setTimers((previous) => [newTimer, ...previous]);
     setActiveTimerId(nextId);
     setHighlightedTimerId(nextId);
+    setCreatedTimerId(nextId);
     
     if (highlightTimeoutRef.current) clearTimeout(highlightTimeoutRef.current);
     highlightTimeoutRef.current = setTimeout(() => setHighlightedTimerId(null), 200);
@@ -527,6 +529,8 @@ export default function StopwatchApp() {
             isFocused={focusedTimerId === timer.id}
             isZen={isFullscreen}
             isHighlighted={highlightedTimerId === timer.id}
+            shouldAutoFocus={createdTimerId === timer.id}
+            onTitleFocus={() => setCreatedTimerId(null)}
             focusScale={focusScale}
             onScaleChange={setFocusScale}
             onToggleFocus={(isZen) => toggleFocus(timer.id, isZen)}

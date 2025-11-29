@@ -32,6 +32,8 @@ type TimerCardProps = {
   onDrop: (event: DragEvent<HTMLDivElement>) => void;
   onInteract?: () => void;
   isHighlighted?: boolean;
+  shouldAutoFocus?: boolean;
+  onTitleFocus?: () => void;
 };
 
 export default function TimerCard(props: TimerCardProps) {
@@ -42,6 +44,7 @@ export default function TimerCard(props: TimerCardProps) {
     isFocused,
     isZen,
     isHighlighted,
+    shouldAutoFocus,
     focusScale,
     onScaleChange,
     onToggleFocus,
@@ -53,11 +56,22 @@ export default function TimerCard(props: TimerCardProps) {
     onDragOver,
     onDrop,
     onInteract,
+    onTitleFocus,
   } = props;
 
   const [showControls, setShowControls] = useState(true);
   const [showEscHint, setShowEscHint] = useState(false);
   const controlsTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const controlsVisible = showControls || (totalTimers === 1 && !isFocused && timer.elapsedMs === 0);
+
+  useEffect(() => {
+    if (shouldAutoFocus && inputRef.current) {
+      inputRef.current.focus();
+      inputRef.current.select(); // Select default text for easy overwriting
+    }
+  }, [shouldAutoFocus]);
 
   useEffect(() => {
     if (isFocused && !isZen) {
@@ -194,11 +208,13 @@ export default function TimerCard(props: TimerCardProps) {
             onClick={(e) => e.stopPropagation()}
           >
             <input
+              ref={inputRef}
               type="text"
               value={timer.label}
               onChange={(event) => onUpdateLabel(event.target.value)}
-              placeholder="Timer name"
-              className="bg-transparent text-left outline-none border-b border-transparent focus:border-chrono-accent/50 transition-all text-chrono-fg-muted focus:text-chrono-accent text-lg placeholder:text-muted-foreground"
+              onFocus={() => onTitleFocus?.()}
+              placeholder="Type timer name..."
+              className="bg-transparent text-left outline-none border-b border-transparent focus:border-chrono-accent/50 transition-all text-chrono-fg-muted focus:text-chrono-accent text-lg placeholder:text-muted-foreground/50"
             />
           </div>
         )}
@@ -207,7 +223,7 @@ export default function TimerCard(props: TimerCardProps) {
           className={[
             "flex gap-2 items-center ml-auto flex-shrink-0 transition-opacity duration-500",
             isFocused ? "absolute top-6 right-6" : "",
-            !showControls ? "opacity-0 pointer-events-none" : "opacity-100",
+            !controlsVisible ? "opacity-0 pointer-events-none" : "opacity-100",
           ].join(" ")}
           onClick={(e) => e.stopPropagation()}
         >
@@ -286,11 +302,13 @@ export default function TimerCard(props: TimerCardProps) {
       >
         {isFocused && (
           <input
+            ref={inputRef}
             type="text"
             value={timer.label}
             onChange={(event) => onUpdateLabel(event.target.value)}
             onClick={(e) => e.stopPropagation()}
-            placeholder="Timer name"
+            onFocus={() => onTitleFocus?.()}
+            placeholder="Type timer name..."
             className="bg-transparent text-center outline-none border-b border-transparent focus:border-chrono-accent/50 transition-all text-muted-foreground font-normal max-w-full text-[calc(1.5rem*var(--timer-scale))] mb-[calc(0.5rem*var(--timer-scale))]"
           />
         )}
@@ -325,7 +343,7 @@ export default function TimerCard(props: TimerCardProps) {
         <div
           className={[
             "fixed bottom-8 right-8 flex flex-col gap-2 z-50 transition-opacity duration-500",
-            !showControls ? "opacity-0 pointer-events-none" : "opacity-100",
+            !controlsVisible ? "opacity-0 pointer-events-none" : "opacity-100",
           ]
             .filter(Boolean)
             .join(" ")}
@@ -371,9 +389,18 @@ export default function TimerCard(props: TimerCardProps) {
 
       <div
         className={[
+          "text-[10px] text-muted-foreground/30 font-medium uppercase tracking-widest mt-4 mb-2 select-none transition-all duration-500",
+          !controlsVisible ? "opacity-0 h-0 overflow-hidden mt-0 mb-0" : "opacity-100 h-auto",
+        ].join(" ")}
+      >
+        Press Space to stop or start
+      </div>
+
+      <div
+        className={[
           "flex gap-4 transition-all duration-500 justify-center",
           isFocused ? "mt-[calc(3rem*var(--timer-scale))] scale-150" : "mt-6",
-          !showControls ? "opacity-0 pointer-events-none" : "opacity-100",
+          !controlsVisible ? "opacity-0 pointer-events-none" : "opacity-100",
         ]
           .filter(Boolean)
           .join(" ")}
