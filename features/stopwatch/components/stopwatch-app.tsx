@@ -232,6 +232,39 @@ export default function StopwatchApp() {
         return;
       }
 
+      if (key === 'arrowup' || key === 'arrowdown') {
+        event.preventDefault();
+        
+        if (timersRef.current.length === 0) return;
+
+        if (activeTimerId === null) {
+          const firstId = timersRef.current[0].id;
+          setActiveTimerId(firstId);
+          setHighlightedTimerId(firstId);
+          if (highlightTimeoutRef.current) clearTimeout(highlightTimeoutRef.current);
+          highlightTimeoutRef.current = setTimeout(() => setHighlightedTimerId(null), 200);
+          return;
+        }
+
+        const currentIndex = timersRef.current.findIndex(t => t.id === activeTimerId);
+        if (currentIndex === -1) return;
+
+        let newIndex = currentIndex;
+        if (key === 'arrowup') {
+          newIndex = Math.max(0, currentIndex - 1);
+        } else {
+          newIndex = Math.min(timersRef.current.length - 1, currentIndex + 1);
+        }
+
+        const newId = timersRef.current[newIndex].id;
+        setActiveTimerId(newId);
+        setHighlightedTimerId(newId);
+        
+        if (highlightTimeoutRef.current) clearTimeout(highlightTimeoutRef.current);
+        highlightTimeoutRef.current = setTimeout(() => setHighlightedTimerId(null), 200);
+        return;
+      }
+
       if (!targetId) return;
 
       if (event.key === ' ') {

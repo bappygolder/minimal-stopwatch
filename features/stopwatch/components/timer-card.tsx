@@ -402,14 +402,6 @@ export default function TimerCard(props: TimerCardProps) {
         </div>
       )}
 
-      <div
-        className={[
-          "text-[10px] text-muted-foreground/30 font-medium uppercase tracking-widest mt-4 mb-2 select-none transition-all duration-500",
-          !controlsVisible ? "opacity-0 h-0 overflow-hidden mt-0 mb-0" : "opacity-100 h-auto",
-        ].join(" ")}
-      >
-        Press Space to stop or start
-      </div>
 
       <div
         className={[
@@ -449,6 +441,10 @@ export default function TimerCard(props: TimerCardProps) {
             <Play size={24} fill="currentColor" />
           )}
         </button>
+      </div>
+
+      <div className="text-[10px] text-muted-foreground/30 font-medium uppercase tracking-widest mt-6 select-none text-center w-full max-w-[200px] mx-auto leading-relaxed">
+        Press Space to start/stop
       </div>
     </div>
   );
