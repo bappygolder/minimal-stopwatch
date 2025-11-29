@@ -31,6 +31,7 @@ export default function StopwatchApp() {
   const [activeTimerId, setActiveTimerId] = useState<number | null>(null);
   const [highlightedTimerId, setHighlightedTimerId] = useState<number | null>(null);
   const [createdTimerId, setCreatedTimerId] = useState<number | null>(null);
+  const [titleFocusId, setTitleFocusId] = useState<number | null>(null);
   const [spaceHintSeen, setSpaceHintSeen] = useState<number[]>([]);
   const previousModeRef = useRef<'focus' | 'multi'>('multi');
   const highlightTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -226,7 +227,19 @@ export default function StopwatchApp() {
 
       // Detect shortcuts
       const key = event.key.toLowerCase();
-      if (key !== 'f' && key !== 'z' && key !== 'n' && event.key !== ' ') return;
+      if (
+        key !== 'f' &&
+        key !== 'z' &&
+        key !== 'n' &&
+        key !== 'd' &&
+        key !== 'r' &&
+        key !== 't' &&
+        key !== 'arrowup' &&
+        key !== 'arrowdown' &&
+        event.key !== ' '
+      ) {
+        return;
+      }
 
       const targetId = activeTimerId ?? timersRef.current[0]?.id;
       // For 'n', we don't need a targetId necessarily, but we check input focus above.
@@ -268,6 +281,27 @@ export default function StopwatchApp() {
         
         if (highlightTimeoutRef.current) clearTimeout(highlightTimeoutRef.current);
         highlightTimeoutRef.current = setTimeout(() => setHighlightedTimerId(null), 200);
+        return;
+      }
+
+      if (key === 'd') {
+        if (!targetId) return;
+        event.preventDefault();
+        removeTimer(targetId);
+        return;
+      }
+
+      if (key === 'r') {
+        if (!targetId) return;
+        event.preventDefault();
+        resetTimer(targetId);
+        return;
+      }
+
+      if (key === 't') {
+        if (!targetId) return;
+        event.preventDefault();
+        setTitleFocusId(targetId);
         return;
       }
 
@@ -539,6 +573,15 @@ export default function StopwatchApp() {
                   <span>Zen</span>
                   <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] text-center">Z</kbd>
                   
+                  <span>Delete Timer</span>
+                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] text-center">D</kbd>
+                  
+                  <span>Reset</span>
+                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] text-center">R</kbd>
+
+                  <span>Edit Title</span>
+                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] text-center">T</kbd>
+                  
                   <span>Exit</span>
                   <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] text-center">Esc</kbd>
                 </div>
@@ -594,6 +637,8 @@ export default function StopwatchApp() {
             isZen={isFullscreen}
             isHighlighted={highlightedTimerId === timer.id}
             shouldAutoFocus={createdTimerId === timer.id}
+            requestTitleFocus={titleFocusId === timer.id}
+            onTitleFocusHandled={() => setTitleFocusId(null)}
             showSpaceHint={showSpaceHint}
             onCommit={() => handleCommit(timer.id)}
             focusScale={focusScale}

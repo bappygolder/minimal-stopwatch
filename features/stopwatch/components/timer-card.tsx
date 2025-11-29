@@ -35,6 +35,8 @@ type TimerCardProps = {
   shouldAutoFocus?: boolean;
   onCommit?: () => void;
   showSpaceHint?: boolean;
+  requestTitleFocus?: boolean;
+  onTitleFocusHandled?: () => void;
 };
 
 export default function TimerCard(props: TimerCardProps) {
@@ -59,6 +61,8 @@ export default function TimerCard(props: TimerCardProps) {
     onInteract,
     onCommit,
     showSpaceHint,
+    requestTitleFocus,
+    onTitleFocusHandled,
   } = props;
 
   const [showControls, setShowControls] = useState(true);
@@ -74,6 +78,14 @@ export default function TimerCard(props: TimerCardProps) {
       inputRef.current.select(); // Select default text for easy overwriting
     }
   }, [shouldAutoFocus]);
+
+  useEffect(() => {
+    if (requestTitleFocus && inputRef.current) {
+      inputRef.current.focus();
+      inputRef.current.select();
+      onTitleFocusHandled?.();
+    }
+  }, [requestTitleFocus, onTitleFocusHandled]);
 
   useEffect(() => {
     if (isFocused && !isZen) {
