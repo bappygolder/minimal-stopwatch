@@ -468,13 +468,13 @@ export default function StopwatchApp() {
   return (
     <div
       ref={containerRef}
-      className={`min-h-screen bg-chrono-bg-page text-foreground font-sans selection:bg-muted overflow-y-auto transition-opacity duration-500 ${
+      className={`min-h-screen bg-chrono-bg-page text-foreground font-sans selection:bg-muted overflow-y-auto flex flex-col transition-opacity duration-500 ${
         hasHydrated ? "opacity-100" : "opacity-0"
       }`}
     >
       <div
         className={[
-          "fixed top-0 left-0 right-0 p-6 flex justify-between items-center z-40 transition-opacity duration-500",
+          "sticky top-0 left-0 right-0 p-6 flex justify-between items-center z-40 transition-opacity duration-500 bg-chrono-bg-page/95 border-b border-chrono-border-subtle backdrop-blur-sm",
           focusedTimerId !== null ? "opacity-0 pointer-events-none" : "opacity-100",
         ]
           .filter(Boolean)
@@ -559,8 +559,8 @@ export default function StopwatchApp() {
 
       <div
         className={[
-          "min-h-screen flex flex-col items-center p-4 transition-all duration-500 gap-8",
-          timers.length >= 1 ? "pt-24 pb-24" : "justify-center",
+          "flex-1 flex flex-col items-center p-4 transition-all duration-500 gap-8",
+          timers.length >= 1 ? "pt-24 pb-12" : "justify-center",
         ]
           .filter(Boolean)
           .join(" ")}
@@ -589,7 +589,7 @@ export default function StopwatchApp() {
             onDrop={handleDrop}
           />
         ))}
-        <footer className="fixed bottom-2 left-0 right-0 text-center text-xs text-muted-foreground/30 transition-colors hover:text-muted-foreground/80 z-30">
+        <footer className="mt-auto pt-8 pb-4 text-center text-xs text-muted-foreground/30 transition-colors hover:text-muted-foreground/80">
           &copy;{" "}
           <a
             href="https://www.linkedin.com/in/bappygolder/"
