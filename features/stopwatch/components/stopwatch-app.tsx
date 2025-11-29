@@ -235,6 +235,9 @@ export default function StopwatchApp() {
         key !== 'r' &&
         key !== 't' &&
         key !== 'm' &&
+        key !== '+' &&
+        key !== '=' &&
+        key !== '-' &&
         key !== 'arrowup' &&
         key !== 'arrowdown' &&
         event.key !== ' '
@@ -254,6 +257,19 @@ export default function StopwatchApp() {
       if (key === 'm') {
         event.preventDefault();
         setIsMenuOpen((previous) => !previous);
+        return;
+      }
+
+      // Zoom controls: Focus/Zen only, when a timer is focused
+      if ((event.key === '+' || event.key === '=') && focusedTimerId !== null) {
+        event.preventDefault();
+        setFocusScale((previous) => Math.min(3, previous + 0.1));
+        return;
+      }
+
+      if (event.key === '-' && focusedTimerId !== null) {
+        event.preventDefault();
+        setFocusScale((previous) => Math.max(0.5, previous - 0.1));
         return;
       }
 
@@ -643,6 +659,12 @@ export default function StopwatchApp() {
                   
                   <span>Move Selected</span>
                   <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] text-center">Shift + ↑ / Shift + ↓</kbd>
+                  
+                  <span>Zoom In (Focus/Zen)</span>
+                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] text-center">+</kbd>
+
+                  <span>Zoom Out (Focus/Zen)</span>
+                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] text-center">-</kbd>
                   
                   <span>Toggle Menu</span>
                   <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] text-center">M</kbd>
