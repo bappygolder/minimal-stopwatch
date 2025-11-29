@@ -1,6 +1,6 @@
 # AI Context Specification
 
-**Purpose**: This file serves as the technical source of truth for LLMs and AI Agents working on ChronoMinimal. Read this before proposing code changes.
+**Purpose**: This file serves as the technical source of truth for LLMs and AI Agents working on Minimal Stopwatch. Read this before proposing code changes.
 
 ---
 

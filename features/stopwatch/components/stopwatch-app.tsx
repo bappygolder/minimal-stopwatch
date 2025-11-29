@@ -481,8 +481,8 @@ export default function StopwatchApp() {
           .join(" ")}
       >
         <div className="relative flex items-center gap-3">
-          <span className="text-lg font-light tracking-widest text-foreground uppercase cursor-default select-none">
-            Stopwatch
+          <span className="text-lg font-extralight tracking-widest text-foreground uppercase cursor-default select-none">
+            Minimal StopWatch
           </span>
         </div>
 

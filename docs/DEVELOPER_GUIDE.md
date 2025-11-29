@@ -1,6 +1,6 @@
 # Developer Guide
 
-Welcome to the ChronoMinimal codebase! This guide is designed to help you understand the architecture, setup the project, and contribute effectively.
+Welcome to the Minimal Stopwatch codebase! This guide is designed to help you understand the architecture, setup the project, and contribute effectively.
 
 ---
 
@@ -55,7 +55,7 @@ Welcome to the ChronoMinimal codebase! This guide is designed to help you unders
 ## 🧠 Core Concepts
 
 ### 1. Drift-Free Timing Loop
-Standard `setInterval` is inaccurate over time because execution delays accumulate. ChronoMinimal uses a **delta-time** approach:
+Standard `setInterval` is inaccurate over time because execution delays accumulate. Minimal Stopwatch uses a **delta-time** approach:
 
 - We store a `lastUpdateTime` timestamp for each running timer.
 - A global `requestAnimationFrame` loop runs constantly when *any* timer is active.

@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "M. Timer",
+  title: "Minimal Stopwatch by oLab",
   description: "A minimal, distraction-free stopwatch app.",
 };
 

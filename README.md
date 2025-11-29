@@ -1,8 +1,8 @@
-# ChronoMinimal
+# Minimal Stopwatch
 
 **A distraction-free, high-precision multi-stopwatch for deep work.**
 
-ChronoMinimal is a clean, keyboard-first stopwatch application designed for developers, designers, and anyone who needs to track time across multiple tasks without clutter. It features a focused "Zen Mode" to eliminate distractions and precise drift-free timing logic.
+Minimal Stopwatch is a clean, keyboard-first stopwatch application designed for developers, designers, and anyone who needs to track time across multiple tasks without clutter. It features a focused "Zen Mode" to eliminate distractions and precise drift-free timing logic.
 
 ---
 
