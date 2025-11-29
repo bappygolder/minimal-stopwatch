@@ -261,7 +261,7 @@ export default function StopwatchApp() {
           setActiveTimerId(firstId);
           setHighlightedTimerId(firstId);
           if (highlightTimeoutRef.current) clearTimeout(highlightTimeoutRef.current);
-          highlightTimeoutRef.current = setTimeout(() => setHighlightedTimerId(null), 200);
+          highlightTimeoutRef.current = setTimeout(() => setHighlightedTimerId(null), 2500);
           return;
         }
 
@@ -278,9 +278,9 @@ export default function StopwatchApp() {
         const newId = timersRef.current[newIndex].id;
         setActiveTimerId(newId);
         setHighlightedTimerId(newId);
-        
+
         if (highlightTimeoutRef.current) clearTimeout(highlightTimeoutRef.current);
-        highlightTimeoutRef.current = setTimeout(() => setHighlightedTimerId(null), 200);
+        highlightTimeoutRef.current = setTimeout(() => setHighlightedTimerId(null), 2500);
         return;
       }
 
@@ -313,9 +313,9 @@ export default function StopwatchApp() {
         setActiveTimerId(targetId);
         setHighlightedTimerId(targetId);
         markSpaceHintSeen(targetId);
-        
+
         if (highlightTimeoutRef.current) clearTimeout(highlightTimeoutRef.current);
-        highlightTimeoutRef.current = setTimeout(() => setHighlightedTimerId(null), 200);
+        highlightTimeoutRef.current = setTimeout(() => setHighlightedTimerId(null), 2500);
         return;
       }
 
@@ -376,9 +376,10 @@ export default function StopwatchApp() {
     setActiveTimerId(nextId);
     setHighlightedTimerId(nextId);
     setCreatedTimerId(nextId);
-    
+
     if (highlightTimeoutRef.current) clearTimeout(highlightTimeoutRef.current);
-    highlightTimeoutRef.current = setTimeout(() => setHighlightedTimerId(null), 200);
+    // Keep new timer highlight visible briefly, then let it fade via CSS transitions
+    highlightTimeoutRef.current = setTimeout(() => setHighlightedTimerId(null), 2500);
   };
 
   const removeTimer = (id: number) => {
@@ -573,6 +574,12 @@ export default function StopwatchApp() {
                   <span>Zen</span>
                   <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] text-center">Z</kbd>
                   
+                  <span>Move Up</span>
+                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] text-center">↑</kbd>
+
+                  <span>Move Down</span>
+                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] text-center">↓</kbd>
+                  
                   <span>Delete Timer</span>
                   <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] text-center">D</kbd>
                   
@@ -581,6 +588,9 @@ export default function StopwatchApp() {
 
                   <span>Edit Title</span>
                   <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] text-center">T</kbd>
+                  
+                  <span>Commit Title</span>
+                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] text-center">Enter</kbd>
                   
                   <span>Exit</span>
                   <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] text-center">Esc</kbd>
@@ -649,7 +659,11 @@ export default function StopwatchApp() {
             onDelete={() => removeTimer(timer.id)}
             onInteract={() => {
               setActiveTimerId(timer.id);
+              setHighlightedTimerId(timer.id);
               markSpaceHintSeen(timer.id);
+
+              if (highlightTimeoutRef.current) clearTimeout(highlightTimeoutRef.current);
+              highlightTimeoutRef.current = setTimeout(() => setHighlightedTimerId(null), 2500);
             }}
             onUpdateLabel={(label) => updateLabel(timer.id, label)}
             onDragStart={(event) => handleDragStart(event, timer.id)}
