@@ -234,6 +234,7 @@ export default function StopwatchApp() {
         key !== 'd' &&
         key !== 'r' &&
         key !== 't' &&
+        key !== 'm' &&
         key !== 'arrowup' &&
         key !== 'arrowdown' &&
         event.key !== ' '
@@ -242,11 +243,17 @@ export default function StopwatchApp() {
       }
 
       const targetId = activeTimerId ?? timersRef.current[0]?.id;
-      // For 'n', we don't need a targetId necessarily, but we check input focus above.
+      // For 'n' and 'm', we don't need a targetId necessarily, but we check input focus above.
       
       if (event.key === 'n') {
         event.preventDefault();
         addTimer();
+        return;
+      }
+
+      if (key === 'm') {
+        event.preventDefault();
+        setIsMenuOpen((previous) => !previous);
         return;
       }
 
@@ -517,7 +524,9 @@ export default function StopwatchApp() {
       <div
         className={[
           "sticky top-0 left-0 right-0 p-6 flex justify-between items-center z-40 transition-opacity duration-500 bg-chrono-bg-page/95 border-b border-chrono-border-subtle backdrop-blur-sm",
-          focusedTimerId !== null ? "opacity-0 pointer-events-none" : "opacity-100",
+          focusedTimerId !== null && !isMenuOpen
+            ? "opacity-0 pointer-events-none"
+            : "opacity-100",
         ]
           .filter(Boolean)
           .join(" ")}
@@ -591,6 +600,9 @@ export default function StopwatchApp() {
                   
                   <span>Commit Title</span>
                   <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] text-center">Enter</kbd>
+                  
+                  <span>Toggle Menu</span>
+                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] text-center">M</kbd>
                   
                   <span>Exit</span>
                   <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] text-center">Esc</kbd>
