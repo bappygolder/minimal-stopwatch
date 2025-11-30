@@ -2,6 +2,8 @@
 
 **A distraction-free, high-precision multi-stopwatch for deep work.**
 
+_README last updated: 2025-11-30_
+
 Minimal Stopwatch is a clean, keyboard-first stopwatch application designed for developers, designers, and anyone who needs to track time across multiple tasks without clutter. It features a focused "Zen Mode" to eliminate distractions and precise drift-free timing logic.
 
 ---
@@ -48,6 +50,7 @@ For developers and contributors, please see the detailed documentation in the `d
 
 - **[Developer Guide](docs/DEVELOPER_GUIDE.md)**: Setup, architecture, and code walkthrough.
 - **[AI Context](docs/AI_CONTEXT.md)**: Technical specification and state schema for LLMs/Agents.
+ - **[Design Language](docs/DESIGN_LANGUAGE.md)**: Visual style, interaction patterns, and reusable design system.
 
 ---
 
