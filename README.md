@@ -50,7 +50,8 @@ For developers and contributors, please see the detailed documentation in the `d
 
 - **[Developer Guide](docs/DEVELOPER_GUIDE.md)**: Setup, architecture, and code walkthrough.
 - **[AI Context](docs/AI_CONTEXT.md)**: Technical specification and state schema for LLMs/Agents.
- - **[Design Language](docs/DESIGN_LANGUAGE.md)**: Visual style, interaction patterns, and reusable design system.
+ - **[Design Language](docs/DESIGN_LANGUAGE.md)**: Shared visual style and interaction language for oLab micro projects of this type.
+ - **[Technical Documentation](docs/TECHNICAL_DOCUMENTATION.md)**: Reusable technical architecture and patterns for similar oLab projects.
 
 ---
 

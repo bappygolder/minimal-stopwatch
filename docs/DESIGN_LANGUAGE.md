@@ -1,16 +1,16 @@
-# Minimal Stopwatch – Design Language Guide
+# oLab Micro Projects – Design Language Guide
 
 _Last updated: 2025-11-30_
 
-This document describes the **visual and interaction design language** of **Minimal Stopwatch** so that other projects can reuse the same look and feel. It is intended for designers, developers, and AI tooling that want to recreate or extend this style consistently.
+This document describes the **visual and interaction design language** used in a family of **oLab micro projects** of this type (for example, Minimal Stopwatch) so that other projects can reuse the same look and feel. It is intended for designers, developers, and AI tooling that want to recreate or extend this style consistently across similar tools.
 
 ---
 
 ## 1. Brand & Product Feel
 
-- **Product name:** Minimal Stopwatch  
-- **Tagline:** A distraction-free, high-precision multi-stopwatch for deep work.  
-- **Attribution:** "Minimal Stopwatch" by **oLab** (lowercase `o`, uppercase `L`).
+- **Example product:** Minimal Stopwatch (reference implementation).  
+- **Company:** **oLab** (lowercase `o`, uppercase `L`).  
+- **Tagline pattern:** Short, descriptive phrase emphasising focus, precision, and minimalism (e.g. "A distraction-free, high-precision multi-stopwatch for deep work.").
 
 **Personality keywords:**
 
@@ -340,4 +340,4 @@ When applying this design language to a new app:
 7. **Preserve motion style:** gentle fade/scale transitions for state changes and popovers.  
 8. **Document shortcuts in-app** using `<kbd>` pills in a menu/info panel.
 
-Following this guide should let another project achieve a **visually consistent** and familiar Minimal Stopwatch experience, even in a different codebase or tech stack.
+Following this guide should let another project achieve a **visually consistent** and familiar oLab micro project experience (for example Minimal Stopwatch), even in a different codebase or tech stack.
