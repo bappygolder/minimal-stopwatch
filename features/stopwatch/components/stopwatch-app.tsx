@@ -285,6 +285,14 @@ export default function StopwatchApp() {
           setHighlightedTimerId(firstId);
           if (highlightTimeoutRef.current) clearTimeout(highlightTimeoutRef.current);
           highlightTimeoutRef.current = setTimeout(() => setHighlightedTimerId(null), 2500);
+
+          requestAnimationFrame(() => {
+            const element = document.querySelector<HTMLElement>(
+              `[data-timer-id="${firstId}"]`
+            );
+            element?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          });
+
           return;
         }
 
@@ -367,6 +375,14 @@ export default function StopwatchApp() {
 
         if (highlightTimeoutRef.current) clearTimeout(highlightTimeoutRef.current);
         highlightTimeoutRef.current = setTimeout(() => setHighlightedTimerId(null), 2500);
+
+        requestAnimationFrame(() => {
+          const element = document.querySelector<HTMLElement>(
+            `[data-timer-id="${newId}"]`
+          );
+          element?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
+
         return;
       }
 
