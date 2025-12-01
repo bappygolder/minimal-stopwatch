@@ -485,12 +485,49 @@ export default function StopwatchApp() {
   };
 
   const removeTimer = (id: number) => {
+    const currentTimers = timersRef.current;
+
+    // Do not remove the last remaining timer
+    if (currentTimers.length <= 1) {
+      return;
+    }
+
+    // Compute the next focused timer based on the position of the removed one
+    const index = currentTimers.findIndex((timer) => timer.id === id);
+    if (index === -1) {
+      return;
+    }
+
+    const remaining = currentTimers.filter((timer) => timer.id !== id);
+
     setTimers((previous) => {
       if (previous.length <= 1) {
         return previous;
       }
 
       return previous.filter((timer) => timer.id !== id);
+    });
+
+    if (remaining.length === 0) {
+      setActiveTimerId(null);
+      setHighlightedTimerId(null);
+      return;
+    }
+
+    const nextIndex = index < remaining.length ? index : remaining.length - 1;
+    const nextId = remaining[nextIndex].id;
+
+    setActiveTimerId(nextId);
+    setHighlightedTimerId(nextId);
+
+    if (highlightTimeoutRef.current) clearTimeout(highlightTimeoutRef.current);
+    highlightTimeoutRef.current = setTimeout(() => setHighlightedTimerId(null), 2500);
+
+    requestAnimationFrame(() => {
+      const element = document.querySelector<HTMLElement>(
+        `[data-timer-id="${nextId}"]`
+      );
+      element?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     });
   };
 
