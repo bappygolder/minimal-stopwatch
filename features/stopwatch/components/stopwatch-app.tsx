@@ -703,36 +703,58 @@ export default function StopwatchApp() {
               <div className="space-y-3">
                 <div className="font-medium text-foreground text-[10px]">Shortcuts</div>
                 <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-y-2 gap-x-4 items-start text-[10px]">
+                  {/* 1. Focus & Zen Modes */}
+                  <span>Focus</span>
+                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] max-w-[72px] text-center leading-tight break-words">F</kbd>
+
+                  <span>Zen</span>
+                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] max-w-[72px] text-center leading-tight break-words">Z</kbd>
+
+                  <span>Zoom In (Focus/Zen)</span>
+                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] max-w-[72px] text-center leading-tight break-words">+</kbd>
+
+                  <span>Zoom Out (Focus/Zen)</span>
+                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] max-w-[72px] text-center leading-tight break-words">-</kbd>
+
+                  <div className="col-span-2 h-px bg-border/30 my-1" />
+
+                  {/* 2. Core Actions */}
                   <span>New Timer</span>
                   <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] max-w-[72px] text-center leading-tight break-words">N</kbd>
 
                   <span>Start/Stop</span>
                   <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] max-w-[72px] text-center leading-tight break-words">Space</kbd>
 
-                  <span>Focus</span>
-                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] max-w-[72px] text-center leading-tight break-words">F</kbd>
+                  <span>Edit Title</span>
+                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] max-w-[72px] text-center leading-tight break-words">T</kbd>
                   
-                  <span>Zen</span>
-                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] max-w-[72px] text-center leading-tight break-words">Z</kbd>
-                  
-                  <span>Move Up</span>
-                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] max-w-[72px] text-center leading-tight break-words">↑</kbd>
+                  <span>Commit Title</span>
+                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] max-w-[72px] text-center leading-tight break-words">Enter</kbd>
 
-                  <span>Move Down</span>
-                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] max-w-[72px] text-center leading-tight break-words">↓</kbd>
-                  
                   <span>Delete Timer</span>
                   <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] max-w-[72px] text-center leading-tight break-words">D</kbd>
                   
                   <span>Reset</span>
                   <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] max-w-[72px] text-center leading-tight break-words">R</kbd>
 
-                  <span>Edit Title</span>
-                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] max-w-[72px] text-center leading-tight break-words">T</kbd>
-                  
-                  <span>Commit Title</span>
-                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] max-w-[72px] text-center leading-tight break-words">Enter</kbd>
-                  
+                  <span>Exit</span>
+                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] max-w-[72px] text-center leading-tight break-words">Esc</kbd>
+
+                  <div className="col-span-2 h-px bg-border/30 my-1" />
+
+                  {/* 3. Navigation */}
+                  <span>Move Up</span>
+                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] max-w-[72px] text-center leading-tight break-words">↑</kbd>
+
+                  <span>Move Down</span>
+                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] max-w-[72px] text-center leading-tight break-words">↓</kbd>
+
+                  <span>Toggle Menu</span>
+                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] max-w-[72px] text-center leading-tight break-words">M</kbd>
+
+                  <div className="col-span-2 h-px bg-border/30 my-1" />
+
+                  {/* 4. Reordering */}
                   <span>Move Selected</span>
                   <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] max-w-[72px] text-center leading-tight break-words">Shift + ↑ / Shift + ↓</kbd>
                   
@@ -744,18 +766,6 @@ export default function StopwatchApp() {
                     <br />
                     ↑
                   </kbd>
-                  
-                  <span>Zoom In (Focus/Zen)</span>
-                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] max-w-[72px] text-center leading-tight break-words">+</kbd>
-
-                  <span>Zoom Out (Focus/Zen)</span>
-                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] max-w-[72px] text-center leading-tight break-words">-</kbd>
-                  
-                  <span>Toggle Menu</span>
-                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] max-w-[72px] text-center leading-tight break-words">M</kbd>
-                  
-                  <span>Exit</span>
-                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] max-w-[72px] text-center leading-tight break-words">Esc</kbd>
                 </div>
               </div>
 
