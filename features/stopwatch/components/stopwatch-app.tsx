@@ -28,6 +28,7 @@ export default function StopwatchApp() {
   const [focusScale, setFocusScale] = useState(1);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isShortcutsOpen, setIsShortcutsOpen] = useState(false);
   const [activeTimerId, setActiveTimerId] = useState<number | null>(null);
   const [highlightedTimerId, setHighlightedTimerId] = useState<number | null>(null);
   const [createdTimerId, setCreatedTimerId] = useState<number | null>(null);
@@ -280,9 +281,16 @@ export default function StopwatchApp() {
         return;
       }
 
-      if (event.key === "Escape" && focusedTimerId !== null && !document.fullscreenElement) {
-        setFocusedTimerId(null);
-        return;
+      if (event.key === "Escape") {
+        if (isShortcutsOpen) {
+          setIsShortcutsOpen(false);
+          return;
+        }
+
+        if (focusedTimerId !== null && !document.fullscreenElement) {
+          setFocusedTimerId(null);
+          return;
+        }
       }
 
       // Detect shortcuts
@@ -295,6 +303,7 @@ export default function StopwatchApp() {
         key !== 'r' &&
         key !== 't' &&
         key !== 'm' &&
+        key !== '/' &&
         key !== '+' &&
         key !== '=' &&
         key !== '-' &&
@@ -317,6 +326,12 @@ export default function StopwatchApp() {
       if (key === 'm') {
         event.preventDefault();
         setIsMenuOpen((previous) => !previous);
+        return;
+      }
+
+      if (key === '/' && (event.metaKey || event.ctrlKey)) {
+        event.preventDefault();
+        setIsShortcutsOpen((previous) => !previous);
         return;
       }
 
@@ -529,15 +544,15 @@ export default function StopwatchApp() {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [focusedTimerId, activeTimerId, timers]); // timers dependency triggers update on list change
+  }, [focusedTimerId, activeTimerId, timers, isShortcutsOpen]); // timers dependency triggers update on list change
 
   useEffect(() => {
-    if (focusedTimerId !== null) {
+    if (focusedTimerId !== null || isShortcutsOpen) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
     }
-  }, [focusedTimerId]);
+  }, [focusedTimerId, isShortcutsOpen]);
 
   const handleCommit = (id: number) => {
     if (id === createdTimerId) {
@@ -788,6 +803,20 @@ export default function StopwatchApp() {
                 </span>
               </div>
 
+              <button
+                type="button"
+                onClick={() => {
+                  setIsShortcutsOpen(true);
+                  setIsMenuOpen(false);
+                }}
+                className="flex items-center justify-between px-2 py-1.5 rounded-lg bg-foreground/5 hover:bg-foreground/10 text-[10px] text-foreground transition-colors"
+             >
+                <span className="font-medium">Keyboard Shortcuts</span>
+                <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[40px] text-center leading-tight">
+                  Cmd/Ctrl + /
+                </kbd>
+              </button>
+
               {/* Shortcuts */}
               <div className="space-y-3">
                 <div className="font-medium text-foreground text-[10px]">Shortcuts</div>
@@ -968,6 +997,129 @@ export default function StopwatchApp() {
             Add another timer
           </span>
         </button>
+      )}
+
+      {isShortcutsOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-chrono-bg-page/80 backdrop-blur-sm"
+          onClick={() => setIsShortcutsOpen(false)}
+        >
+          <div
+            className="relative w-full max-w-md mx-4 rounded-2xl bg-card border border-border/60 shadow-2xl p-6 text-xs leading-relaxed text-muted-foreground"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="mb-4 flex items-center justify-between">
+              <div>
+                <div className="text-[11px] font-medium tracking-wide text-foreground uppercase">
+                  Keyboard Shortcuts
+                </div>
+                <div className="text-[10px] opacity-60">
+                  Press Esc or Cmd/Ctrl + / to close
+                </div>
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              <div>
+                <div className="text-[10px] font-medium text-foreground mb-2 uppercase tracking-wide">
+                  Focus &amp; Zen
+                </div>
+                <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-y-1.5 gap-x-4 items-start">
+                  <span>Focus</span>
+                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] max-w-[96px] text-center leading-tight break-words">F</kbd>
+
+                  <span>Zen</span>
+                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] max-w-[96px] text-center leading-tight break-words">Z</kbd>
+
+                  <span>Zoom In (Focus/Zen)</span>
+                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] max-w-[96px] text-center leading-tight break-words">+</kbd>
+
+                  <span>Zoom Out (Focus/Zen)</span>
+                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] max-w-[96px] text-center leading-tight break-words">-</kbd>
+                </div>
+              </div>
+
+              <div>
+                <div className="text-[10px] font-medium text-foreground mb-2 uppercase tracking-wide">
+                  Core actions
+                </div>
+                <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-y-1.5 gap-x-4 items-start">
+                  <span>New Timer</span>
+                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] max-w-[96px] text-center leading-tight break-words">N</kbd>
+
+                  <span>Start/Stop</span>
+                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] max-w-[96px] text-center leading-tight break-words">Space</kbd>
+
+                  <span>Edit Title</span>
+                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] max-w-[96px] text-center leading-tight break-words">T</kbd>
+
+                  <span>Commit Title</span>
+                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] max-w-[96px] text-center leading-tight break-words">Enter</kbd>
+
+                  <span>Delete Timer</span>
+                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] max-w-[96px] text-center leading-tight break-words">D</kbd>
+
+                  <span>Reset</span>
+                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] max-w-[96px] text-center leading-tight break-words">R</kbd>
+
+                  <span>Reset all timers</span>
+                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[40px] max-w-[120px] text-center leading-tight break-words">
+                    Cmd/Ctrl +
+                    <br />
+                    Shift +
+                    <br />
+                    R
+                  </kbd>
+
+                  <span>Shortcuts Panel</span>
+                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[40px] max-w-[120px] text-center leading-tight break-words">
+                    Cmd/Ctrl +
+                    <br />
+                    /
+                  </kbd>
+
+                  <span>Exit</span>
+                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] max-w-[96px] text-center leading-tight break-words">Esc</kbd>
+                </div>
+              </div>
+
+              <div>
+                <div className="text-[10px] font-medium text-foreground mb-2 uppercase tracking-wide">
+                  Navigation
+                </div>
+                <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-y-1.5 gap-x-4 items-start">
+                  <span>Move Up</span>
+                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] max-w-[96px] text-center leading-tight break-words">↑</kbd>
+
+                  <span>Move Down</span>
+                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] max-w-[96px] text-center leading-tight break-words">↓</kbd>
+
+                  <span>Toggle Menu</span>
+                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] max-w-[96px] text-center leading-tight break-words">M</kbd>
+                </div>
+              </div>
+
+              <div>
+                <div className="text-[10px] font-medium text-foreground mb-2 uppercase tracking-wide">
+                  Reordering
+                </div>
+                <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-y-1.5 gap-x-4 items-start">
+                  <span>Move Selected</span>
+                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[40px] max-w-[140px] text-center leading-tight break-words">Shift + ↑ / Shift + ↓</kbd>
+
+                  <span>Move to Top</span>
+                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[40px] max-w-[120px] text-center leading-tight break-words">
+                    Shift +
+                    <br />
+                    Ctrl +
+                    <br />
+                    ↑
+                  </kbd>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       )}
 
     </div>
