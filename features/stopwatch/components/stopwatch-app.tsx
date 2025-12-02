@@ -38,9 +38,64 @@ export default function StopwatchApp() {
   const menuRef = useRef<HTMLDivElement>(null);
   const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const timersRef = useRef(timers);
+  const nextIdRef = useRef<number>(2);
 
   // Keep ref synced with state for event listeners
   timersRef.current = timers;
+
+  const createTimerWithNextId = (): Timer => {
+    const id = nextIdRef.current;
+    nextIdRef.current += 1;
+
+    return {
+      id,
+      label: "",
+      isRunning: false,
+      elapsedMs: 0,
+      lastUpdateTime: Date.now(),
+    };
+  };
+
+  const getLowestAvailableTimerNumber = (timersList: Timer[], excludeId?: number): number => {
+    const usedNumbers = new Set<number>();
+
+    for (const timer of timersList) {
+      if (excludeId !== undefined && timer.id === excludeId) {
+        continue;
+      }
+
+      const match = /^Timer (\d+)$/.exec(timer.label.trim());
+      if (!match) continue;
+
+      const parsed = Number.parseInt(match[1], 10);
+      if (Number.isFinite(parsed) && parsed > 0) {
+        usedNumbers.add(parsed);
+      }
+    }
+
+    let candidate = 1;
+    while (usedNumbers.has(candidate)) {
+      candidate += 1;
+    }
+
+    return candidate;
+  };
+
+  const assignDefaultLabel = (id: number) => {
+    setTimers((previous) => {
+      const nextNumber = getLowestAvailableTimerNumber(previous, id);
+      const nextLabel = `Timer ${nextNumber}`;
+
+      return previous.map((timer) =>
+        timer.id === id
+          ? {
+              ...timer,
+              label: nextLabel,
+            }
+          : timer
+      );
+    });
+  };
 
   const markSpaceHintSeen = (id: number) => {
     setSpaceHintSeen((previous) => (previous.includes(id) ? previous : [...previous, id]));
@@ -124,13 +179,18 @@ export default function StopwatchApp() {
         } satisfies Timer;
       });
 
-      if (next.length === 0) {
-        setTimers(DEFAULT_TIMERS);
-      } else {
-        setTimers(next);
-      }
+      const initialTimers = next.length === 0 ? DEFAULT_TIMERS : next;
+
+      setTimers(initialTimers);
+
+      const maxId = initialTimers.reduce(
+        (max, timer) => (timer.id > max ? timer.id : max),
+        0
+      );
+      nextIdRef.current = maxId > 0 ? maxId + 1 : 1;
     } catch {
       setTimers(DEFAULT_TIMERS);
+      nextIdRef.current = 2;
     } finally {
       setHasHydrated(true);
     }
@@ -397,13 +457,8 @@ export default function StopwatchApp() {
         if (event.shiftKey && (event.metaKey || event.ctrlKey)) {
           event.preventDefault();
 
-          const newTimer: Timer = {
-            id: 1,
-            label: "",
-            isRunning: false,
-            elapsedMs: 0,
-            lastUpdateTime: Date.now(),
-          };
+          nextIdRef.current = 1;
+          const newTimer: Timer = createTimerWithNextId();
 
           setTimers([newTimer]);
           setFocusedTimerId(null);
@@ -506,24 +561,12 @@ export default function StopwatchApp() {
   };
 
   const addTimer = () => {
-    const currentTimers = timersRef.current;
-    const nextId =
-      currentTimers.length > 0
-        ? Math.max(...currentTimers.map((timer) => timer.id)) + 1
-        : 1;
-
-    const newTimer: Timer = {
-      id: nextId,
-      label: "", // Start empty to show placeholder
-      isRunning: false,
-      elapsedMs: 0,
-      lastUpdateTime: Date.now(),
-    };
+    const newTimer = createTimerWithNextId();
 
     setTimers((previous) => [newTimer, ...previous]);
-    setActiveTimerId(nextId);
-    setHighlightedTimerId(nextId);
-    setCreatedTimerId(nextId);
+    setActiveTimerId(newTimer.id);
+    setHighlightedTimerId(newTimer.id);
+    setCreatedTimerId(newTimer.id);
 
     if (highlightTimeoutRef.current) clearTimeout(highlightTimeoutRef.current);
     // Keep new timer highlight visible briefly, then let it fade via CSS transitions
@@ -893,6 +936,7 @@ export default function StopwatchApp() {
               highlightTimeoutRef.current = setTimeout(() => setHighlightedTimerId(null), 2500);
             }}
             onUpdateLabel={(label) => updateLabel(timer.id, label)}
+            onDefaultLabel={() => assignDefaultLabel(timer.id)}
             onDragStart={(event) => handleDragStart(event, timer.id)}
             onDragOver={(event) => handleDragOver(event, timer.id)}
             onDrop={handleDrop}

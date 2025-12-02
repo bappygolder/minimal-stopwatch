@@ -27,6 +27,7 @@ type TimerCardProps = {
   onReset: () => void;
   onDelete: () => void;
   onUpdateLabel: (label: string) => void;
+  onDefaultLabel?: () => void;
   onDragStart: (event: DragEvent<HTMLDivElement>) => void;
   onDragOver: (event: DragEvent<HTMLDivElement>) => void;
   onDrop: (event: DragEvent<HTMLDivElement>) => void;
@@ -55,6 +56,7 @@ export default function TimerCard(props: TimerCardProps) {
     onReset,
     onDelete,
     onUpdateLabel,
+    onDefaultLabel,
     onDragStart,
     onDragOver,
     onDrop,
@@ -108,7 +110,7 @@ export default function TimerCard(props: TimerCardProps) {
 
   const handleBlur = () => {
     if (!timer.label.trim()) {
-      onUpdateLabel(`Timer ${timer.id}`);
+      onDefaultLabel?.();
     }
     onCommit?.();
   };
