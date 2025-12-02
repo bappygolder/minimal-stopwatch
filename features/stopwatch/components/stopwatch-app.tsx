@@ -1,12 +1,14 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState, DragEvent } from "react";
-import { Plus, Menu } from "lucide-react";
+import type { KeyboardEvent as ReactKeyboardEvent } from "react";
+import { Plus, Menu, Play, Pause, Trash2, GripVertical } from "lucide-react";
 import type { Timer } from "@/features/stopwatch/types";
 import TimerCard from "@/features/stopwatch/components/timer-card";
 
 const STORAGE_KEY = "chrono-minimal-timers-v1";
 const STORAGE_KEY_SCALE = "chrono-minimal-scale-v1";
+const STORAGE_KEY_COMPACT = "chrono-minimal-compact-v1";
 
 const DEFAULT_TIMERS: Timer[] = [
   {
@@ -16,6 +18,170 @@ const DEFAULT_TIMERS: Timer[] = [
     elapsedMs: 0,
   },
 ];
+
+type CompactTimerRowProps = {
+  timer: Timer;
+  totalTimers: number;
+  isBeingDragged: boolean;
+  isHighlighted: boolean;
+  requestTitleFocus: boolean;
+  onTitleFocusHandled: () => void;
+  onToggle: () => void;
+  onDelete: () => void;
+  onUpdateLabel: (label: string) => void;
+  onDefaultLabel?: () => void;
+  onCommit?: () => void;
+  onInteract?: () => void;
+  onDragStart: (event: DragEvent<HTMLDivElement>) => void;
+  onDragOver: (event: DragEvent<HTMLDivElement>) => void;
+  onDrop: (event: DragEvent<HTMLDivElement>) => void;
+};
+
+function CompactTimerRow(props: CompactTimerRowProps) {
+  const {
+    timer,
+    totalTimers,
+    isBeingDragged,
+    isHighlighted,
+    requestTitleFocus,
+    onTitleFocusHandled,
+    onToggle,
+    onDelete,
+    onUpdateLabel,
+    onDefaultLabel,
+    onCommit,
+    onInteract,
+    onDragStart,
+    onDragOver,
+    onDrop,
+  } = props;
+
+  const inputRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    if (requestTitleFocus && inputRef.current) {
+      inputRef.current.focus();
+      inputRef.current.select();
+      onTitleFocusHandled();
+    }
+  }, [requestTitleFocus, onTitleFocusHandled]);
+
+  const handleBlur = () => {
+    if (!timer.label.trim()) {
+      onDefaultLabel?.();
+    }
+    onCommit?.();
+  };
+
+  const handleKeyDownInput = (event: ReactKeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      event.currentTarget.blur();
+    }
+  };
+
+  const hours = Math.floor(timer.elapsedMs / 3600000);
+  const minutes = Math.floor((timer.elapsedMs % 3600000) / 60000);
+  const seconds = Math.floor((timer.elapsedMs % 60000) / 1000);
+  const milliseconds = Math.floor((timer.elapsedMs % 1000) / 10);
+
+  const showHours = hours > 0;
+
+  const pad2 = (value: number) => value.toString().padStart(2, "0");
+
+  const timeLabel = showHours
+    ? `${pad2(hours)}:${pad2(minutes)}:${pad2(seconds)}`
+    : `${pad2(minutes)}:${pad2(seconds)}.${pad2(milliseconds)}`;
+
+  const containerClasses = [
+    "group relative flex items-center w-full max-w-4xl mx-auto rounded-xl border px-3 py-2 text-xs sm:text-sm cursor-pointer transition-colors",
+    timer.isRunning
+      ? "bg-chrono-bg-card/80 border-chrono-border-subtle"
+      : "bg-chrono-bg-card/40 border-chrono-border-subtle",
+    isBeingDragged ? "opacity-50 border-chrono-accent border-dashed" : "",
+    isHighlighted ? "ring-2 ring-chrono-accent shadow-chrono-glow scale-[1.01]" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  return (
+    <div
+      className={containerClasses}
+      data-timer-id={timer.id}
+      draggable
+      onDragStart={onDragStart}
+      onDragOver={onDragOver}
+      onDrop={onDrop}
+      onClick={() => {
+        onInteract?.();
+        onToggle();
+      }}
+    >
+      {totalTimers > 1 && (
+        <div
+          className="mr-2 p-1 text-muted-foreground hover:text-foreground transition-colors cursor-grab"
+          onClick={(event) => event.stopPropagation()}
+        >
+          <GripVertical size={16} />
+        </div>
+      )}
+
+      <div
+        className="flex-1 min-w-0"
+        onClick={(event) => event.stopPropagation()}
+      >
+        <input
+          ref={inputRef}
+          type="text"
+          value={timer.label}
+          onChange={(event) => onUpdateLabel(event.target.value)}
+          onBlur={handleBlur}
+          onKeyDown={handleKeyDownInput}
+          placeholder="Type timer name..."
+          className="w-full bg-transparent text-left outline-none text-xs sm:text-sm text-chrono-fg-muted focus:text-chrono-accent border-b border-transparent focus:border-chrono-accent/50 transition-colors placeholder:text-muted-foreground/50"
+        />
+      </div>
+
+      <div className="ml-2 font-mono text-[11px] sm:text-xs text-foreground tabular-nums">
+        {timeLabel}
+      </div>
+
+      <div
+        className="ml-3 flex items-center gap-1"
+        onClick={(event) => event.stopPropagation()}
+      >
+        <button
+          type="button"
+          onClick={(event) => {
+            event.stopPropagation();
+            onToggle();
+          }}
+          className="p-1.5 rounded-full border border-chrono-border-subtle bg-card text-foreground hover:bg-chrono-success/10 hover:text-chrono-success transition-colors"
+          title={timer.isRunning ? "Pause" : "Start"}
+        >
+          {timer.isRunning ? (
+            <Pause size={14} />
+          ) : (
+            <Play size={14} />
+          )}
+        </button>
+
+        {totalTimers > 1 && (
+          <button
+            type="button"
+            onClick={(event) => {
+              event.stopPropagation();
+              onDelete();
+            }}
+            className="p-1.5 rounded-full border border-chrono-border-subtle bg-card text-muted-foreground hover:text-chrono-danger hover:border-chrono-danger/60 hover:bg-chrono-danger/10 transition-colors"
+            title="Delete timer"
+          >
+            <Trash2 size={14} />
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}
 
 export default function StopwatchApp() {
   const [timers, setTimers] = useState<Timer[]>(DEFAULT_TIMERS);
@@ -29,6 +195,7 @@ export default function StopwatchApp() {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isShortcutsOpen, setIsShortcutsOpen] = useState(false);
+  const [isCompactView, setIsCompactView] = useState(false);
   const [activeTimerId, setActiveTimerId] = useState<number | null>(null);
   const [highlightedTimerId, setHighlightedTimerId] = useState<number | null>(null);
   const [createdTimerId, setCreatedTimerId] = useState<number | null>(null);
@@ -138,12 +305,17 @@ export default function StopwatchApp() {
     try {
       const raw = window.localStorage.getItem(STORAGE_KEY);
       const rawScale = window.localStorage.getItem(STORAGE_KEY_SCALE);
+      const rawCompact = window.localStorage.getItem(STORAGE_KEY_COMPACT);
 
       if (rawScale) {
         const parsedScale = parseFloat(rawScale);
         if (!isNaN(parsedScale) && parsedScale >= 0.5 && parsedScale <= 3) {
           setFocusScale(parsedScale);
         }
+      }
+
+      if (rawCompact !== null) {
+        setIsCompactView(rawCompact === "1");
       }
 
       if (!raw) {
@@ -221,6 +393,18 @@ export default function StopwatchApp() {
       }
     };
   }, [timers, hasHydrated, focusScale]);
+
+  useEffect(() => {
+    if (!hasHydrated || typeof window === "undefined") {
+      return;
+    }
+
+    try {
+      window.localStorage.setItem(STORAGE_KEY_COMPACT, isCompactView ? "1" : "0");
+    } catch {
+      // Ignore write errors
+    }
+  }, [isCompactView, hasHydrated]);
 
   useEffect(() => {
     if (!hasRunningTimer) {
@@ -805,6 +989,26 @@ export default function StopwatchApp() {
 
               <button
                 type="button"
+                onClick={() => setIsCompactView((previous) => !previous)}
+                className="flex items-center justify-between px-2 py-1.5 rounded-lg text-[10px] text-foreground hover:bg-foreground/10 transition-colors"
+              >
+                <span className="font-medium">Compact View</span>
+                <span
+                  className={[
+                    "inline-flex items-center rounded-full px-2 py-0.5 text-[9px] border",
+                    isCompactView
+                      ? "bg-foreground text-background border-foreground"
+                      : "bg-transparent text-muted-foreground border-border/70",
+                  ]
+                    .filter(Boolean)
+                    .join(" ")}
+                >
+                  {isCompactView ? "On" : "Off"}
+                </span>
+              </button>
+
+              <button
+                type="button"
                 onClick={() => {
                   setIsShortcutsOpen(true);
                   setIsMenuOpen(false);
@@ -858,40 +1062,80 @@ export default function StopwatchApp() {
               !hasSeen &&
               ((isOnlyTimer && (isFresh || isSingleRunning)) || isFocusedTimer);
 
-            return (
-          <TimerCard
-            key={timer.id}
-            timer={timer}
-            totalTimers={timers.length}
-            isBeingDragged={draggedId === timer.id}
-            isFocused={focusedTimerId === timer.id}
-            isZen={isFullscreen}
-            isHighlighted={highlightedTimerId === timer.id}
-            shouldAutoFocus={createdTimerId === timer.id}
-            requestTitleFocus={titleFocusId === timer.id}
-            onTitleFocusHandled={() => setTitleFocusId(null)}
-            showSpaceHint={showSpaceHint}
-            onCommit={() => handleCommit(timer.id)}
-            focusScale={focusScale}
-            onScaleChange={setFocusScale}
-            onToggleFocus={(isZen) => toggleFocus(timer.id, isZen)}
-            onToggle={() => toggleTimer(timer.id)}
-            onReset={() => resetTimer(timer.id)}
-            onDelete={() => removeTimer(timer.id)}
-            onInteract={() => {
-              setActiveTimerId(timer.id);
-              setHighlightedTimerId(timer.id);
-              markSpaceHintSeen(timer.id);
+            const shouldRenderCompact = isCompactView && focusedTimerId === null;
 
-              if (highlightTimeoutRef.current) clearTimeout(highlightTimeoutRef.current);
-              highlightTimeoutRef.current = setTimeout(() => setHighlightedTimerId(null), 2500);
-            }}
-            onUpdateLabel={(label) => updateLabel(timer.id, label)}
-            onDefaultLabel={() => assignDefaultLabel(timer.id)}
-            onDragStart={(event) => handleDragStart(event, timer.id)}
-            onDragOver={(event) => handleDragOver(event, timer.id)}
-            onDrop={handleDrop}
-          />
+            if (shouldRenderCompact) {
+              return (
+                <CompactTimerRow
+                  key={timer.id}
+                  timer={timer}
+                  totalTimers={timers.length}
+                  isBeingDragged={draggedId === timer.id}
+                  isHighlighted={highlightedTimerId === timer.id}
+                  requestTitleFocus={titleFocusId === timer.id}
+                  onTitleFocusHandled={() => setTitleFocusId(null)}
+                  onToggle={() => toggleTimer(timer.id)}
+                  onDelete={() => removeTimer(timer.id)}
+                  onUpdateLabel={(label) => updateLabel(timer.id, label)}
+                  onDefaultLabel={() => assignDefaultLabel(timer.id)}
+                  onCommit={() => handleCommit(timer.id)}
+                  onInteract={() => {
+                    setActiveTimerId(timer.id);
+                    setHighlightedTimerId(timer.id);
+                    markSpaceHintSeen(timer.id);
+
+                    if (highlightTimeoutRef.current)
+                      clearTimeout(highlightTimeoutRef.current);
+                    highlightTimeoutRef.current = setTimeout(
+                      () => setHighlightedTimerId(null),
+                      2500
+                    );
+                  }}
+                  onDragStart={(event) => handleDragStart(event, timer.id)}
+                  onDragOver={(event) => handleDragOver(event, timer.id)}
+                  onDrop={handleDrop}
+                />
+              );
+            }
+
+            return (
+              <TimerCard
+                key={timer.id}
+                timer={timer}
+                totalTimers={timers.length}
+                isBeingDragged={draggedId === timer.id}
+                isFocused={focusedTimerId === timer.id}
+                isZen={isFullscreen}
+                isHighlighted={highlightedTimerId === timer.id}
+                shouldAutoFocus={createdTimerId === timer.id}
+                requestTitleFocus={titleFocusId === timer.id}
+                onTitleFocusHandled={() => setTitleFocusId(null)}
+                showSpaceHint={showSpaceHint}
+                onCommit={() => handleCommit(timer.id)}
+                focusScale={focusScale}
+                onScaleChange={setFocusScale}
+                onToggleFocus={(isZen) => toggleFocus(timer.id, isZen)}
+                onToggle={() => toggleTimer(timer.id)}
+                onReset={() => resetTimer(timer.id)}
+                onDelete={() => removeTimer(timer.id)}
+                onInteract={() => {
+                  setActiveTimerId(timer.id);
+                  setHighlightedTimerId(timer.id);
+                  markSpaceHintSeen(timer.id);
+
+                  if (highlightTimeoutRef.current)
+                    clearTimeout(highlightTimeoutRef.current);
+                  highlightTimeoutRef.current = setTimeout(
+                    () => setHighlightedTimerId(null),
+                    2500
+                  );
+                }}
+                onUpdateLabel={(label) => updateLabel(timer.id, label)}
+                onDefaultLabel={() => assignDefaultLabel(timer.id)}
+                onDragStart={(event) => handleDragStart(event, timer.id)}
+                onDragOver={(event) => handleDragOver(event, timer.id)}
+                onDrop={handleDrop}
+              />
             );
           })()
         ))}
