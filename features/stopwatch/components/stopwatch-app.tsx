@@ -487,6 +487,7 @@ export default function StopwatchApp() {
         key !== 'r' &&
         key !== 't' &&
         key !== 'm' &&
+        key !== 'c' &&
         key !== '/' &&
         key !== '+' &&
         key !== '=' &&
@@ -510,6 +511,12 @@ export default function StopwatchApp() {
       if (key === 'm') {
         event.preventDefault();
         setIsMenuOpen((previous) => !previous);
+        return;
+      }
+
+      if (key === 'c' && event.shiftKey && (event.metaKey || event.ctrlKey)) {
+        event.preventDefault();
+        setIsCompactView((previous) => !previous);
         return;
       }
 
@@ -990,20 +997,37 @@ export default function StopwatchApp() {
               <button
                 type="button"
                 onClick={() => setIsCompactView((previous) => !previous)}
-                className="flex items-center justify-between px-2 py-1.5 rounded-lg text-[10px] text-foreground hover:bg-foreground/10 transition-colors"
+                className="flex items-center justify-between px-2 py-1.5 rounded-lg text-[10px] text-foreground hover:bg-foreground/10 transition-colors gap-3"
+                aria-pressed={isCompactView}
               >
-                <span className="font-medium">Compact View</span>
+                <div className="flex flex-col items-start gap-0.5">
+                  <span className="font-medium">Compact View</span>
+                  <span className="text-[9px] text-muted-foreground flex items-center gap-1">
+                    <span className="uppercase tracking-[0.12em] text-[8px]">Shortcut</span>
+                    <kbd className="font-mono bg-foreground text-background rounded px-1 py-0.5 text-[8px] leading-tight">
+                      Cmd/Ctrl + Shift + C
+                    </kbd>
+                  </span>
+                </div>
+
                 <span
                   className={[
-                    "inline-flex items-center rounded-full px-2 py-0.5 text-[9px] border",
+                    "relative inline-flex h-4 w-8 items-center rounded-full border transition-colors duration-200",
                     isCompactView
-                      ? "bg-foreground text-background border-foreground"
-                      : "bg-transparent text-muted-foreground border-border/70",
+                      ? "bg-chrono-accent border-chrono-accent"
+                      : "bg-transparent border-border/70",
                   ]
                     .filter(Boolean)
                     .join(" ")}
                 >
-                  {isCompactView ? "On" : "Off"}
+                  <span
+                    className={[
+                      "inline-block h-3 w-3 rounded-full bg-background shadow-sm transition-transform duration-200",
+                      isCompactView ? "translate-x-4" : "translate-x-1",
+                    ]
+                      .filter(Boolean)
+                      .join(" ")}
+                  />
                 </span>
               </button>
 
@@ -1242,6 +1266,15 @@ export default function StopwatchApp() {
                     Cmd/Ctrl +
                     <br />
                     /
+                  </kbd>
+
+                  <span>Compact View</span>
+                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[40px] max-w-[140px] text-center leading-tight break-words">
+                    Cmd/Ctrl +
+                    <br />
+                    Shift +
+                    <br />
+                    C
                   </kbd>
 
                   <span>Exit</span>
