@@ -11,7 +11,7 @@ const STORAGE_KEY_SCALE = "chrono-minimal-scale-v1";
 const DEFAULT_TIMERS: Timer[] = [
   {
     id: 1,
-    label: "First timer",
+    label: "",
     isRunning: false,
     elapsedMs: 0,
   },
@@ -394,6 +394,42 @@ export default function StopwatchApp() {
       }
 
       if (key === 'r') {
+        if (event.shiftKey && (event.metaKey || event.ctrlKey)) {
+          event.preventDefault();
+
+          const newTimer: Timer = {
+            id: 1,
+            label: "",
+            isRunning: false,
+            elapsedMs: 0,
+            lastUpdateTime: Date.now(),
+          };
+
+          setTimers([newTimer]);
+          setFocusedTimerId(null);
+          setIsFullscreen(false);
+          setActiveTimerId(newTimer.id);
+          setHighlightedTimerId(newTimer.id);
+          setCreatedTimerId(null);
+          setTitleFocusId(newTimer.id);
+          setSpaceHintSeen([]);
+
+          if (highlightTimeoutRef.current) clearTimeout(highlightTimeoutRef.current);
+          highlightTimeoutRef.current = setTimeout(
+            () => setHighlightedTimerId(null),
+            2500
+          );
+
+          requestAnimationFrame(() => {
+            const element = document.querySelector<HTMLElement>(
+              `[data-timer-id="${newTimer.id}"]`
+            );
+            element?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          });
+
+          return;
+        }
+
         if (!targetId) return;
         event.preventDefault();
         resetTimer(targetId);
@@ -736,6 +772,15 @@ export default function StopwatchApp() {
                   
                   <span>Reset</span>
                   <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] max-w-[72px] text-center leading-tight break-words">R</kbd>
+
+                  <span>Reset all timers</span>
+                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] max-w-[72px] text-center leading-tight break-words">
+                    Cmd/Ctrl +
+                    <br />
+                    Shift +
+                    <br />
+                    R
+                  </kbd>
 
                   <span>Exit</span>
                   <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] max-w-[72px] text-center leading-tight break-words">Esc</kbd>
