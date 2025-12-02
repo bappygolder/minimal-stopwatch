@@ -487,12 +487,22 @@ export default function StopwatchApp() {
   const handleCommit = (id: number) => {
     if (id === createdTimerId) {
       setCreatedTimerId(null);
-      setTimers((previous) =>
-        previous.map((timer) =>
-          timer.id === id ? { ...timer, isRunning: true, lastUpdateTime: Date.now() } : timer
-        )
-      );
     }
+
+    setTimers((previous) =>
+      previous.map((timer) => {
+        if (timer.id !== id) return timer;
+
+        const isFresh = timer.elapsedMs === 0 && !timer.isRunning;
+        if (!isFresh) return timer;
+
+        return {
+          ...timer,
+          isRunning: true,
+          lastUpdateTime: Date.now(),
+        };
+      })
+    );
   };
 
   const addTimer = () => {
