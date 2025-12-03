@@ -146,7 +146,7 @@ function CompactTimerRow(props: CompactTimerRowProps) {
       </div>
 
       <div
-        className="ml-3 flex items-center gap-1"
+        className="ml-3 flex items-center gap-1.5"
         onClick={(event) => event.stopPropagation()}
       >
         <button
@@ -155,13 +155,18 @@ function CompactTimerRow(props: CompactTimerRowProps) {
             event.stopPropagation();
             onToggle();
           }}
-          className="p-1.5 rounded-full border border-chrono-border-subtle bg-card text-foreground hover:bg-chrono-success/10 hover:text-chrono-success transition-colors"
+          className={[
+            "p-1.5 rounded-full transition-all duration-200",
+            timer.isRunning
+              ? "bg-chrono-warning/10 text-chrono-warning hover:bg-chrono-warning/20"
+              : "bg-chrono-success/10 text-chrono-success hover:bg-chrono-success/20",
+          ].join(" ")}
           title={timer.isRunning ? "Pause" : "Start"}
         >
           {timer.isRunning ? (
-            <Pause size={14} />
+            <Pause size={16} fill="currentColor" />
           ) : (
-            <Play size={14} />
+            <Play size={16} fill="currentColor" />
           )}
         </button>
 
