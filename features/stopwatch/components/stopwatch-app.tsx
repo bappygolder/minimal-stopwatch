@@ -200,6 +200,7 @@ export default function StopwatchApp() {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isShortcutsOpen, setIsShortcutsOpen] = useState(false);
+  const [isAboutOpen, setIsAboutOpen] = useState(false);
   const [isCompactView, setIsCompactView] = useState(false);
   const [activeTimerId, setActiveTimerId] = useState<number | null>(null);
   const [highlightedTimerId, setHighlightedTimerId] = useState<number | null>(null);
@@ -476,6 +477,11 @@ export default function StopwatchApp() {
           return;
         }
 
+        if (isAboutOpen) {
+          setIsAboutOpen(false);
+          return;
+        }
+
         if (focusedTimerId !== null && !document.fullscreenElement) {
           setFocusedTimerId(null);
           return;
@@ -740,15 +746,15 @@ export default function StopwatchApp() {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [focusedTimerId, activeTimerId, timers, isShortcutsOpen]); // timers dependency triggers update on list change
+  }, [focusedTimerId, activeTimerId, timers, isShortcutsOpen, isAboutOpen]); // timers dependency triggers update on list change
 
   useEffect(() => {
-    if (focusedTimerId !== null || isShortcutsOpen) {
+    if (focusedTimerId !== null || isShortcutsOpen || isAboutOpen) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
     }
-  }, [focusedTimerId, isShortcutsOpen]);
+  }, [focusedTimerId, isShortcutsOpen, isAboutOpen]);
 
   const handleCommit = (id: number) => {
     if (id === createdTimerId) {
@@ -1002,38 +1008,34 @@ export default function StopwatchApp() {
               <button
                 type="button"
                 onClick={() => setIsCompactView((previous) => !previous)}
-                className="flex items-center justify-between px-2 py-1.5 rounded-lg text-[10px] text-foreground hover:bg-foreground/10 transition-colors gap-3"
+                className="w-full text-left px-2 py-2 rounded-lg text-[10px] text-foreground hover:bg-foreground/10 transition-colors"
                 aria-pressed={isCompactView}
               >
-                <div className="flex flex-col items-start gap-0.5">
+                <div className="flex items-center justify-between gap-3">
                   <span className="font-medium">Compact View</span>
-                  <span className="text-[9px] text-muted-foreground flex items-center gap-1">
-                    <span className="uppercase tracking-[0.12em] text-[8px]">Shortcut</span>
-                    <kbd className="font-mono bg-foreground text-background rounded px-1 py-0.5 text-[8px] leading-tight">
-                      Cmd/Ctrl + Shift + C
-                    </kbd>
-                  </span>
-                </div>
-
-                <span
-                  className={[
-                    "relative inline-flex h-4 w-8 items-center rounded-full border transition-colors duration-200",
-                    isCompactView
-                      ? "bg-chrono-accent border-chrono-accent"
-                      : "bg-transparent border-border/70",
-                  ]
-                    .filter(Boolean)
-                    .join(" ")}
-                >
                   <span
                     className={[
-                      "inline-block h-3 w-3 rounded-full bg-background shadow-sm transition-transform duration-200",
-                      isCompactView ? "translate-x-4" : "translate-x-1",
+                      "relative inline-flex h-4 w-8 items-center rounded-full border transition-colors duration-200",
+                      isCompactView
+                        ? "bg-chrono-accent border-chrono-accent"
+                        : "bg-transparent border-border/70",
                     ]
                       .filter(Boolean)
                       .join(" ")}
-                  />
-                </span>
+                  >
+                    <span
+                      className={[
+                        "inline-block h-3 w-3 rounded-full bg-background shadow-sm transition-transform duration-200",
+                        isCompactView ? "translate-x-4" : "translate-x-1",
+                      ]
+                        .filter(Boolean)
+                        .join(" ")}
+                    />
+                  </span>
+                </div>
+                <div className="mt-1 text-[9px] text-muted-foreground">
+                  Cmd/Ctrl + Shift + C
+                </div>
               </button>
 
               <button
@@ -1042,17 +1044,30 @@ export default function StopwatchApp() {
                   setIsShortcutsOpen(true);
                   setIsMenuOpen(false);
                 }}
-                className="flex items-center justify-between px-2 py-1.5 rounded-lg bg-foreground/5 hover:bg-foreground/10 text-[10px] text-foreground transition-colors"
+                className="w-full text-left px-2 py-2 rounded-lg bg-foreground/5 hover:bg-foreground/10 text-[10px] text-foreground transition-colors"
              >
-                <span className="font-medium">Keyboard Shortcuts</span>
-                <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[40px] text-center leading-tight">
+                <div className="flex items-center justify-between gap-2">
+                  <span className="font-medium">Keyboard Shortcuts</span>
+                </div>
+                <div className="mt-1 text-[9px] text-muted-foreground">
                   Cmd/Ctrl + /
-                </kbd>
+                </div>
               </button>
 
 
               {/* Divider */}
               <div className="h-px bg-border/40 w-full" />
+
+              <button
+                type="button"
+                onClick={() => {
+                  setIsAboutOpen(true);
+                  setIsMenuOpen(false);
+                }}
+                className="w-full text-left px-2 py-2 rounded-lg text-[10px] text-foreground hover:bg-foreground/10 transition-colors"
+              >
+                <span className="font-medium">About</span>
+              </button>
 
               {/* Footer Links */}
               <div className="flex items-center gap-4 text-[10px] tracking-wider uppercase opacity-60">
@@ -1189,9 +1204,35 @@ export default function StopwatchApp() {
         >
           <Plus size={24} className="transition-transform duration-500" />
           <span className="absolute bottom-full mb-3 right-0 px-3 py-1.5 bg-card/90 backdrop-blur border border-border/50 rounded-lg text-xs font-medium text-foreground shadow-xl opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 pointer-events-none whitespace-nowrap">
-            Add another timer
+          Add another timer
           </span>
         </button>
+      )}
+
+      {isAboutOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-chrono-bg-page/80 backdrop-blur-sm"
+          onClick={() => setIsAboutOpen(false)}
+        >
+          <div
+            className="relative w-full max-w-md mx-4 rounded-2xl bg-card border border-border/60 shadow-2xl p-6 text-xs leading-relaxed text-muted-foreground"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="mb-4">
+              <div className="text-[11px] font-medium tracking-wide text-foreground uppercase">
+                About
+              </div>
+              <div className="text-[10px] opacity-60">
+                Minimal Stopwatch is a simple, keyboard-friendly multi-timer.
+              </div>
+            </div>
+
+            <div className="space-y-2 text-[10px]">
+              <p>Built for focus, quick entry, and precise timing.</p>
+              <p>Designed by oLab and maintained by Bappy Golder.</p>
+            </div>
+          </div>
+        </div>
       )}
 
       {isShortcutsOpen && (
