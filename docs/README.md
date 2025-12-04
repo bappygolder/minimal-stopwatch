@@ -18,13 +18,35 @@ A beautiful, distraction-free multi-timer application built with **Next.js**, **
 
 ## ⌨️ Keyboard Shortcuts
 
-| Key | Action |
-| :--- | :--- |
-| **Space** | Start/Stop the active timer |
-| **N** | Create a new timer |
-| **F** | Enter Focus Mode (Browser) |
-| **Z** | Enter Zen Mode (Fullscreen) |
-| **Esc** | Exit current mode |
+### Focus & Zen
+- **F** — Toggle Focus Mode on selected timer  
+- **Z** — Toggle Zen Mode on selected timer  
+- **Shift + Enter** — Commit title → Start timer (if fresh) → Enter Focus Mode  
+- **Cmd/Ctrl + Shift + Enter** — Commit title → Start timer (if fresh) → Enter Zen Mode  
+- **+** — Zoom In (when in Focus/Zen)  
+- **−** — Zoom Out (when in Focus/Zen)  
+- **Shift + Click Focus/Zen icon** — Enter Zen Mode instantly  
+
+### Core Actions
+- **N** — Create new timer  
+- **T** — Edit title of selected timer  
+- **Enter** — Commit title  
+  _If empty: assign default name without auto-start. If non-empty and timer is fresh: commit and auto-start._  
+- **Space** — Start/Stop selected timer  
+- **D** — Delete selected timer  
+- **R** — Reset selected timer  
+- **Cmd/Ctrl + Shift + R** — Full Reset (remove all timers, restore a fresh Timer #1 at 0:00)  
+
+### Navigation
+- **↑ / ↓** — Move focus up/down through timers (scrolls to keep selection in view)  
+- **Shift + ↑ / Shift + ↓** — Move selected timer up/down in the list  
+- **Cmd/Ctrl + Shift + ↑** — Move selected timer to top  
+
+### App Controls
+- **M** — Toggle menu  
+- **Cmd/Ctrl + /** — Show “Keyboard Shortcuts” popup  
+- **Cmd/Ctrl + Shift + C** — Toggle Compact View layout  
+- **Esc** — Exit Focus/Zen or close open panels (shortcuts, About, etc.)  
 
 ## 🚀 Quick Start
 
