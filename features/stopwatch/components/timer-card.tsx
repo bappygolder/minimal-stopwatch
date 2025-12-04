@@ -116,7 +116,46 @@ export default function TimerCard(props: TimerCardProps) {
   };
 
   const handleKeyDownInput = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter") {
+    const isEnter = event.key === "Enter";
+
+    if (
+      isEnter &&
+      event.shiftKey &&
+      (event.ctrlKey || event.metaKey)
+    ) {
+      event.preventDefault();
+
+      if (!timer.label.trim()) {
+        onDefaultLabel?.();
+      }
+
+      onCommit?.();
+      onToggleFocus(true);
+      event.currentTarget.blur();
+      return;
+    }
+
+    if (isEnter && event.shiftKey && !event.ctrlKey && !event.metaKey) {
+      event.preventDefault();
+
+      if (!timer.label.trim()) {
+        onDefaultLabel?.();
+      }
+
+      onCommit?.();
+      onToggleFocus(false);
+      event.currentTarget.blur();
+      return;
+    }
+
+    if (isEnter && !event.shiftKey && !event.ctrlKey && !event.metaKey) {
+      if (!timer.label.trim()) {
+        event.preventDefault();
+        onDefaultLabel?.();
+        return;
+      }
+
+      event.preventDefault();
       event.currentTarget.blur();
     }
   };

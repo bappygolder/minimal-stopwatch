@@ -31,6 +31,8 @@ type CompactTimerRowProps = {
   onUpdateLabel: (label: string) => void;
   onDefaultLabel?: () => void;
   onCommit?: () => void;
+  onEnterFocus?: () => void;
+  onEnterZen?: () => void;
   onInteract?: () => void;
   onDragStart: (event: DragEvent<HTMLDivElement>) => void;
   onDragOver: (event: DragEvent<HTMLDivElement>) => void;
@@ -50,6 +52,8 @@ function CompactTimerRow(props: CompactTimerRowProps) {
     onUpdateLabel,
     onDefaultLabel,
     onCommit,
+    onEnterFocus,
+    onEnterZen,
     onInteract,
     onDragStart,
     onDragOver,
@@ -74,7 +78,46 @@ function CompactTimerRow(props: CompactTimerRowProps) {
   };
 
   const handleKeyDownInput = (event: ReactKeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter") {
+    const isEnter = event.key === "Enter";
+
+    if (
+      isEnter &&
+      event.shiftKey &&
+      (event.ctrlKey || event.metaKey)
+    ) {
+      event.preventDefault();
+
+      if (!timer.label.trim()) {
+        onDefaultLabel?.();
+      }
+
+      onCommit?.();
+      onEnterZen?.();
+      event.currentTarget.blur();
+      return;
+    }
+
+    if (isEnter && event.shiftKey && !event.ctrlKey && !event.metaKey) {
+      event.preventDefault();
+
+      if (!timer.label.trim()) {
+        onDefaultLabel?.();
+      }
+
+      onCommit?.();
+      onEnterFocus?.();
+      event.currentTarget.blur();
+      return;
+    }
+
+    if (isEnter && !event.shiftKey && !event.ctrlKey && !event.metaKey) {
+      if (!timer.label.trim()) {
+        event.preventDefault();
+        onDefaultLabel?.();
+        return;
+      }
+
+      event.preventDefault();
       event.currentTarget.blur();
     }
   };
@@ -488,9 +531,16 @@ export default function StopwatchApp() {
         }
       }
 
+      const isShiftEnter =
+        event.key === "Enter" &&
+        event.shiftKey &&
+        !event.ctrlKey &&
+        !event.metaKey;
+
       // Detect shortcuts
       const key = event.key.toLowerCase();
       if (
+        !isShiftEnter &&
         key !== 'f' &&
         key !== 'z' &&
         key !== 'n' &&
@@ -522,6 +572,13 @@ export default function StopwatchApp() {
       if (key === 'm') {
         event.preventDefault();
         setIsMenuOpen((previous) => !previous);
+        return;
+      }
+
+      if (isShiftEnter) {
+        if (!targetId) return;
+        event.preventDefault();
+        toggleFocus(targetId, false);
         return;
       }
 
@@ -1123,6 +1180,8 @@ export default function StopwatchApp() {
                   onUpdateLabel={(label) => updateLabel(timer.id, label)}
                   onDefaultLabel={() => assignDefaultLabel(timer.id)}
                   onCommit={() => handleCommit(timer.id)}
+                  onEnterFocus={() => toggleFocus(timer.id, false)}
+                  onEnterZen={() => toggleFocus(timer.id, true)}
                   onInteract={() => {
                     setActiveTimerId(timer.id);
                     setHighlightedTimerId(timer.id);
@@ -1261,11 +1320,32 @@ export default function StopwatchApp() {
                   Focus &amp; Zen
                 </div>
                 <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-y-1.5 gap-x-4 items-start">
-                  <span>Focus</span>
+                  <span>Focus (selected timer)</span>
                   <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] max-w-[96px] text-center leading-tight break-words">F</kbd>
+
+                  <span>Focus (Shift + Enter)</span>
+                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[40px] max-w-[120px] text-center leading-tight break-words">
+                    Shift +
+                    <br />
+                    Enter
+                  </kbd>
 
                   <span>Zen</span>
                   <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] max-w-[96px] text-center leading-tight break-words">Z</kbd>
+
+                  <span>Zen (Cmd/Ctrl + Shift + Enter)</span>
+                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[40px] max-w-[140px] text-center leading-tight break-words">
+                    Cmd/Ctrl +
+                    <br />
+                    Shift +
+                    <br />
+                    Enter
+                  </kbd>
+
+                  <span>Zen (Shift + Click)</span>
+                  <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[40px] max-w-[120px] text-center leading-tight break-words">
+                    Shift + Click
+                  </kbd>
 
                   <span>Zoom In (Focus/Zen)</span>
                   <kbd className="font-mono bg-foreground text-background rounded px-1.5 py-0.5 text-[9px] min-w-[28px] max-w-[96px] text-center leading-tight break-words">+</kbd>
